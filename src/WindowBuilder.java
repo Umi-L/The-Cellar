@@ -1,11 +1,3 @@
-/*
-name: Julian O'Grady
-course: ICS4UO
-Assignment: Linked List Palindrome
-Due date: October 13th 2023
-Program Description: A program that checks if a string is a palindrome using a linked list with a user friendly UI
-*/
-
 import java.awt.EventQueue;
 
 import javax.swing.*;
@@ -52,8 +44,6 @@ public class WindowBuilder extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// set main toCheck variable to text field text
 				Main.toCheck = textField.getText();
-
-				Main.Check();
 			}
 		});
 		
