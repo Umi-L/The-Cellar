@@ -1,6 +1,14 @@
 # Git
 git is a version control software that we will be using for this project.
 
+## Quick Start
+```
+git clone
+git add .
+git commit -m "message"
+git push
+```
+
 ## Installation
 https://git-scm.com/
 
