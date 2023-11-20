@@ -36,7 +36,7 @@ public abstract class Equipment {
 		
 	}
 	
-	public void setModifier() {
+	public void setModifier(int modifier) {
 		this.modifier = modifier;
 		
 	}
@@ -46,7 +46,7 @@ public abstract class Equipment {
 		
 	}
 	
-	public void setUpgradePrice() {
+	public void setUpgradePrice(int upgradePrice) {
 		this.upgradePrice = upgradePrice;
 	}
 }

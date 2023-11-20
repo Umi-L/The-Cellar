@@ -1,12 +1,9 @@
-/*
- Knife (Abstract)
-#Name: string
-#Price: int
-#Modifier: int
-#UpgradePrice: int
-get&set for all fields
-
- */
+// Knife (Abstract)
+// #Name: string
+// #Price: int
+// #Modifier: int
+// #UpgradePrice: int
+// get&set for all fields
 
 public abstract class Knife {
     protected String name;
@@ -39,7 +36,7 @@ public abstract class Knife {
 		
 	}
 	
-	public void setModifier() {
+	public void setModifier(int modifier) {
 		this.modifier = modifier;
 		
 	}
@@ -49,7 +46,7 @@ public abstract class Knife {
 		
 	}
 	
-	public void setUpgradePrice() {
+	public void setUpgradePrice(int upgradePrice) {
 		this.upgradePrice = upgradePrice;
 	}
 }
