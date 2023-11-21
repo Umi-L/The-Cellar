@@ -15,7 +15,7 @@ public class SaveLoadSystem {
         {
             throw new RuntimeException("Game class is not serializable!" + nse.getMessage());
         }
-        catch(IOException eio) // catch any IO exceptions (file not found, etc.
+        catch(IOException eio) // catch any IO exceptions (file not found, etc...)
         {
             throw new RuntimeException("Error writing to file!" + eio.getMessage());
         }
