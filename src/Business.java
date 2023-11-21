@@ -26,8 +26,8 @@ public class Business {
     protected String name;
     protected int money;
     protected int steaks;
-    protected double quality;
-    protected double cleanliness;
+    protected double quality; // range from 0-1 representing 0-100%
+    protected double cleanliness; // range from 0-1 representing 0-100%
     protected double demand;
     protected int debt;
     protected Equipment cookingEquipment;
@@ -150,12 +150,16 @@ public class Business {
         this.daysInDebt = daysInDebt;
     }
 
+    // get net worth, factors in money, equipment, knives, and debt but not employees
     public int GetNetWorth() {
-        return money+debt; // TODO: add value of equipment, knives, food, etc.
+        int equipmentValue = cookingEquipment.getPrice();
+        int knifeValue = knives.getPrice();
+
+        return (money + equipmentValue + knifeValue) - debt;
     }
 
     public double GetCustomerSatisfaction() {
-        // not implemented
-        return 0.0;
+        // customer satisfaction is a range from 0-1 which is calculated using quality and cleanliness
+        return (quality + cleanliness) / 2;
     }
 }
