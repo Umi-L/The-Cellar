@@ -49,15 +49,15 @@ public class GamePage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(6, 5, 119, 41);
+		btnNewButton.setBounds(23, 8, 119, 41);
 		getContentPane().add(btnNewButton);
 		
 		JSlider slider = new JSlider();
-		slider.setBounds(10, 374, 200, 26);
+		slider.setBounds(10, 374, 151, 26);
 		getContentPane().add(slider);
 		
 		JLabel lblNewLabel = new JLabel("Game Speed");
-		lblNewLabel.setBounds(80, 359, 81, 14);
+		lblNewLabel.setBounds(50, 359, 81, 14);
 		getContentPane().add(lblNewLabel);
 		
 		Button button_1 = new Button("Shop");
@@ -78,12 +78,12 @@ public class GamePage extends JFrame {
 		
 		Canvas canvas = new Canvas();
 		canvas.setBackground(new Color(192, 192, 192));
-		canvas.setBounds(0, 54, 125, 289);
+		canvas.setBounds(0, 54, 161, 289);
 		getContentPane().add(canvas);
 		
 		Canvas canvas_1 = new Canvas();
 		canvas_1.setBackground(Color.LIGHT_GRAY);
-		canvas_1.setBounds(131, 0, 556, 343);
+		canvas_1.setBounds(167, 0, 520, 411);
 		getContentPane().add(canvas_1);
 		
 		Button button_1_1 = new Button("Chefs");
