@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Main {
 	// entry point of program
 	public static void main(String[] args) {
-		System.out.println("Goodbye world");
-		System.out.println("Hello world");//ellas comment
+		JFrame window = new WindowBuilder();
+		window.setVisible(true);
 	}
 }
