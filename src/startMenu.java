@@ -31,20 +31,17 @@ public class startMenu {
 		btnNewButton.setBounds(46, 44, 219, 70);
 		frame.getContentPane().add(btnNewButton);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(348, 6, 219, 260);
-		frame.getContentPane().add(scrollPane);
-		scrollPane.setVisible(false);
-		
 		JTextArea textArea = new JTextArea("");
+		textArea.setBounds(348, 6, 219, 260);
+		frame.getContentPane().add(textArea);
+		textArea.setVisible(false);
 		
 		JButton btnNewButton_1 = new JButton("Load Instructions");
 		btnNewButton_1.setForeground(new Color(0, 0, 0));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				scrollPane.setVisible(true);
-				scrollPane.add(textArea);
-				textArea.setText("");
+				textArea.setVisible(true);
+				textArea.setText("GAME INSTRUCTIONS WILL GO HERE");
 		
 			}
 		});
