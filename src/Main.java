@@ -1,9 +1,14 @@
 import javax.swing.*;
+import java.util.ArrayList;
+
 //Aamir
 public class Main {
+
+	public static Game game;
+
 	// entry point of program
 	public static void main(String[] args) {
-		JFrame window = new WindowBuilder();
-		window.setVisible(true);
+		JFrame GamePage = new GamePage();
+		GamePage.setVisible(true);
 	}
 }

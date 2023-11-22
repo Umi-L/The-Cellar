@@ -12,7 +12,7 @@ import java.awt.Color;
 
 public class startMenu {
 	private JFrame frame;
-	private JPanel panel;
+	
 	
 	public startMenu() {
 		frame = new JFrame("");
