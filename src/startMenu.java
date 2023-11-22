@@ -26,6 +26,9 @@ public class startMenu {
 		btnNewButton.setBackground(new Color(255, 18, 29));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame GamePage = new GamePage();
+				GamePage.setVisible(true);
+				frame.setVisible(false);
 			}
 		});
 		btnNewButton.setBounds(46, 44, 219, 70);
