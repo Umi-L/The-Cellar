@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 
 public class pauseMenu {
 	private JFrame frame;
+	
+	public static void showWindow() {
+		
+	}
 
 	public pauseMenu() {
 		frame = new JFrame("");
@@ -76,6 +80,8 @@ public class pauseMenu {
 
 	public static void main(String[] args) {
 		new pauseMenu();
+		showWindow();
+		
 		// TODO Auto-generated method stub
 
 	}

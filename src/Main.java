@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
-//Aamir
 public class Main {
 
 	public static Game game;
@@ -10,5 +9,6 @@ public class Main {
 	public static void main(String[] args) {
 		JFrame GamePage = new GamePage();
 		GamePage.setVisible(true);
+		
 	}
 }
