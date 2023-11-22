@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //import javax.swing.*;
 //import java.util.ArrayList;
 //
@@ -13,7 +13,7 @@
 //		
 //	}
 //}
-=======
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -27,4 +27,5 @@ public class Main {
 		
 	}
 }
->>>>>>> 12976d76d0fe6899dddbb6a77caa11c33ca21cfd
+
+
