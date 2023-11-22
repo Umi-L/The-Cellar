@@ -56,13 +56,14 @@ public class GamePage {
 		frame.getContentPane().add(button);
 		
 		JButton btnNewButton = new JButton("Pause Menu");
-		btnNewButton.setBackground(new Color(255, 4, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				pauseMenu pause = new pauseMenu();
 				pause.showWindow();		}
 		});
+		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+		btnNewButton.setBackground(new Color(255, 2, 0));
 		btnNewButton.setBounds(23, 8, 119, 41);
 		frame.getContentPane().add(btnNewButton);
 		

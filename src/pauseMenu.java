@@ -34,7 +34,7 @@ public class pauseMenu {
 						
 			}
 		});
-		btnNewButton.setBounds(74, 190, 219, 42);
+		btnNewButton.setBounds(116, 127, 219, 42);
 		frame.getContentPane().add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea("");
@@ -99,11 +99,11 @@ public class pauseMenu {
 				
 			}
 		});
-		btnNewButton_1.setBounds(74, 273, 219, 42);
+		btnNewButton_1.setBounds(116, 215, 219, 42);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Are you sure?");
-		lblNewLabel_1.setBounds(327, 231, 97, 16);
+		lblNewLabel_1.setBounds(347, 171, 97, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		lblNewLabel_1.setVisible(false);
 		
@@ -115,7 +115,7 @@ public class pauseMenu {
 				new GamePage();
 			}
 		});
-		btnNewButton_4.setBounds(304, 246, 67, 16);
+		btnNewButton_4.setBounds(339, 199, 52, 16);
 		frame.getContentPane().add(btnNewButton_4);
 		
 		JButton btnNewButton_4_1 = new JButton("No");
@@ -127,7 +127,7 @@ public class pauseMenu {
 			}
 		});
 		btnNewButton_4_1.setVisible(false);
-		btnNewButton_4_1.setBounds(372, 246, 67, 16);
+		btnNewButton_4_1.setBounds(392, 199, 52, 16);
 		frame.getContentPane().add(btnNewButton_4_1);
 		
 		
@@ -145,7 +145,7 @@ public class pauseMenu {
 				
 			}
 		});
-		btnNewButton_2.setBounds(74, 233, 219, 42);
+		btnNewButton_2.setBounds(116, 171, 219, 42);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Save And Exit");
@@ -156,12 +156,12 @@ public class pauseMenu {
 		});
 		btnNewButton_3.setForeground(Color.BLACK);
 		btnNewButton_3.setBackground(new Color(255, 18, 29));
-		btnNewButton_3.setBounds(74, 316, 219, 42);
+		btnNewButton_3.setBounds(116, 258, 219, 42);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JLabel lblNewLabel = new JLabel("GAME PAUSED");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
-		lblNewLabel.setBounds(103, 144, 219, 32);
+		lblNewLabel.setBounds(143, 93, 219, 32);
 		frame.getContentPane().add(lblNewLabel);
 	
 		frame.setVisible(true);
