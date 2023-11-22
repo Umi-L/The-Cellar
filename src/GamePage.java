@@ -35,7 +35,7 @@ public class GamePage {
 		// set title
 		frame = new JFrame();
 		
-		frame.setTitle("Game Page");
+		frame.setTitle("The Cellar");
 
 		// set close operation
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +45,9 @@ public class GamePage {
 		Button button = new Button("Bank");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				bankMenu bank = new bankMenu();
+				bank.showWindow();
 			}
 		});
 		button.setFont(new Font("SansSerif", Font.BOLD, 18));
@@ -53,6 +56,7 @@ public class GamePage {
 		frame.getContentPane().add(button);
 		
 		JButton btnNewButton = new JButton("Pause Menu");
+		btnNewButton.setBackground(new Color(255, 4, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -73,6 +77,9 @@ public class GamePage {
 		Button button_1 = new Button("Shop");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				shopMenu shop = new shopMenu();
+				shop.showWindow();
 			}
 		});
 		button_1.setFont(new Font("SansSerif", Font.BOLD, 18));
@@ -99,8 +106,17 @@ public class GamePage {
 		Button button_1_1 = new Button("Chefs");
 		button_1_1.setFont(new Font("SansSerif", Font.BOLD, 18));
 		button_1_1.setBackground(new Color(255, 0, 255));
+		button_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				chefMenu chefs = new chefMenu();
+				chefs.showWindow();	
+		}
+	});
 		button_1_1.setBounds(693, 228, 81, 81);
 		frame.getContentPane().add(button_1_1);
+		
+		
 		
 		frame.setVisible(true);
 	}

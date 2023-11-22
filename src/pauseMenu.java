@@ -34,7 +34,7 @@ public class pauseMenu {
 						
 			}
 		});
-		btnNewButton.setBounds(89, 192, 219, 42);
+		btnNewButton.setBounds(74, 190, 219, 42);
 		frame.getContentPane().add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea("");
@@ -99,16 +99,53 @@ public class pauseMenu {
 				
 			}
 		});
-		btnNewButton_1.setBounds(89, 274, 219, 42);
+		btnNewButton_1.setBounds(74, 273, 219, 42);
 		frame.getContentPane().add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Are you sure?");
+		lblNewLabel_1.setBounds(327, 231, 97, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setVisible(false);
+		
+		JButton btnNewButton_4 = new JButton("Yes");
+		btnNewButton_4.setVisible(false);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				new GamePage();
+			}
+		});
+		btnNewButton_4.setBounds(304, 246, 67, 16);
+		frame.getContentPane().add(btnNewButton_4);
+		
+		JButton btnNewButton_4_1 = new JButton("No");
+		btnNewButton_4_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblNewLabel_1.setVisible(false);
+				btnNewButton_4.setVisible(false);
+				btnNewButton_4_1.setVisible(false);
+			}
+		});
+		btnNewButton_4_1.setVisible(false);
+		btnNewButton_4_1.setBounds(372, 246, 67, 16);
+		frame.getContentPane().add(btnNewButton_4_1);
+		
+		
 		
 		JButton btnNewButton_2 = new JButton("Restart Game");
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblNewLabel_1.setVisible(true);
+				btnNewButton_4.setVisible(true);
+				btnNewButton_4_1.setVisible(true);
+				
+				
+			
+				
 			}
 		});
-		btnNewButton_2.setBounds(89, 233, 219, 42);
+		btnNewButton_2.setBounds(74, 233, 219, 42);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Save And Exit");
@@ -119,13 +156,14 @@ public class pauseMenu {
 		});
 		btnNewButton_3.setForeground(Color.BLACK);
 		btnNewButton_3.setBackground(new Color(255, 18, 29));
-		btnNewButton_3.setBounds(89, 316, 219, 42);
+		btnNewButton_3.setBounds(74, 316, 219, 42);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JLabel lblNewLabel = new JLabel("GAME PAUSED");
-		lblNewLabel.setBounds(153, 109, 219, 32);
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
+		lblNewLabel.setBounds(103, 144, 219, 32);
 		frame.getContentPane().add(lblNewLabel);
-		
+	
 		frame.setVisible(true);
 		
 	}
