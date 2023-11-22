@@ -35,10 +35,18 @@ public class chefMenu {
 	btnNewButton.setBounds(300, 346, 219, 70);
 	frame.getContentPane().add(btnNewButton);
 	
-	JLabel lblNewLabel = new JLabel("Chefs");
+	JLabel lblNewLabel = new JLabel("Hire");
 	lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
-	lblNewLabel.setBounds(369, 6, 78, 23);
+	lblNewLabel.setBounds(375, 6, 78, 23);
 	frame.getContentPane().add(lblNewLabel);
+	
+	JLabel lblNewLabel_1 = new JLabel("CHEFS");
+	lblNewLabel_1.setBounds(6, 41, 61, 16);
+	frame.getContentPane().add(lblNewLabel_1);
+	
+	JLabel lblNewLabel_2 = new JLabel("CLEANERS");
+	lblNewLabel_2.setBounds(6, 182, 78, 16);
+	frame.getContentPane().add(lblNewLabel_2);
 	
 	frame.setVisible(true);
 	

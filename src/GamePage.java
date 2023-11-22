@@ -56,14 +56,13 @@ public class GamePage {
 		frame.getContentPane().add(button);
 		
 		JButton btnNewButton = new JButton("Pause Menu");
+		btnNewButton.setBackground(new Color(255, 4, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				pauseMenu pause = new pauseMenu();
 				pause.showWindow();		}
 		});
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 18));
-		btnNewButton.setBackground(new Color(255, 2, 0));
 		btnNewButton.setBounds(23, 8, 119, 41);
 		frame.getContentPane().add(btnNewButton);
 		
@@ -104,7 +103,7 @@ public class GamePage {
 		canvas_1.setBounds(167, 0, 520, 411);
 		frame.getContentPane().add(canvas_1);
 		
-		Button button_1_1 = new Button("Chefs");
+		Button button_1_1 = new Button("Hire");
 		button_1_1.setFont(new Font("SansSerif", Font.BOLD, 18));
 		button_1_1.setBackground(new Color(255, 0, 255));
 		button_1_1.addActionListener(new ActionListener() {

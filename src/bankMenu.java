@@ -6,9 +6,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JTextField;
 
 public class bankMenu {
 	private JFrame frame;
+	private JTextField textField;
 	
 	public static void showWindow() {
 		
@@ -38,8 +40,30 @@ public class bankMenu {
 	
 	JLabel lblNewLabel = new JLabel("Bank");
 	lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
-	lblNewLabel.setBounds(373, 6, 61, 23);
+	lblNewLabel.setBounds(375, 6, 61, 23);
 	frame.getContentPane().add(lblNewLabel);
+	
+	JLabel lblNewLabel_1 = new JLabel("Request a loan");
+	lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+	lblNewLabel_1.setBounds(339, 69, 162, 23);
+	frame.getContentPane().add(lblNewLabel_1);
+	
+	textField = new JTextField();
+	textField.setBounds(317, 93, 190, 39);
+	frame.getContentPane().add(textField);
+	textField.setColumns(10);
+	
+	JLabel lblNewLabel_2 = new JLabel("$");
+	lblNewLabel_2.setBounds(288, 104, 17, 16);
+	frame.getContentPane().add(lblNewLabel_2);
+	
+	JLabel lblNewLabel_3 = new JLabel("");
+	lblNewLabel_3.setBounds(317, 133, 190, 16);
+	frame.getContentPane().add(lblNewLabel_3);
+	
+	JButton btnNewButton_1 = new JButton("Request");
+	btnNewButton_1.setBounds(509, 99, 117, 29);
+	frame.getContentPane().add(btnNewButton_1);
 	
 	frame.setVisible(true);
 	

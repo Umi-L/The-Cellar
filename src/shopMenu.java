@@ -43,6 +43,22 @@ public class shopMenu {
 	lblNewLabel.setBounds(373, 6, 61, 30);
 	frame.getContentPane().add(lblNewLabel);
 	
+	JLabel lblNewLabel_1 = new JLabel("EQUIPMENT UPGRADES");
+	lblNewLabel_1.setBounds(6, 45, 144, 16);
+	frame.getContentPane().add(lblNewLabel_1);
+	
+	JLabel lblNewLabel_2 = new JLabel("FOOD UPGRADES");
+	lblNewLabel_2.setBounds(357, 45, 133, 16);
+	frame.getContentPane().add(lblNewLabel_2);
+	
+	JLabel lblNewLabel_3 = new JLabel("KNIFE UPGRADES");
+	lblNewLabel_3.setBounds(658, 45, 117, 16);
+	frame.getContentPane().add(lblNewLabel_3);
+	
+	JLabel lblNewLabel_4 = new JLabel("CHEF UPGRADES");
+	lblNewLabel_4.setBounds(6, 205, 133, 16);
+	frame.getContentPane().add(lblNewLabel_4);
+	
 	frame.setVisible(true);
 	
 	}
