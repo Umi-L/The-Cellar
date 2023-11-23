@@ -1,5 +1,5 @@
-/*
- Business
+package TheCellar;/*
+ TheCellar.Business
 #Name: string
 #Money: int
 #Steaks: int
@@ -7,11 +7,11 @@
 #Cleanliness: double
 #Demand: double
 #Debt: int
-#CookingEquipment: Equipment
-#Chefs: ArrayList<Chef>
-#Cleaners: Array<Cleaner>
-#Knives: Knife
-#FoodType: Food
+#CookingEquipment: TheCellar.Equipment
+#Chefs: ArrayList<TheCellar.Chef>
+#Cleaners: Array<TheCellar.Cleaner>
+#Knives: TheCellar.Knife
+#FoodType: TheCellar.Food
 #DaysOfFood: int
 #DaysInDebt: int
 +GetNetWorth(): int

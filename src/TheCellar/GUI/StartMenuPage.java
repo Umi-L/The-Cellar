@@ -1,4 +1,6 @@
-package GUI;
+package TheCellar.GUI;
+
+import TheCellar.SaveLoadSystem;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -6,10 +8,6 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
@@ -25,7 +23,7 @@ public class StartMenuPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Start New Game");
+		JButton btnNewButton = new JButton("Start New TheCellar.Game");
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(255, 18, 29));
 		btnNewButton.addActionListener(new ActionListener() {
@@ -64,7 +62,7 @@ public class StartMenuPage {
 						+ "\n"
 						+ " To do this you must:\n"
 						+ "\n"
-						+ " Upgrade Equipment: Upgrade equipment by buying better equipment\n"
+						+ " Upgrade TheCellar.Equipment: Upgrade equipment by buying better equipment\n"
 						+ " or upgrading old equipment in the shop."
 						+ "\n"
 						+ " This has the potential to increase the quality of your restaurant \n"
@@ -84,7 +82,7 @@ public class StartMenuPage {
 						+ " your restaurant cleanliness, you must hire cleaners by clicking\n"
 						+ " the “Employee” button on the right hand side.\n"
 						+ "\n"
-						+ " Increase Food Quality: To increase food quality, you must click the\n "
+						+ " Increase TheCellar.Food Quality: To increase food quality, you must click the\n "
 						+ " “shop” on the right handside. \n"
 						+ " The higher the quality of the food, "
 						+ " the more likely customers will\n"
@@ -103,13 +101,14 @@ public class StartMenuPage {
 		btnNewButton_1.setBounds(104, 276, 219, 70);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Load Save Game");
+		JButton btnNewButton_2 = new JButton("Load Save TheCellar.Game");
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GamePage.loadGame();
+				SaveLoadSystem.loadGame();
 			}
 		});
+
 		btnNewButton_2.setBounds(104, 194, 219, 70);
 		frame.getContentPane().add(btnNewButton_2);
 		

@@ -1,4 +1,4 @@
-/*Chef (Abstract)
+package TheCellar;/*TheCellar.Chef (Abstract)
 #Name: string
 #Price: int
 #Modifier: int

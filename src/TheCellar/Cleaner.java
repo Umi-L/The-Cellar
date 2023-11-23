@@ -1,5 +1,5 @@
-/*
- Cleaner
+package TheCellar;/*
+ TheCellar.Cleaner
 #Price: int
 #Modifier: int
 get&set for all fields

@@ -1,5 +1,5 @@
-/*
- AIBusiness extends Business
+package TheCellar;/*
+ TheCellar.AIBusiness extends TheCellar.Business
 #level: int
 +MakeDecision(): void
 get&set for all fields

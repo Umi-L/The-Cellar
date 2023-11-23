@@ -1,3 +1,5 @@
+package TheCellar;
+
 import java.io.*;
 
 public class SaveLoadSystem {
@@ -13,7 +15,7 @@ public class SaveLoadSystem {
         }
         catch(NotSerializableException nse) // catch any non-serializable exceptions (may occur if the class is recursive)
         {
-            throw new RuntimeException("Game class is not serializable!" + nse.getMessage());
+            throw new RuntimeException("TheCellar.Game class is not serializable!" + nse.getMessage());
         }
         catch(IOException eio) // catch any IO exceptions (file not found, etc...)
         {
@@ -22,7 +24,7 @@ public class SaveLoadSystem {
     }
 
     public static Game loadGame(){
-        // load Main.game from a file
+        // load TheCellar.Main.game from a file
         Game game = null;
 
         try(ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(path)))
@@ -32,7 +34,7 @@ public class SaveLoadSystem {
         }
         catch(ClassNotFoundException cnfe)
         {
-            throw new RuntimeException("Game class not found!" + cnfe.getMessage()); // Should never appear because only the game class is being serialized to this file
+            throw new RuntimeException("TheCellar.Game class not found!" + cnfe.getMessage()); // Should never appear because only the game class is being serialized to this file
         }
         catch(FileNotFoundException fnfe)
         {

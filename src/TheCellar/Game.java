@@ -1,5 +1,5 @@
-/*
-Game class for all game data to be stored in.
+package TheCellar;/*
+TheCellar.Game class for all game data to be stored in.
 This is seperated because it needs to be serialized and deserialized.
  */
 

@@ -1,4 +1,4 @@
-package GUI;
+package TheCellar.GUI;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ public class BankPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Resume Game");
+		JButton btnNewButton = new JButton("Resume TheCellar.Game");
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(255, 18, 29));
 		btnNewButton.addActionListener(new ActionListener() {

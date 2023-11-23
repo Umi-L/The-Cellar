@@ -1,12 +1,11 @@
-package GUI;
+package TheCellar.GUI;
+
+import TheCellar.Main;
+import TheCellar.SaveLoadSystem;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,7 +28,7 @@ public class PauseMenuPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Resume Game");
+		JButton btnNewButton = new JButton("Resume TheCellar.Game");
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(255, 18, 29));
 		btnNewButton.addActionListener(new ActionListener() {
@@ -69,7 +68,7 @@ public class PauseMenuPage {
 						+ "\n"
 						+ " To do this you must:\n"
 						+ "\n"
-						+ " Upgrade Equipment: Upgrade equipment by buying better equipment\n"
+						+ " Upgrade TheCellar.Equipment: Upgrade equipment by buying better equipment\n"
 						+ " or upgrading old equipment in the shop."
 						+ "\n"
 						+ " This has the potential to increase the quality of your restaurant \n"
@@ -89,7 +88,7 @@ public class PauseMenuPage {
 						+ " your restaurant cleanliness, you must hire cleaners by clicking\n"
 						+ " the “Employee” button on the right hand side.\n"
 						+ "\n"
-						+ " Increase Food Quality: To increase food quality, you must click the\n "
+						+ " Increase TheCellar.Food Quality: To increase food quality, you must click the\n "
 						+ " “shop” on the right handside. \n"
 						+ " The higher the quality of the food, "
 						+ " the more likely customers will\n"
@@ -138,7 +137,7 @@ public class PauseMenuPage {
 		
 		
 		
-		JButton btnNewButton_2 = new JButton("Restart Game");
+		JButton btnNewButton_2 = new JButton("Restart TheCellar.Game");
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,7 +156,7 @@ public class PauseMenuPage {
 		JButton btnNewButton_3 = new JButton("Save And Exit");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GamePage.saveGame();
+				SaveLoadSystem.saveGame(Main.game);
 //				System.exit(0);
 			}
 		});

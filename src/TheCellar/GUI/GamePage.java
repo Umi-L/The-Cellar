@@ -1,4 +1,4 @@
-package GUI;
+package TheCellar.GUI;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -37,7 +37,7 @@ public class GamePage {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				BankPage bank = new BankPage();
+				TheCellar.GUI.BankPage bank = new TheCellar.GUI.BankPage();
 				bank.showWindow();
 			}
 		});
@@ -51,7 +51,7 @@ public class GamePage {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				PauseMenuPage pause = new PauseMenuPage();
+				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
 				pause.showWindow();		}
 		});
 		btnNewButton.setBounds(23, 8, 119, 41);
@@ -61,7 +61,7 @@ public class GamePage {
 		slider.setBounds(10, 374, 151, 26);
 		frame.getContentPane().add(slider);
 		
-		JLabel lblNewLabel = new JLabel("Game Speed");
+		JLabel lblNewLabel = new JLabel("TheCellar.Game Speed");
 		lblNewLabel.setBounds(50, 359, 81, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -69,7 +69,7 @@ public class GamePage {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				ShopPage shop = new ShopPage();
+				TheCellar.GUI.ShopPage shop = new ShopPage();
 				shop.showWindow();
 			}
 		});
@@ -100,7 +100,7 @@ public class GamePage {
 		button_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				HirePage chefs = new HirePage();
+				TheCellar.GUI.HirePage chefs = new HirePage();
 				chefs.showWindow();	
 		}
 	});

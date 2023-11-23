@@ -1,5 +1,5 @@
-/*
- Food (Abstract)
+package TheCellar;/*
+ TheCellar.Food (Abstract)
 #Name: string
 #Price: int
 #Modifier: int
