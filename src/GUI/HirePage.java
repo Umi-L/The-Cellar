@@ -1,3 +1,5 @@
+package GUI;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,14 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class chefMenu {
+public class HirePage {
 	private JFrame frame;
 	
 	public static void showWindow() {
 		
 	}
 	
-	public chefMenu() {
+	public HirePage() {
 		frame = new JFrame("");
 		frame.setTitle("The Cellar");
 		frame.setBounds(100, 100, 800, 450);
@@ -53,7 +55,7 @@ public class chefMenu {
 	}
 	
 	public static void main(String[] args) {
-		new chefMenu();
+		new HirePage();
 		showWindow();
 		// TODO Auto-generated method stub
 

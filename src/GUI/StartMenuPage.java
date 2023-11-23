@@ -1,29 +1,27 @@
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package GUI;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Font;
 
-public class pauseMenu {
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import java.awt.Color;
+
+public class StartMenuPage {
 	private JFrame frame;
 	
-	public static void showWindow() {
-		
-	}
-
-	public pauseMenu() {
+	
+	public StartMenuPage() {
 		frame = new JFrame("");
 		frame.setTitle("The Cellar");
 		frame.setBounds(100, 100, 800, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Resume Game");
+		JButton btnNewButton = new JButton("Start New Game");
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(255, 18, 29));
 		btnNewButton.addActionListener(new ActionListener() {
@@ -31,10 +29,9 @@ public class pauseMenu {
 				frame.setVisible(false);
 				GamePage window2 = new GamePage();
 				window2.showWindow();
-						
 			}
 		});
-		btnNewButton.setBounds(116, 127, 219, 42);
+		btnNewButton.setBounds(104, 118, 219, 70);
 		frame.getContentPane().add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea("");
@@ -99,80 +96,34 @@ public class pauseMenu {
 				
 			}
 		});
-		btnNewButton_1.setBounds(116, 215, 219, 42);
+		btnNewButton_1.setBounds(104, 276, 219, 70);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("Are you sure?");
-		lblNewLabel_1.setBounds(347, 171, 97, 16);
-		frame.getContentPane().add(lblNewLabel_1);
-		lblNewLabel_1.setVisible(false);
-		
-		JButton btnNewButton_4 = new JButton("Yes");
-		btnNewButton_4.setVisible(false);
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				new GamePage();
-			}
-		});
-		btnNewButton_4.setBounds(339, 199, 52, 16);
-		frame.getContentPane().add(btnNewButton_4);
-		
-		JButton btnNewButton_4_1 = new JButton("No");
-		btnNewButton_4_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_1.setVisible(false);
-				btnNewButton_4.setVisible(false);
-				btnNewButton_4_1.setVisible(false);
-			}
-		});
-		btnNewButton_4_1.setVisible(false);
-		btnNewButton_4_1.setBounds(392, 199, 52, 16);
-		frame.getContentPane().add(btnNewButton_4_1);
-		
-		
-		
-		JButton btnNewButton_2 = new JButton("Restart Game");
+		JButton btnNewButton_2 = new JButton("Load Save Game");
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_1.setVisible(true);
-				btnNewButton_4.setVisible(true);
-				btnNewButton_4_1.setVisible(true);
-				
-				
-			
-				
 			}
 		});
-		btnNewButton_2.setBounds(116, 171, 219, 42);
+		btnNewButton_2.setBounds(104, 194, 219, 70);
 		frame.getContentPane().add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Save And Exit");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		btnNewButton_3.setForeground(Color.BLACK);
-		btnNewButton_3.setBackground(new Color(255, 18, 29));
-		btnNewButton_3.setBounds(116, 258, 219, 42);
-		frame.getContentPane().add(btnNewButton_3);
-		
-		JLabel lblNewLabel = new JLabel("GAME PAUSED");
+		JLabel lblNewLabel = new JLabel("The Cellar");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
-		lblNewLabel.setBounds(143, 93, 219, 32);
+		lblNewLabel.setBounds(146, 41, 206, 56);
 		frame.getContentPane().add(lblNewLabel);
-	
+		
 		frame.setVisible(true);
 		
 	}
 
 	public static void main(String[] args) {
-		new pauseMenu();
-		showWindow();
-		
+		new StartMenuPage();
 		// TODO Auto-generated method stub
 
+
+			
+		}
 	}
-}
+
+

@@ -8,14 +8,13 @@
 //
 //	// entry point of program
 //	public static void main(String[] args) {
-//		JFrame GamePage = new GamePage();
-//		GamePage.setVisible(true);
+//		JFrame GUI.GamePage = new GUI.GamePage();
+//		GUI.GamePage.setVisible(true);
 //		
 //	}
 //}
 
-import javax.swing.*;
-import java.util.ArrayList;
+import GUI.StartMenuPage;
 
 public class Main {
 
@@ -23,7 +22,7 @@ public class Main {
 
 	// entry point of program
 	public static void main(String[] args) {
-		new startMenu();
+		new StartMenuPage();
 	}
 }
 

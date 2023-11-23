@@ -1,14 +1,8 @@
-import java.awt.EventQueue;
-import java.awt.Graphics;
+package GUI;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowListener;
 import java.awt.Canvas;
 import java.awt.Button;
 import java.awt.Color;
@@ -46,7 +40,7 @@ public class GamePage {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				bankMenu bank = new bankMenu();
+				BankPage bank = new BankPage();
 				bank.showWindow();
 			}
 		});
@@ -60,7 +54,7 @@ public class GamePage {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				pauseMenu pause = new pauseMenu();
+				PauseMenuPage pause = new PauseMenuPage();
 				pause.showWindow();		}
 		});
 		btnNewButton.setBounds(23, 8, 119, 41);
@@ -78,7 +72,7 @@ public class GamePage {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				shopMenu shop = new shopMenu();
+				ShopPage shop = new ShopPage();
 				shop.showWindow();
 			}
 		});
@@ -109,7 +103,7 @@ public class GamePage {
 		button_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				chefMenu chefs = new chefMenu();
+				HirePage chefs = new HirePage();
 				chefs.showWindow();	
 		}
 	});
