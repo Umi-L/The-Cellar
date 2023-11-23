@@ -16,9 +16,7 @@ public class ShopPage {
 		
 	}
 	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+
 	public ShopPage() {
 		frame = new JFrame("");
 		frame.setTitle("The Cellar");

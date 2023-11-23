@@ -3,6 +3,10 @@ package GUI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,10 +17,11 @@ import java.awt.Font;
 public class PauseMenuPage {
 	private JFrame frame;
 	
+	
 	public static void showWindow() {
 		
 	}
-
+		
 	public PauseMenuPage() {
 		frame = new JFrame("");
 		frame.setTitle("The Cellar");
@@ -152,7 +157,8 @@ public class PauseMenuPage {
 		JButton btnNewButton_3 = new JButton("Save And Exit");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				GamePage.saveGame();
+//				System.exit(0);
 			}
 		});
 		btnNewButton_3.setForeground(Color.BLACK);

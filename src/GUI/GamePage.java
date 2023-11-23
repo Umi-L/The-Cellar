@@ -21,10 +21,7 @@ public class GamePage {
 		
 		
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public GamePage() {
 		// set title
 		frame = new JFrame();
@@ -140,4 +137,6 @@ public class GamePage {
 			
 			
 	}
+
 }
+

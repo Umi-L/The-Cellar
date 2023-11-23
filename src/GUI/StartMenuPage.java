@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
@@ -103,6 +107,7 @@ public class StartMenuPage {
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GamePage.loadGame();
 			}
 		});
 		btnNewButton_2.setBounds(104, 194, 219, 70);
