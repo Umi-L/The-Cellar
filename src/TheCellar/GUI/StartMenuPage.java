@@ -38,7 +38,7 @@ public class StartMenuPage {
 		
 		JTextArea textArea = new JTextArea("");
 		textArea.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		textArea.setBounds(451, 19, 297, 379);
+		textArea.setBounds(451, 19, 323, 379);
 		frame.getContentPane().add(textArea);
 		textArea.setVisible(false);
 		textArea.setWrapStyleWord(true);

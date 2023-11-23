@@ -8,6 +8,6 @@ import java.util.ArrayList;
 public class Game {
     public Business PlayerBusiness = new Business();
     public ArrayList<AIBusiness> AIBusinesses = new ArrayList<AIBusiness>();
-    public int money = 10000;
+
   
 }

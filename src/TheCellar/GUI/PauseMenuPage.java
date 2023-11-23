@@ -44,7 +44,7 @@ public class PauseMenuPage {
 		
 		JTextArea textArea = new JTextArea("");
 		textArea.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		textArea.setBounds(451, 19, 297, 379);
+		textArea.setBounds(451, 19, 321, 379);
 		frame.getContentPane().add(textArea);
 		textArea.setVisible(false);
 		textArea.setWrapStyleWord(true);
@@ -157,7 +157,7 @@ public class PauseMenuPage {
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SaveLoadSystem.saveGame(Main.game);
-//				System.exit(0);
+				System.exit(0);
 			}
 		});
 		btnNewButton_3.setForeground(Color.BLACK);

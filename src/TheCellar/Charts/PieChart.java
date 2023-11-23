@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.geom.Arc2D;
 
 public class PieChart extends JPanel {
+	public PieChart() {
+	}
 
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
