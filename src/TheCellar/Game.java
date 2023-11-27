@@ -5,6 +5,8 @@ This is seperated because it needs to be serialized and deserialized.
 
 import java.util.ArrayList;
 
+import TheCellar.AI.AIBusiness;
+
 public class Game {
     public Business PlayerBusiness = new Business();
     public ArrayList<AIBusiness> AIBusinesses = new ArrayList<AIBusiness>();
