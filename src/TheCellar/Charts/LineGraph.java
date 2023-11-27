@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+// LineGraph class
+// maybe change Y axis to be vertical
+// https://stackoverflow.com/questions/10083913/how-to-rotate-text-with-graphics2d-in-java
+
 public class LineGraph  extends JPanel {
     protected ArrayList<Double> values;
 

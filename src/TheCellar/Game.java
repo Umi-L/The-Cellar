@@ -10,6 +10,4 @@ import TheCellar.AI.AI;
 public class Game {
     public Business PlayerBusiness = new Business();
     public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
-
-  
 }

@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+// BarGraph class
+// maybe change Y axis to be vertical
+// https://stackoverflow.com/questions/10083913/how-to-rotate-text-with-graphics2d-in-java
+
 public class BarGraph extends JPanel {
     protected ArrayList<Double> values;
     protected ArrayList<String> labels;
@@ -28,7 +32,8 @@ public class BarGraph extends JPanel {
         int y = 0;
 
         int padding = 25;
-        int barPadding = 10;
+        int barPadding = 5;
+        int numYLabels = 5;
 
         // get max value in values
         double max = 0;
@@ -71,7 +76,7 @@ public class BarGraph extends JPanel {
             double barHeight = (bounds.height - 2*padding) * (value / max);
 
             // get x position of bar
-            x = (int) (padding + barWidth * i) + barPadding*(i+1);
+            x = (int) (padding + barWidth * i) + ((barPadding*2)*(i+1));
 
             // get y position of bar
             y = (int) Math.round(bounds.height - padding - barHeight);
@@ -85,6 +90,20 @@ public class BarGraph extends JPanel {
 
             // draw label
             g2.drawString(labels.get(i), x, bounds.height - padding + 20);
+        }
+
+        // draw y axis labels
+        for (int i = 0; i < numYLabels; i++) {
+            // value is the percentage of the max value that the label represents
+            double value = max * ((double) i / (double) numYLabels);
+
+            // get y position of label
+            y = (int) Math.round(bounds.height - padding - (bounds.height - 2*padding) * (value / max));
+
+            String label = Integer.toString((int) value);
+
+            // draw label
+            g2.drawString(label, 0, y);
         }
     }
 }
