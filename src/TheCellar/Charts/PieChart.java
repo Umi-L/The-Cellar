@@ -33,8 +33,8 @@ public class PieChart extends JPanel {
         // make bounds square
         bounds.width = smallest;
 
-        // make x and y centered
-        bounds.x = (this.getWidth() - bounds.width) / 2;
+        // make left justified
+        bounds.x = 0;
 
         // make arc fill bounds
         arc.setFrame(bounds);
@@ -62,8 +62,10 @@ public class PieChart extends JPanel {
 
             // draw the legend right justified
             g2.fillRect(bounds.x + bounds.width + 20, bounds.y + i * 20, 10, 10);
-            g2.drawString(name, bounds.x + bounds.width + 40, bounds.y + i * 20 + 10);
 
+            // draw black text
+            g2.setColor(Color.BLACK);
+            g2.drawString(name, bounds.x + bounds.width + 40, bounds.y + i * 20 + 10);
 
         }
     }

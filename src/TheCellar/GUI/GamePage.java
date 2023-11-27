@@ -1,5 +1,6 @@
 package TheCellar.GUI;
 
+import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
 import TheCellar.Charts.PieChart;
 
@@ -114,9 +115,14 @@ public class GamePage {
 		pieChart.setBounds(167, 0, 300, 150);
 		frame.getContentPane().add(pieChart);
 
-		LineGraph lineGraph = new LineGraph(names, values);
+		LineGraph lineGraph = new LineGraph("time", "company value", values);
 		lineGraph.setBounds(167, 160, 300, 150);
 		frame.getContentPane().add(lineGraph);
+
+		BarGraph barGraph = new BarGraph("value", names, values);
+		barGraph.setBounds(167, 320, 300, 150);
+		frame.getContentPane().add(barGraph);
+
 
 		
 		Button button_1_1 = new Button("Hire");
