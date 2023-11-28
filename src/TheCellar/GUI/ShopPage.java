@@ -49,7 +49,7 @@ public class ShopPage {
 	lblNewLabel.setBounds(373, 0, 61, 30);
 	frame.getContentPane().add(lblNewLabel);
 	
-<<<<<<< HEAD
+
 	JComboBox<String> equipment = new JComboBox<String>();
 	equipment.setBounds(192, 34, 178, 30);
 	frame.getContentPane().add(equipment);
@@ -58,15 +58,11 @@ public class ShopPage {
 	equipment.addItem("Stove Burner Upgrade");
 	equipment.addItem("Energy Efficient Appliances");
 	equipment.setVisible(false);
-=======
-	JLabel lblNewLabel_1 = new JLabel("EQUIPMENT UPGRADES");
-	lblNewLabel_1.setBounds(6, 45, 144, 16);
-	frame.getContentPane().add(lblNewLabel_1);
 
-	PurchaseArea equipment1 = new PurchaseArea("Knife", 100, "a knife :D");
-	equipment1.setBounds(6, 73, 144, 100);
-	frame.getContentPane().add(equipment1);
->>>>>>> 2125552314a6276d3977fd705982be492d2c8bba
+//	PurchaseArea equipment1 = new PurchaseArea("Knife", 100, "a knife :D");
+//	equipment1.setBounds(6, 73, 144, 100);
+//	frame.getContentPane().add(equipment1);
+//>>>>>>> 2125552314a6276d3977fd705982be492d2c8bba
 	
 	JButton btnNewButton_1 = new JButton("Equipment Upgrades");
 	btnNewButton_1.addActionListener(new ActionListener() {
@@ -99,9 +95,19 @@ public class ShopPage {
 	btnNewButton_2.setBounds(6, 83, 174, 60);
 	frame.getContentPane().add(btnNewButton_2);
 	
+	JComboBox<String> knife = new JComboBox<String>();
+	knife.setBounds(192, 225, 178, 30);
+	frame.getContentPane().add(knife);
+	knife.addItem("");
+	knife.addItem("Blade Upgrade");
+	knife.addItem("handle Upgrade");
+	knife.addItem("Sharpner Upgrade");
+	knife.setVisible(false);
+	
 	JButton btnNewButton_3 = new JButton("Knife Upgrades");
 	btnNewButton_3.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			knife.setVisible(true);
 	
 			
 		}
@@ -110,13 +116,12 @@ public class ShopPage {
 	frame.getContentPane().add(btnNewButton_3);
 	
 	JComboBox<String> chef = new JComboBox<String>();
-	chef.setBounds(192, 98, 178, 30);
-	frame.getContentPane().add(food);
+	chef.setBounds(192, 160, 178, 30);
+	frame.getContentPane().add(chef);
 	chef.addItem("");
-	chef.addItem("Premium Meat Supplier");
-	chef.addItem("Organic Farm Partnership");
-	chef.addItem("Gourmet Recipe Book");
-	chef.addItem("Seasonal Menu Updates");
+	chef.addItem("Culinary School Graduate");
+	chef.addItem("Chef training program");
+	chef.addItem("Master Chef Certification");
 	chef.setVisible(false);
 	
 	
@@ -129,9 +134,25 @@ public class ShopPage {
 	btnNewButton_4.setBounds(6, 145, 174, 60);
 	frame.getContentPane().add(btnNewButton_4);
 	
+	JComboBox<String> cleaner = new JComboBox<String>();
+	cleaner.setBounds(192, 285, 178, 30);
+	frame.getContentPane().add(cleaner);
+	cleaner.addItem("");
+	cleaner.addItem("Industrial Grade Cleaning Supplies");
+	cleaner.addItem("Cleaning Robots");
+	cleaner.addItem("Eco Friendly Cleaning supplies");
+	cleaner.addItem("24/7 Cleaning Staff");
+	cleaner.setVisible(false);
+	
 	JButton btnNewButton_3_1 = new JButton("Cleaner Upgrades");
+	btnNewButton_3_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			cleaner.setVisible(true);
+		}
+	});
 	btnNewButton_3_1.setBounds(6, 273, 174, 60);
 	frame.getContentPane().add(btnNewButton_3_1);
+	
 	
 
 	
