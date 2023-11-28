@@ -1,5 +1,7 @@
 package TheCellar.GUI;
 
+import TheCellar.GUI.Components.PurchaseArea;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -46,6 +48,10 @@ public class ShopPage {
 	JLabel lblNewLabel_1 = new JLabel("EQUIPMENT UPGRADES");
 	lblNewLabel_1.setBounds(6, 45, 144, 16);
 	frame.getContentPane().add(lblNewLabel_1);
+
+	PurchaseArea equipment1 = new PurchaseArea("Knife", 100, "a knife :D");
+	equipment1.setBounds(6, 73, 144, 100);
+	frame.getContentPane().add(equipment1);
 	
 	JLabel lblNewLabel_2 = new JLabel("FOOD UPGRADES");
 	lblNewLabel_2.setBounds(357, 45, 133, 16);
