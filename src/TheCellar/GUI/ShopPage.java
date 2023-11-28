@@ -1,5 +1,7 @@
 package TheCellar.GUI;
 
+import TheCellar.GUI.Components.PurchaseArea;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -47,6 +49,7 @@ public class ShopPage {
 	lblNewLabel.setBounds(373, 0, 61, 30);
 	frame.getContentPane().add(lblNewLabel);
 	
+<<<<<<< HEAD
 	JComboBox<String> equipment = new JComboBox<String>();
 	equipment.setBounds(192, 34, 178, 30);
 	frame.getContentPane().add(equipment);
@@ -55,6 +58,15 @@ public class ShopPage {
 	equipment.addItem("Stove Burner Upgrade");
 	equipment.addItem("Energy Efficient Appliances");
 	equipment.setVisible(false);
+=======
+	JLabel lblNewLabel_1 = new JLabel("EQUIPMENT UPGRADES");
+	lblNewLabel_1.setBounds(6, 45, 144, 16);
+	frame.getContentPane().add(lblNewLabel_1);
+
+	PurchaseArea equipment1 = new PurchaseArea("Knife", 100, "a knife :D");
+	equipment1.setBounds(6, 73, 144, 100);
+	frame.getContentPane().add(equipment1);
+>>>>>>> 2125552314a6276d3977fd705982be492d2c8bba
 	
 	JButton btnNewButton_1 = new JButton("Equipment Upgrades");
 	btnNewButton_1.addActionListener(new ActionListener() {
