@@ -14,7 +14,7 @@ public class Game {
     private int goingRate;
 
     public Game() {
-    	goingRate = 5;
+    	goingRate = 5; // avg price of steak with quality of 50%
     }
 
     public int getGoingRate() {
