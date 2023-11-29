@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 
 public class ShopPage {
 	private JFrame frame;
-	private JTextArea textArea;
+	
 	
 	public static void showWindow() {
 		
@@ -66,13 +66,13 @@ public class ShopPage {
 	equipment.setBounds(192, 34, 178, 30);
 	frame.getContentPane().add(equipment);
 	equipment.addItem("");
-	equipment.addItem("Hotplate");
-	equipment.addItem("Stove Burner Upgrade");
-	equipment.addItem("Energy Efficient Appliances");
+	equipment.addItem("Hotplate (Increases Speed)");
+	equipment.addItem("Stove Burner Upgrade (Increases Speed)");
+	equipment.addItem("Energy Efficient Appliances (Reduces utility cost)");
 	equipment.setVisible(false);
 	
 	JButton addToCartButton = new JButton("Add to cart");
-	addToCartButton.setBounds(362, 34, 114, 30);
+	addToCartButton.setBounds(373, 34, 114, 30);
 	frame.getContentPane().add(addToCartButton);
 	addToCartButton.setVisible(false);
 	
@@ -113,11 +113,11 @@ public class ShopPage {
 			
 		}
 	});
-	btnNewButton_1.setBounds(6, 19, 174, 60);
+	btnNewButton_1.setBounds(6, 34, 174, 30);
 	frame.getContentPane().add(btnNewButton_1);
 	
 	JComboBox<String> food = new JComboBox<String>();
-	food.setBounds(192, 98, 178, 30);
+	food.setBounds(192, 76, 178, 30);
 	frame.getContentPane().add(food);
 	food.addItem("");
 	food.addItem("Premium Meat Supplier");
@@ -127,7 +127,7 @@ public class ShopPage {
 	food.setVisible(false);
 	
 	JButton addToCartButton1 = new JButton("Add to cart");
-	addToCartButton1.setBounds(362, 98, 114, 30);
+	addToCartButton1.setBounds(372, 76, 114, 30);
 	frame.getContentPane().add(addToCartButton1);
 	addToCartButton1.setVisible(false);
 	
@@ -161,11 +161,11 @@ public class ShopPage {
 		food.setVisible(true);
 		}
 	});
-	btnNewButton_2.setBounds(6, 83, 174, 60);
+	btnNewButton_2.setBounds(6, 76, 174, 30);
 	frame.getContentPane().add(btnNewButton_2);
 	
 	JComboBox<String> knife = new JComboBox<String>();
-	knife.setBounds(192, 225, 178, 30);
+	knife.setBounds(192, 118, 178, 30);
 	frame.getContentPane().add(knife);
 	knife.addItem("");
 	knife.addItem("Blade Upgrade");
@@ -174,7 +174,7 @@ public class ShopPage {
 	knife.setVisible(false);
 	
 	JButton addToCartButton2 = new JButton("Add to cart");
-	addToCartButton2.setBounds(362, 226, 114, 30);
+	addToCartButton2.setBounds(373, 118, 114, 30);
 	frame.getContentPane().add(addToCartButton2);
 	addToCartButton2.setVisible(false);
 	
@@ -210,61 +210,26 @@ public class ShopPage {
 			
 		}
 	});
-	btnNewButton_3.setBounds(6, 210, 174, 60);
+	btnNewButton_3.setBounds(6, 118, 174, 30);
 	frame.getContentPane().add(btnNewButton_3);
-	
-	JComboBox<String> chef = new JComboBox<String>();
-	chef.setBounds(192, 160, 178, 30);
-	frame.getContentPane().add(chef);
-	chef.addItem("");
-	chef.addItem("Culinary School Graduate");
-	chef.addItem("Chef training program");
-	chef.addItem("Master Chef Certification");
-	chef.setVisible(false);
-
-
-		JButton addToCartButton3 = new JButton("Add to cart");
-addToCartButton3.setBounds(362, 162, 114, 30);
-frame.getContentPane().add(addToCartButton3);
-addToCartButton3.setVisible(false);
-
-chef.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-		Object selectedItem = chef.getSelectedItem();
-		
-		if(selectedItem != null && !selectedItem.toString().isEmpty()) {
-			addToCartButton3.setVisible(true);
-		} else {
-			addToCartButton3.setVisible(false);
-		}
-		
-
-		
-	}
-});
-
-addToCartButton3.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-		String selectedEquipment = chef.getSelectedItem().toString();
-		textArea.append( selectedEquipment + "\n" + "\n");
-		
-	}
-	
-	});
 
 	
 	
 	JButton btnNewButton_4 = new JButton("Chef Upgrades");
 	btnNewButton_4.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			chef.setVisible(true);
+			frame.setVisible(false);
+			chefUpgrades window3 = new TheCellar.GUI.chefUpgrades();
+			window3.showWindow();
+			
 		}
 	});
-	btnNewButton_4.setBounds(6, 145, 174, 60);
+	btnNewButton_4.setBounds(66, 230, 174, 60);
+	btnNewButton_4.setVisible(true);
 	frame.getContentPane().add(btnNewButton_4);
 	
 	JComboBox<String> cleaner = new JComboBox<String>();
-	cleaner.setBounds(192, 285, 178, 30);
+	cleaner.setBounds(192, 160, 178, 30);
 	frame.getContentPane().add(cleaner);
 	cleaner.addItem("");
 	cleaner.addItem("Industrial Grade Cleaning Supplies");
@@ -274,7 +239,7 @@ addToCartButton3.addActionListener(new ActionListener() {
 	cleaner.setVisible(false);
 	
 	JButton addToCartButton4 = new JButton("Add to cart");
-	addToCartButton4.setBounds(362, 285, 114, 30);
+	addToCartButton4.setBounds(373, 160, 114, 30);
 	frame.getContentPane().add(addToCartButton4);
 	addToCartButton4.setVisible(false);
 	
@@ -309,7 +274,7 @@ addToCartButton3.addActionListener(new ActionListener() {
 			cleaner.setVisible(true);
 		}
 	});
-	btnNewButton_3_1.setBounds(6, 273, 174, 60);
+	btnNewButton_3_1.setBounds(6, 160, 174, 30);
 	frame.getContentPane().add(btnNewButton_3_1);
 	
 	JLabel lblNewLabel_11 = new JLabel("Cart");
@@ -320,6 +285,21 @@ addToCartButton3.addActionListener(new ActionListener() {
 	JButton btnNewButton_5 = new JButton("Purchase");
 	btnNewButton_5.setBounds(590, 327, 117, 29);
 	frame.getContentPane().add(btnNewButton_5);
+	
+	JButton btnNewButton_4_1 = new JButton("Chef Training");
+	btnNewButton_4_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			frame.setVisible(false);
+			TheCellar.GUI.chefTraining window4 = new TheCellar.GUI.chefTraining();
+			window4.showWindow();
+		}
+	});
+	btnNewButton_4_1.setBounds(252, 230, 174, 60);
+	frame.getContentPane().add(btnNewButton_4_1);
+	
+	JLabel lblNewLabel_2 = new JLabel("Additional Upgrades");
+	lblNewLabel_2.setBounds(192, 202, 136, 16);
+	frame.getContentPane().add(lblNewLabel_2);
 	
 	
 	frame.setVisible(true);
