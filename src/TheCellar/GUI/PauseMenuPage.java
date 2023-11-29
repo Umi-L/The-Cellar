@@ -58,7 +58,7 @@ public class PauseMenuPage {
 				textArea.setVisible(true);
 				
 			
-				textArea.setText(" The Cellar is a tycoon style steak house management game where.\n"
+				textArea.setText(" The Cellar is a tycoon style steak house management game where\n"
 						+ " you have to maintain your business and compete against other\n"
 						+ " businesses.\n"
 						+ "\n"
@@ -76,7 +76,7 @@ public class PauseMenuPage {
 						+ "\n"
 						+ "\n"
 						+ " Hire Employees: One way to upgrade your business quality and S/D\n "
-						+ " is hiring employees that all have different levels of experience\n"
+						+ "is hiring employees that all have different levels of experience\n"
 						+ " and skills. "
 						+ "\n"
 						+ " To do this, click the “Employee” button on the right hand side. \n"
@@ -85,11 +85,11 @@ public class PauseMenuPage {
 						+ "\n"
 						+ " Maintain Restaurant Cleanliness: Customers will not come to your \n"
 						+ " restaurant if your cleanliness stat is less than 10%. To increase\n "
-						+ " your restaurant cleanliness, you must hire cleaners by clicking\n"
+						+ "your restaurant cleanliness, you must hire cleaners by clicking\n"
 						+ " the “Employee” button on the right hand side.\n"
 						+ "\n"
 						+ " Increase TheCellar.Food Quality: To increase food quality, you must click the\n "
-						+ " “shop” on the right handside. \n"
+						+ "“shop” on the right handside. \n"
 						+ " The higher the quality of the food, "
 						+ " the more likely customers will\n"
 						+ " buy food for a higher price,\n"

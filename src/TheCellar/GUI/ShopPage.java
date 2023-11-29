@@ -11,9 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class ShopPage {
 	private JFrame frame;
+	private JTextArea textArea;
 	
 	public static void showWindow() {
 		
@@ -49,6 +51,16 @@ public class ShopPage {
 	lblNewLabel.setBounds(373, 0, 61, 30);
 	frame.getContentPane().add(lblNewLabel);
 	
+	JTextArea textArea = new JTextArea();
+	textArea.setBounds(506, 40, 273, 275);
+	frame.getContentPane().add(textArea);
+	
+	JLabel lblNewLabel_1 = new JLabel("$10,000");
+	lblNewLabel_1.setBackground(new Color(192, 192, 192));
+	lblNewLabel_1.setFont(new Font("SansSerif", Font.ITALIC, 18));
+	lblNewLabel_1.setBounds(6, 378, 81, 38);
+	frame.getContentPane().add(lblNewLabel_1);
+	
 
 	JComboBox<String> equipment = new JComboBox<String>();
 	equipment.setBounds(192, 34, 178, 30);
@@ -58,6 +70,36 @@ public class ShopPage {
 	equipment.addItem("Stove Burner Upgrade");
 	equipment.addItem("Energy Efficient Appliances");
 	equipment.setVisible(false);
+	
+	JButton addToCartButton = new JButton("Add to cart");
+	addToCartButton.setBounds(362, 34, 114, 30);
+	frame.getContentPane().add(addToCartButton);
+	addToCartButton.setVisible(false);
+	
+	equipment.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Object selectedItem = equipment.getSelectedItem();
+			
+			if(selectedItem != null && !selectedItem.toString().isEmpty()) {
+				addToCartButton.setVisible(true);
+			} else {
+				addToCartButton.setVisible(false);
+			}
+			
+
+			
+		}
+	});
+	
+	addToCartButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String selectedEquipment = equipment.getSelectedItem().toString();
+			textArea.append( selectedEquipment + "\n" + "\n");
+			
+		}
+		
+		});
+	
 
 //	PurchaseArea equipment1 = new PurchaseArea("Knife", 100, "a knife :D");
 //	equipment1.setBounds(6, 73, 144, 100);
@@ -84,6 +126,33 @@ public class ShopPage {
 	food.addItem("Seasonal Menu Updates");
 	food.setVisible(false);
 	
+	JButton addToCartButton1 = new JButton("Add to cart");
+	addToCartButton1.setBounds(362, 98, 114, 30);
+	frame.getContentPane().add(addToCartButton1);
+	addToCartButton1.setVisible(false);
+	
+	food.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Object selectedItem = food.getSelectedItem();
+			
+			if(selectedItem != null && !selectedItem.toString().isEmpty()) {
+				addToCartButton1.setVisible(true);
+			} else {
+				addToCartButton1.setVisible(false);
+			}
+			
+
+			
+		}
+	});
+	
+	addToCartButton1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String selectedEquipment = food.getSelectedItem().toString();
+			textArea.append( selectedEquipment + "\n" + "\n");
+		}
+		
+		});
 	
 	
 	JButton btnNewButton_2 = new JButton("Food Upgrades");
@@ -104,6 +173,35 @@ public class ShopPage {
 	knife.addItem("Sharpner Upgrade");
 	knife.setVisible(false);
 	
+	JButton addToCartButton2 = new JButton("Add to cart");
+	addToCartButton2.setBounds(362, 226, 114, 30);
+	frame.getContentPane().add(addToCartButton2);
+	addToCartButton2.setVisible(false);
+	
+	knife.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Object selectedItem = knife.getSelectedItem();
+			
+			if(selectedItem != null && !selectedItem.toString().isEmpty()) {
+				addToCartButton2.setVisible(true);
+			} else {
+				addToCartButton2.setVisible(false);
+			}
+			
+
+			
+		}
+	});
+	
+	addToCartButton2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String selectedEquipment = knife.getSelectedItem().toString();
+			textArea.append( selectedEquipment + "\n" + "\n");
+			
+		}
+		
+		});
+	
 	JButton btnNewButton_3 = new JButton("Knife Upgrades");
 	btnNewButton_3.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -123,6 +221,37 @@ public class ShopPage {
 	chef.addItem("Chef training program");
 	chef.addItem("Master Chef Certification");
 	chef.setVisible(false);
+
+
+		JButton addToCartButton3 = new JButton("Add to cart");
+addToCartButton3.setBounds(362, 162, 114, 30);
+frame.getContentPane().add(addToCartButton3);
+addToCartButton3.setVisible(false);
+
+chef.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		Object selectedItem = chef.getSelectedItem();
+		
+		if(selectedItem != null && !selectedItem.toString().isEmpty()) {
+			addToCartButton3.setVisible(true);
+		} else {
+			addToCartButton3.setVisible(false);
+		}
+		
+
+		
+	}
+});
+
+addToCartButton3.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		String selectedEquipment = chef.getSelectedItem().toString();
+		textArea.append( selectedEquipment + "\n" + "\n");
+		
+	}
+	
+	});
+
 	
 	
 	JButton btnNewButton_4 = new JButton("Chef Upgrades");
@@ -144,6 +273,36 @@ public class ShopPage {
 	cleaner.addItem("24/7 Cleaning Staff");
 	cleaner.setVisible(false);
 	
+	JButton addToCartButton4 = new JButton("Add to cart");
+	addToCartButton4.setBounds(362, 285, 114, 30);
+	frame.getContentPane().add(addToCartButton4);
+	addToCartButton4.setVisible(false);
+	
+	cleaner.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Object selectedItem = cleaner.getSelectedItem();
+			
+			if(selectedItem != null && !selectedItem.toString().isEmpty()) {
+				addToCartButton4.setVisible(true);
+			} else {
+				addToCartButton4.setVisible(false);
+			}
+			
+
+			
+		}
+	});
+	
+	addToCartButton4.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String selectedEquipment = cleaner.getSelectedItem().toString();
+			textArea.append( selectedEquipment + "\n");
+			
+		}
+		
+		});
+	
+	
 	JButton btnNewButton_3_1 = new JButton("Cleaner Upgrades");
 	btnNewButton_3_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -153,8 +312,14 @@ public class ShopPage {
 	btnNewButton_3_1.setBounds(6, 273, 174, 60);
 	frame.getContentPane().add(btnNewButton_3_1);
 	
+	JLabel lblNewLabel_11 = new JLabel("Cart");
+	lblNewLabel_11.setBounds(629, 11, 61, 16);
+	frame.getContentPane().add(lblNewLabel_11);
 	
-
+	
+	JButton btnNewButton_5 = new JButton("Purchase");
+	btnNewButton_5.setBounds(590, 327, 117, 29);
+	frame.getContentPane().add(btnNewButton_5);
 	
 	
 	frame.setVisible(true);
@@ -162,7 +327,7 @@ public class ShopPage {
 	}
 	
 	public static void main(String[] args) {
-		new TheCellar.GUI.BankPage();
+		new TheCellar.GUI.ShopPage();
 		showWindow();
 		// TODO Auto-generated method stub
 
