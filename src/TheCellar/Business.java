@@ -162,4 +162,8 @@ public class Business {
         // customer satisfaction is a range from 0-1 which is calculated using quality and cleanliness
         return (quality + cleanliness) / 2;
     }
+
+    public void Update() {
+
+    }
 }
