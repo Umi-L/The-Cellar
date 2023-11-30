@@ -6,44 +6,88 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JComboBox;
 
 public class chefUpgrades {
 	private JFrame frame;
-	
+
 	public static void showWindow() {
-		
+
 	}
 
-		
-		public chefUpgrades() {
-			
-			frame = new JFrame("");
-			frame.setTitle("The Cellar");
-			frame.setBounds(100, 100, 800, 450);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
-			
-			JButton btnNewButton = new JButton("Back");
-			btnNewButton.setForeground(new Color(0, 0, 0));
-			btnNewButton.setBackground(new Color(255, 18, 29));
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					frame.setVisible(false);
-					TheCellar.GUI.ShopPage window2 = new TheCellar.GUI.ShopPage();
-					window2.showWindow();
-	}
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public chefUpgrades() {
 
-});
-			
-			btnNewButton.setBounds(300, 346, 219, 70);
-			frame.getContentPane().add(btnNewButton);
-			
+		frame = new JFrame("");
+		frame.setTitle("The Cellar");
+		frame.setBounds(100, 100, 800, 450);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.setForeground(new Color(0, 0, 0));
+		btnNewButton.setBackground(new Color(255, 18, 29));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				TheCellar.GUI.ShopPage window2 = new TheCellar.GUI.ShopPage();
+				window2.showWindow();
+			}
+
+		});
+
+		btnNewButton.setBounds(300, 346, 219, 70);
+		frame.getContentPane().add(btnNewButton);
+
+		JLabel lblNewLabel = new JLabel("Upgrade Chefs");
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblNewLabel.setBounds(341, -10, 150, 44);
+		frame.getContentPane().add(lblNewLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("Current Chefs:");
+		lblNewLabel_1.setBounds(17, 46, 124, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+
+
+		JButton btnNewButton_2 = new JButton("Upgrade");
+		btnNewButton_2.setBounds(151, 67, 117, 29);
+		btnNewButton_2.setVisible(false);	
+		frame.getContentPane().add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
+		JButton btnNewButton_3 = new JButton("Train");
+		btnNewButton_3.setBounds(311, 67, 117, 29);
+		btnNewButton_3.setVisible(false);
+		frame.getContentPane().add(btnNewButton_3);
+
+		JButton btnNewButton_1 = new JButton("Teenage Chef");
+		btnNewButton_1.setBounds(0, 67, 117, 29);
+		frame.getContentPane().add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnNewButton_2.setVisible(true);
+				btnNewButton_3.setVisible(true);
+			}
+		});
+
+		JLabel lblNewLabel_2 = new JLabel("Click on a chef to upgrade or train chef");
+		lblNewLabel_2.setBounds(4, 372, 284, 44);
+		frame.getContentPane().add(lblNewLabel_2);
+
 		frame.setVisible(true);
-			
-		}
-		
-		
-		public static void main(String[] args) {
-			showWindow();
+
+
+	}
+
+	public static void main(String[] args) {
+		new TheCellar.GUI.chefUpgrades();
+		showWindow();
 	}
 }
