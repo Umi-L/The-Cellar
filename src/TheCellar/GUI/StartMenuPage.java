@@ -18,14 +18,23 @@ public class StartMenuPage {
 	
 	public StartMenuPage() {
 		frame = new JFrame("");
+		frame.getContentPane().setBackground(new Color(192, 192, 192));
 		frame.setTitle("The Cellar");
-		frame.setBounds(100, 100, 800, 450);
+		frame.setBounds(100, 100, 440, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Start New TheCellar.Game");
+		JLabel lblNewLabel = new JLabel("The Cellar");
+		lblNewLabel.setBackground(new Color(0, 0, 0));
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 32));
+		lblNewLabel.setBounds(128, 49, 169, 56);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Start New Game");
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 18));
 		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color(255, 18, 29));
+		btnNewButton.setBackground(new Color(116, 116, 116));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -37,19 +46,37 @@ public class StartMenuPage {
 		frame.getContentPane().add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea("");
-		textArea.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		textArea.setBounds(451, 19, 323, 379);
+		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		textArea.setBounds(385, 11, 390, 379);
 		frame.getContentPane().add(textArea);
 		textArea.setVisible(false);
 		textArea.setWrapStyleWord(true);
+		
+		JButton exitButton = new JButton("X");
+		exitButton.setBackground(new Color(116, 116, 116));
+		exitButton.setFont(new Font("Arial Black", Font.BOLD, 10));
+		exitButton.setVisible(false);
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setBounds(100, 100, 440, 450);
+				textArea.setVisible(false);
+				exitButton.setVisible(false);
+			}
+		});
+		exitButton.setBounds(331, 11, 48, 45);
+		frame.getContentPane().add(exitButton);
 	
 		
 		
-		JButton btnNewButton_1 = new JButton("Load Instructions");
+		JButton btnNewButton_1 = new JButton("Instructions");
+		btnNewButton_1.setBackground(new Color(116, 116, 116));
+		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		btnNewButton_1.setForeground(new Color(0, 0, 0));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setBounds(100, 100, 800, 450);
 				textArea.setVisible(true);
+				exitButton.setVisible(true);
 				
 			
 				textArea.setText(" The Cellar is a tycoon style steak house management game where.\n"
@@ -101,7 +128,9 @@ public class StartMenuPage {
 		btnNewButton_1.setBounds(104, 276, 219, 70);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Load Save TheCellar.Game");
+		JButton btnNewButton_2 = new JButton("Load Last Save");
+		btnNewButton_2.setBackground(new Color(116, 116, 116));
+		btnNewButton_2.setFont(new Font("Arial", Font.PLAIN, 18));
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -111,11 +140,6 @@ public class StartMenuPage {
 
 		btnNewButton_2.setBounds(104, 194, 219, 70);
 		frame.getContentPane().add(btnNewButton_2);
-		
-		JLabel lblNewLabel = new JLabel("The Cellar");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 24));
-		lblNewLabel.setBounds(146, 41, 206, 56);
-		frame.getContentPane().add(lblNewLabel);
 		
 		frame.setVisible(true);
 		
