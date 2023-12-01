@@ -38,56 +38,56 @@ public class GamePage {
 		frame.setBounds(100, 100, 800, 450);
 		frame.getContentPane().setLayout(null);
 		
-		Button button = new Button("Bank");
-		button.addActionListener(new ActionListener() {
+		Button bankButton = new Button("Bank");
+		bankButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				TheCellar.GUI.BankPage bank = new TheCellar.GUI.BankPage();
 				bank.showWindow();
 			}
 		});
-		button.setFont(new Font("SansSerif", Font.BOLD, 18));
-		button.setBackground(new Color(248, 242, 22));
-		button.setBounds(693, 54, 81, 81);
-		frame.getContentPane().add(button);
+		bankButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+		bankButton.setBackground(new Color(248, 242, 22));
+		bankButton.setBounds(693, 54, 81, 81);
+		frame.getContentPane().add(bankButton);
 		
-		JButton btnNewButton = new JButton("Pause Menu");
-		btnNewButton.setBackground(new Color(255, 4, 0));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton pauseButton = new JButton("Pause Menu");
+		pauseButton.setBackground(new Color(255, 4, 0));
+		pauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
 				pause.showWindow();		}
 		});
-		btnNewButton.setBounds(23, 8, 119, 41);
-		frame.getContentPane().add(btnNewButton);
+		pauseButton.setBounds(23, 8, 119, 41);
+		frame.getContentPane().add(pauseButton);
 		
 		JSlider slider = new JSlider();
 		slider.setBounds(10, 374, 151, 26);
 		frame.getContentPane().add(slider);
 		
-		JLabel lblNewLabel = new JLabel("TheCellar.Game Speed");
-		lblNewLabel.setBounds(50, 359, 81, 14);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel timeLabel = new JLabel("TheCellar.Game Speed");
+		timeLabel.setBounds(50, 359, 81, 14);
+		frame.getContentPane().add(timeLabel);
 		
-		Button button_1 = new Button("Shop");
-		button_1.addActionListener(new ActionListener() {
+		Button shopButton = new Button("Shop");
+		shopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				TheCellar.GUI.ShopPage shop = new ShopPage();
 				shop.showWindow();
 			}
 		});
-		button_1.setFont(new Font("SansSerif", Font.BOLD, 18));
-		button_1.setBackground(new Color(0, 255, 255));
-		button_1.setBounds(693, 141, 81, 81);
-		frame.getContentPane().add(button_1);
+		shopButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+		shopButton.setBackground(new Color(0, 255, 255));
+		shopButton.setBounds(693, 141, 81, 81);
+		frame.getContentPane().add(shopButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("$10,000");
-		lblNewLabel_1.setBackground(new Color(192, 192, 192));
-		lblNewLabel_1.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		lblNewLabel_1.setBounds(697, 8, 81, 38);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel networthLabel = new JLabel("$10,000");
+		networthLabel.setBackground(new Color(192, 192, 192));
+		networthLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		networthLabel.setBounds(697, 8, 81, 38);
+		frame.getContentPane().add(networthLabel);
 		
 		Canvas canvas = new Canvas();
 		canvas.setBackground(new Color(192, 192, 192));
@@ -125,18 +125,18 @@ public class GamePage {
 
 
 		
-		Button button_1_1 = new Button("Hire");
-		button_1_1.setFont(new Font("SansSerif", Font.BOLD, 18));
-		button_1_1.setBackground(new Color(255, 0, 255));
-		button_1_1.addActionListener(new ActionListener() {
+		Button hireButton = new Button("Hire");
+		hireButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+		hireButton.setBackground(new Color(255, 0, 255));
+		hireButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				TheCellar.GUI.HirePage chefs = new HirePage();
 				chefs.showWindow();	
 		}
 		});
-		button_1_1.setBounds(693, 228, 81, 81);
-		frame.getContentPane().add(button_1_1);
+		hireButton.setBounds(693, 228, 81, 81);
+		frame.getContentPane().add(hireButton);
 		
 		
 		
