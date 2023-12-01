@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class ShopPage {
@@ -66,9 +67,9 @@ public class ShopPage {
 	equipment.setBounds(192, 34, 178, 30);
 	frame.getContentPane().add(equipment);
 	equipment.addItem("");
-	equipment.addItem("Hotplate (Increases Speed)");
-	equipment.addItem("Stove Burner Upgrade (Increases Speed)");
-	equipment.addItem("Energy Efficient Appliances (Reduces utility cost)");
+	equipment.addItem("Hotplate");
+	equipment.addItem("Stove Burner Upgrade");
+	equipment.addItem("Energy Efficient Appliances");
 	equipment.setVisible(false);
 	
 	JButton addToCartButton = new JButton("Add to cart");
@@ -113,7 +114,7 @@ public class ShopPage {
 			
 		}
 	});
-	btnNewButton_1.setBounds(6, 34, 174, 30);
+	btnNewButton_1.setBounds(31, 34, 165, 30);
 	frame.getContentPane().add(btnNewButton_1);
 	
 	JComboBox<String> food = new JComboBox<String>();
@@ -161,7 +162,7 @@ public class ShopPage {
 		food.setVisible(true);
 		}
 	});
-	btnNewButton_2.setBounds(6, 76, 174, 30);
+	btnNewButton_2.setBounds(31, 76, 165, 30);
 	frame.getContentPane().add(btnNewButton_2);
 	
 	JComboBox<String> knife = new JComboBox<String>();
@@ -200,7 +201,7 @@ public class ShopPage {
 			
 		}
 		
-		});
+	});
 	
 	JButton btnNewButton_3 = new JButton("Knife Upgrades");
 	btnNewButton_3.addActionListener(new ActionListener() {
@@ -210,7 +211,7 @@ public class ShopPage {
 			
 		}
 	});
-	btnNewButton_3.setBounds(6, 118, 174, 30);
+	btnNewButton_3.setBounds(31, 118, 165, 30);
 	frame.getContentPane().add(btnNewButton_3);
 
 	
@@ -224,7 +225,7 @@ public class ShopPage {
 			
 		}
 	});
-	btnNewButton_4.setBounds(66, 230, 174, 60);
+	btnNewButton_4.setBounds(172, 255, 174, 60);
 	btnNewButton_4.setVisible(true);
 	frame.getContentPane().add(btnNewButton_4);
 	
@@ -274,7 +275,7 @@ public class ShopPage {
 			cleaner.setVisible(true);
 		}
 	});
-	btnNewButton_3_1.setBounds(6, 160, 174, 30);
+	btnNewButton_3_1.setBounds(31, 160, 165, 30);
 	frame.getContentPane().add(btnNewButton_3_1);
 	
 	JLabel lblNewLabel_11 = new JLabel("Cart");
@@ -286,20 +287,51 @@ public class ShopPage {
 	btnNewButton_5.setBounds(590, 327, 117, 29);
 	frame.getContentPane().add(btnNewButton_5);
 	
-	JButton btnNewButton_4_1 = new JButton("Chef Training");
-	btnNewButton_4_1.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			frame.setVisible(false);
-			TheCellar.GUI.chefTraining window4 = new TheCellar.GUI.chefTraining();
-			window4.showWindow();
+	JLabel lblNewLabel_2 = new JLabel("Additional Upgrades");
+	lblNewLabel_2.setBounds(192, 219, 136, 16);
+	frame.getContentPane().add(lblNewLabel_2);
+	
+	JButton btnNewButton_6 = new JButton("?");
+	btnNewButton_6.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) { 
+		JOptionPane.showMessageDialog(frame, "Hotplate: Increases speed (3% quality increase)" + "\n" + "Stove Burner Upgrade: Increases speed (10% quality increase, 50 s/d increase)" 
+	+ "\n" + "Energy Efficient Appliances: Reduces utility cost");
+		
 		}
 	});
-	btnNewButton_4_1.setBounds(252, 230, 174, 60);
-	frame.getContentPane().add(btnNewButton_4_1);
+	btnNewButton_6.setBounds(6, 37, 23, 24);
+	frame.getContentPane().add(btnNewButton_6);
 	
-	JLabel lblNewLabel_2 = new JLabel("Additional Upgrades");
-	lblNewLabel_2.setBounds(192, 202, 136, 16);
-	frame.getContentPane().add(lblNewLabel_2);
+	JButton btnNewButton_6_1 = new JButton("?");
+	btnNewButton_6_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(frame, "Premium Meat Supplier: 45% quality increase, 30 s/d increase" + "\n" + "Organic Farm Partnership: 35% quality increase, 30 s/d increase" + "\n" + "Gourmet Recipe Book: 50% quality increase, 20 s/d increase" + "\n"
+		+ "Seasonal Menu Updates: ");
+			
+		}
+	});
+	btnNewButton_6_1.setBounds(6, 79, 23, 24);
+	frame.getContentPane().add(btnNewButton_6_1);
+	
+	JButton btnNewButton_6_2 = new JButton("?");
+	btnNewButton_6_2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(frame, "Blade Upgrade: " + "\n" + "Handle Upgrade: " + "\n" + "Sharpner Upgrade: ");
+		}
+	});
+	btnNewButton_6_2.setBounds(6, 121, 23, 24);
+	frame.getContentPane().add(btnNewButton_6_2);
+	
+	JButton btnNewButton_6_3 = new JButton("?");
+	btnNewButton_6_3.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(frame, "Industrial Grade Cleaning Supplies: " + "\n" + "Cleaning Robots: " + "\n" + "Eco Friendly Cleaning Supplies: " + "\n" + "24/7 cleaning staff: ");
+			
+
+		}
+	});
+	btnNewButton_6_3.setBounds(6, 163, 23, 24);
+	frame.getContentPane().add(btnNewButton_6_3);
 	
 	
 	frame.setVisible(true);

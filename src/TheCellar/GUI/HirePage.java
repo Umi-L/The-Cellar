@@ -1,5 +1,6 @@
-import javax.swing.*;
 package TheCellar.GUI;
+import javax.swing.*;
+
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,10 @@ public class HirePage {
 	//public static void showWindow() {
 		
 	//}
+	
+	public static void showWindow() {
+		
+	}
 	
 	public HirePage() {
 		frame = new JFrame("");
@@ -151,7 +156,7 @@ public class HirePage {
 	
 	public static void main(String[] args) {
 		new HirePage();
-		//showWindow();
+		showWindow();
 		// TODO Auto-generated method stub
 
 	}
