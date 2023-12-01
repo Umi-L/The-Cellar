@@ -2,11 +2,11 @@ package TheCellar.GUI;
 import javax.swing.*;
 
 
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,9 +18,9 @@ import javax.swing.JToggleButton;
 public class HirePage {
 	private JFrame frame;
 	
-	//public static void showWindow() {
+	public static void showWindow() {
 		
-	//}
+	}
 	
 	public static void showWindow() {
 		
@@ -157,7 +157,10 @@ public class HirePage {
 	public static void main(String[] args) {
 		new HirePage();
 		showWindow();
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
+=======
+>>>>>>> 0728e2440d341a08194ef1080b5a4bd4393fb0d0
 
 	}
 }
