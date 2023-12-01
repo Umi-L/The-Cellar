@@ -20,5 +20,23 @@ public class AI extends Business {
 		if (cleanly <= 0.2) {
 			
 		}
+		/*
+		else if (food) {
+			
+		}
+		else if (equipment) {
+			
+		}
+		else if (chef) {
+			
+		}
+		else if (debt) {
+			
+		}
+		else if (price) {
+			
+		}
+		*/
+		
 	}
 }
