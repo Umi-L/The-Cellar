@@ -1,5 +1,7 @@
 package TheCellar.GUI;
 
+import TheCellar.Game;
+import TheCellar.Main;
 import TheCellar.SaveLoadSystem;
 
 import javax.swing.JFrame;
@@ -38,6 +40,7 @@ public class StartMenuPage {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game = new Game();
 				GamePage window2 = new GamePage();
 				window2.showWindow();
 			}
@@ -134,7 +137,9 @@ public class StartMenuPage {
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SaveLoadSystem.loadGame();
+				Main.game = SaveLoadSystem.loadGame();
+				frame.setVisible(false);
+				GamePage window2 = new GamePage();
 			}
 		});
 

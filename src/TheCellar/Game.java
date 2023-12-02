@@ -16,10 +16,10 @@ public class Game {
     public int TotalTime = 0;
     public Timer timer = new Timer();
 
-    private int goingRate;
+    private int goingRate = 5;
 
     public Game() {
-    	goingRate = 5; // avg price of steak with quality of 50%
+        Update();
     }
 
     public int getGoingRate() {
@@ -41,6 +41,7 @@ public class Game {
                     @Override
                     public void run() {
                         Update();
+                        System.out.println("Tick");
                     }
                 },
                 GameSpeed
