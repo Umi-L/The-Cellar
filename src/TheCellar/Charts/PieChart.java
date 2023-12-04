@@ -32,6 +32,7 @@ public class PieChart extends JPanel {
 
         // make bounds square
         bounds.width = smallest;
+        bounds.height = smallest;
 
         // make left justified
         bounds.x = 0;
