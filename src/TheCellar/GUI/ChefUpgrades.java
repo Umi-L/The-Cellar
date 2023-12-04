@@ -52,18 +52,22 @@ public class ChefUpgrades {
 		JLabel currentChefsLabel = new JLabel("Current Chefs:");
 		currentChefsLabel.setBounds(17, 46, 124, 16);
 		frame.getContentPane().add(currentChefsLabel);
-		
+
 		//This button will update and show whatever the next upgrade is based off current chef.
 		JButton btnNewButton_1 = new JButton("Culinary school grad");
 		btnNewButton_1.setBounds(242, 73, 149, 16);
 		frame.getContentPane().add(btnNewButton_1);
-		btnNewButton_1.setVisible(false);	
-		
+		btnNewButton_1.setVisible(false);
+
 		JLabel lblNewLabel = new JLabel("Choose Upgrade");
 		lblNewLabel.setBounds(265, 46, 117, 16);
 		frame.getContentPane().add(lblNewLabel);
 		lblNewLabel.setVisible(false);
 
+
+		JLabel lblNewLabel_1 = new JLabel("Current Chefs:");
+		lblNewLabel_1.setBounds(351, 46, 124, 16);
+		frame.getContentPane().add(lblNewLabel_1);
 
 		JButton btnNewButton_2 = new JButton("Upgrade");
 		btnNewButton_2.setBounds(118, 67, 117, 29);
@@ -75,22 +79,17 @@ public class ChefUpgrades {
 				lblNewLabel.setVisible(true);
 			}
 		});
-		
+
 		JButton btnNewButton_4 = new JButton("Speed");
 		btnNewButton_4.setBounds(517, 73, 87, 16);
 		frame.getContentPane().add(btnNewButton_4);
 		btnNewButton_4.setVisible(false);
-		
+
 		JButton btnNewButton_4_1 = new JButton("Skill");
 		btnNewButton_4_1.setBounds(611, 73, 87, 16);
 		frame.getContentPane().add(btnNewButton_4_1);
 		btnNewButton_4_1.setVisible(false);
-		
-		JLabel lblNewLabel_1 = new JLabel("Choose Upgrade");
-		lblNewLabel_1.setBounds(553, 46, 117, 16);
-		frame.getContentPane().add(lblNewLabel_1);
-		lblNewLabel_1.setVisible(false);
-		
+
 		JButton btnNewButton_3 = new JButton("Train");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,6 +101,13 @@ public class ChefUpgrades {
 		btnNewButton_3.setBounds(400, 67, 117, 29);
 		btnNewButton_3.setVisible(false);
 		frame.getContentPane().add(btnNewButton_3);
+
+		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 
 		JButton button = new JButton("Teenage Chef");
 		button.setBounds(0, 67, 117, 29);
@@ -118,12 +124,12 @@ public class ChefUpgrades {
 		JLabel lblNewLabel_2 = new JLabel("Click on a chef to upgrade or train chef");
 		lblNewLabel_2.setBounds(17, 372, 284, 44);
 		frame.getContentPane().add(lblNewLabel_2);
-		
+
 		frame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		new TheCellar.GUI.chefUpgrades();
+		new TheCellar.GUI.ChefUpgrades();
 		showWindow();
 	}
 }

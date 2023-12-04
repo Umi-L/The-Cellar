@@ -21,7 +21,6 @@ public class HirePage {
 	public static void showWindow() {
 		
 	}
-	
 
 	public HirePage() {
 		frame = new JFrame("");

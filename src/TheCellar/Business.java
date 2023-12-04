@@ -31,8 +31,8 @@ public class Business {
     protected double demand;
     protected int debt;
     protected Equipment cookingEquipment;
-    protected ArrayList<Chef> chefs;
-    protected ArrayList<Cleaner> cleaners;
+    protected ArrayList<Chef> chefs = new ArrayList<Chef>();
+    protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
     protected Knife knives;
     protected Food foodType;
     protected int daysOfFood;

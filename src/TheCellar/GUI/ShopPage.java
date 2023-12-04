@@ -220,7 +220,7 @@ public class ShopPage {
 	btnNewButton_4.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
-			chefUpgrades window3 = new TheCellar.GUI.chefUpgrades();
+			ChefUpgrades window3 = new TheCellar.GUI.ChefUpgrades();
 			window3.showWindow();
 			
 		}
