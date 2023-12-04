@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 
-public class chefUpgrades {
+public class ChefUpgrades {
 	private JFrame frame;
 
 	public static void showWindow() {
@@ -20,7 +20,7 @@ public class chefUpgrades {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public chefUpgrades() {
+	public ChefUpgrades() {
 
 		frame = new JFrame("");
 		frame.setTitle("The Cellar");
