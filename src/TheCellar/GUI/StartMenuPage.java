@@ -49,8 +49,8 @@ public class StartMenuPage {
 		frame.getContentPane().add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea("");
-		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
-		textArea.setBounds(385, 11, 390, 379);
+		textArea.setFont(new Font("Arial", Font.PLAIN, 8));
+		textArea.setBounds(385, 11, 350, 379);
 		frame.getContentPane().add(textArea);
 		textArea.setVisible(false);
 		textArea.setWrapStyleWord(true);
