@@ -65,10 +65,6 @@ public class ChefUpgrades {
 		lblNewLabel.setVisible(false);
 
 
-		JLabel lblNewLabel_1 = new JLabel("Current Chefs:");
-		lblNewLabel_1.setBounds(351, 46, 124, 16);
-		frame.getContentPane().add(lblNewLabel_1);
-
 		JButton btnNewButton_2 = new JButton("Upgrade");
 		btnNewButton_2.setBounds(118, 67, 117, 29);
 		btnNewButton_2.setVisible(false);	
@@ -89,7 +85,12 @@ public class ChefUpgrades {
 		btnNewButton_4_1.setBounds(611, 73, 87, 16);
 		frame.getContentPane().add(btnNewButton_4_1);
 		btnNewButton_4_1.setVisible(false);
-
+		
+		JLabel lblNewLabel_1 = new JLabel("Choose Upgrade");
+		lblNewLabel_1.setBounds(550, 46, 117, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setVisible(false);
+		
 		JButton btnNewButton_3 = new JButton("Train");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
