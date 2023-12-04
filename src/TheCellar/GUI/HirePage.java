@@ -22,8 +22,11 @@ public class HirePage {
 		
 	}
 	
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> e23037b6b7d51f0ac0a4333aa816dbc6b897a1a8
 	public HirePage() {
 		frame = new JFrame("");
 		frame.getContentPane().setFont(new Font("Dialog", Font.BOLD, 12));
@@ -153,12 +156,17 @@ public class HirePage {
 	
 	
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		new HirePage();
 		showWindow();
 
 		// TODO Auto-generated method stub
 
 
+=======
+		new HirePage().showWindow();
+		// TODO Auto-generated method stub
+>>>>>>> e23037b6b7d51f0ac0a4333aa816dbc6b897a1a8
 	}
 }
 

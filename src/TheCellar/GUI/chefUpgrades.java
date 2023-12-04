@@ -48,10 +48,19 @@ public class chefUpgrades {
 		titleLabel.setBounds(341, -10, 150, 44);
 		frame.getContentPane().add(titleLabel);
 
+<<<<<<< HEAD
 		JLabel currentChefsLabel = new JLabel("Current Chefs:");
 		currentChefsLabel.setBounds(17, 46, 124, 16);
 		frame.getContentPane().add(currentChefsLabel);
 
+=======
+		JLabel lblNewLabel_1 = new JLabel("Current Chefs:");
+		lblNewLabel_1.setBounds(351, 46, 124, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+		JLabel currentChefsLabel = new JLabel("Current Chefs:");
+		currentChefsLabel.setBounds(17, 46, 124, 16);
+		frame.getContentPane().add(currentChefsLabel);
+>>>>>>> e23037b6b7d51f0ac0a4333aa816dbc6b897a1a8
 
 
 		JButton btnNewButton_2 = new JButton("Upgrade");
@@ -68,11 +77,28 @@ public class chefUpgrades {
 		btnNewButton_3.setVisible(false);
 		frame.getContentPane().add(btnNewButton_3);
 
+<<<<<<< HEAD
+=======
+		JButton btnNewButton_1 = new JButton("Teenage Chef");
+		btnNewButton_1.setBounds(97, 74, 117, 29);
+		frame.getContentPane().add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+>>>>>>> e23037b6b7d51f0ac0a4333aa816dbc6b897a1a8
 		JButton button = new JButton("Teenage Chef");
 		button.setBounds(0, 67, 117, 29);
 		frame.getContentPane().add(button);
-		button.addActionListener(new ActionListener() {
 
+		button.addActionListener(new ActionListener() {
+<<<<<<< HEAD
+
+=======
+>>>>>>> e23037b6b7d51f0ac0a4333aa816dbc6b897a1a8
 			public void actionPerformed(ActionEvent e) {
 				btnNewButton_2.setVisible(true);
 				btnNewButton_3.setVisible(true);
@@ -84,8 +110,6 @@ public class chefUpgrades {
 		frame.getContentPane().add(lblNewLabel_2);
 
 		frame.setVisible(true);
-
-
 	}
 
 	public static void main(String[] args) {
