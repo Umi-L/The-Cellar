@@ -5,11 +5,15 @@ package TheCellar;/*TheCellar.Chef (Abstract)
 get&set for all fields
 */
 
-public abstract class Chef {
+public class Chef {
 
 	protected String name;
 	protected int price;
 	protected int modifier;
+	
+	int teenCount;
+	int gradCount;
+	int ramsayCount; 
 	
 	public String getName() {
 		return name;
