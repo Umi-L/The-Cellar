@@ -164,6 +164,18 @@ public class Business {
     }
 
     public void Update() {
+        // foreach chef, update
+        for (Chef chef : chefs) {
+            // subtract price of chef from money
+            money -= chef.getPrice();
+        }
+
+        // foreach cleaner, update
+        for (Cleaner cleaner : cleaners) {
+            // subtract price of cleaner from money
+            money -= cleaner.getPrice();
+        }
+
 
     }
 }
