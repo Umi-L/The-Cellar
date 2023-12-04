@@ -22,9 +22,7 @@ public class HirePage {
 		
 	}
 	
-	public static void showWindow() {
-		
-	}
+	
 	
 	public HirePage() {
 		frame = new JFrame("");
@@ -157,10 +155,9 @@ public class HirePage {
 	public static void main(String[] args) {
 		new HirePage();
 		showWindow();
-<<<<<<< HEAD
+
 		// TODO Auto-generated method stub
-=======
->>>>>>> 0728e2440d341a08194ef1080b5a4bd4393fb0d0
+
 
 	}
 }
