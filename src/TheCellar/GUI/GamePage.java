@@ -3,6 +3,7 @@ package TheCellar.GUI;
 import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
 import TheCellar.Charts.PieChart;
+import TheCellar.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -65,6 +66,19 @@ public class GamePage {
 		JSlider slider = new JSlider();
 		slider.setBounds(10, 374, 151, 26);
 		frame.getContentPane().add(slider);
+		slider.addChangeListener(e -> {
+			if (textListenerEnabled) {
+				System.out.println("Slider value: " + slider.getValue());
+
+				float percent = slider.getValue() / 100.0f;
+				int min = Main.game.GameSpeedMin;
+				int max = Main.game.GameSpeedMax;
+				int range = max - min;
+				int value = (int) (min + range * percent);
+
+				Main.game.SetGameSpeed(value);
+			}
+		});
 		
 		JLabel timeLabel = new JLabel("TheCellar.Game Speed");
 		timeLabel.setBounds(50, 359, 81, 14);

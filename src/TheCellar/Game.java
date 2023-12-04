@@ -13,6 +13,8 @@ public class Game {
     public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
 
     public int GameSpeed = 1000;
+    public final int GameSpeedMax = 5000;
+    public final int GameSpeedMin = 10;
     public int TotalTime = 0;
     public Timer timer = new Timer();
 
@@ -26,9 +28,12 @@ public class Game {
     	return goingRate;
     }
 
+    public void SetGameSpeed(int speed) {
+        GameSpeed = speed;
+    }
+
     public void Update(){
         TotalTime++;
-
 
         PlayerBusiness.Update();
         for (AI ai : AIBusinesses) {
@@ -41,7 +46,6 @@ public class Game {
                     @Override
                     public void run() {
                         Update();
-                        System.out.println("Tick");
                     }
                 },
                 GameSpeed
