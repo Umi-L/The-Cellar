@@ -10,7 +10,13 @@ get&set for all fields
 public abstract class Food {
     protected String name;
     protected int price;
-    protected int modifier;
+    protected double modifier;
+
+    protected Food(String name, int price, double modifier) {
+        this.name = name;
+        this.price = price;
+        this.modifier = modifier;
+    }
 
     public String getName() {
         return name;
@@ -28,7 +34,7 @@ public abstract class Food {
         this.price = price;
     }
 
-    public int getModifier() {
+    public double getModifier() {
         return modifier;
     }
 

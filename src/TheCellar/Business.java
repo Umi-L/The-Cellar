@@ -11,7 +11,7 @@ package TheCellar;/*
 #Chefs: ArrayList<TheCellar.Chef>
 #Cleaners: Array<TheCellar.Cleaner>
 #Knives: TheCellar.Knife
-#FoodType: TheCellar.Food
+#food: TheCellar.Food
 #DaysOfFood: int
 #DaysInDebt: int
 +GetNetWorth(): int
@@ -19,6 +19,8 @@ package TheCellar;/*
 get&set for all fields
 
  */
+
+import TheCellar.Foods.FoodScraps;
 
 import java.util.ArrayList;
 
@@ -34,7 +36,7 @@ public class Business {
     protected ArrayList<Chef> chefs = new ArrayList<Chef>();
     protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
     protected Knife knives;
-    protected Food foodType;
+    protected Food food = new FoodScraps();
     protected int daysOfFood;
     protected int daysInDebt;
 
@@ -48,10 +50,6 @@ public class Business {
 
     public int getMoney() {
         return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public int getSteaks() {
@@ -76,78 +74,6 @@ public class Business {
 
     public void setCleanliness(double cleanliness) {
         this.cleanliness = cleanliness;
-    }
-
-    public double getDemand() {
-        return demand;
-    }
-
-    public void setDemand(double demand) {
-        this.demand = demand;
-    }
-
-    public int getDebt() {
-        return debt;
-    }
-
-    public void setDebt(int debt) {
-        this.debt = debt;
-    }
-
-    public Equipment getCookingEquipment() {
-        return cookingEquipment;
-    }
-
-    public void setCookingEquipment(Equipment cookingEquipment) {
-        this.cookingEquipment = cookingEquipment;
-    }
-
-    public ArrayList<Chef> getChefs() {
-        return chefs;
-    }
-
-    public void setChefs(ArrayList<Chef> chefs) {
-        this.chefs = chefs;
-    }
-
-    public ArrayList<Cleaner> getCleaners() {
-        return cleaners;
-    }
-
-    public void setCleaners(ArrayList<Cleaner> cleaners) {
-        this.cleaners = cleaners;
-    }
-
-    public Knife getKnives() {
-        return knives;
-    }
-
-    public void setKnives(Knife knives) {
-        this.knives = knives;
-    }
-
-    public Food getFoodType() {
-        return foodType;
-    }
-
-    public void setFoodType(Food foodType) {
-        this.foodType = foodType;
-    }
-
-    public int getDaysOfFood() {
-        return daysOfFood;
-    }
-
-    public void setDaysOfFood(int daysOfFood) {
-        this.daysOfFood = daysOfFood;
-    }
-
-    public int getDaysInDebt() {
-        return daysInDebt;
-    }
-
-    public void setDaysInDebt(int daysInDebt) {
-        this.daysInDebt = daysInDebt;
     }
 
     // get net worth, factors in money, equipment, knives, and debt but not employees
@@ -176,6 +102,20 @@ public class Business {
             money -= cleaner.getPrice();
         }
 
+        // calculate profit
+        int profit = (int) (steaks * food.getModifier() * GetCustomerSatisfaction());
 
+        // if debt is greater than 0, increment days in debt
+        if (debt > 0) {
+            daysInDebt++;
+        } else{
+            daysInDebt = 0;
+        }
+
+        // if debt is greater than 0 and days in debt is greater than 4, game over
+        if (debt > 0 && daysInDebt > 4) {
+            // game over
+            System.out.println("Game over!");
+        }
     }
 }
