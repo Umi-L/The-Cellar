@@ -1,4 +1,6 @@
 package TheCellar.GUI;
+import javax.swing.*;
+
 
 import javax.swing.*;
 import java.awt.Color;
@@ -22,7 +24,7 @@ public class HirePage {
 	public static void showWindow() {
 		
 	}
-	
+
 	public HirePage() {
 		
 		Chef obj = new Chef(); //initiate chef object
@@ -42,6 +44,14 @@ public class HirePage {
 		resumeButton.setBackground(new Color(255, 18, 29));
 		resumeButton.setBounds(300, 346, 219, 70);
 		frame.getContentPane().add(resumeButton);
+		
+		resumeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				GamePage window2 = new GamePage();
+				window2.showWindow();
+			}
+		});
 		
 		//TITLE PAGE LABEL
 		JLabel lblNewLabel = new JLabel("HIRING PAGE");
@@ -200,8 +210,16 @@ public class HirePage {
 	
 	
 	public static void main(String[] args) {
+
 		new HirePage();
 		showWindow();
+
+		// TODO Auto-generated method stub
+
+
+
+		new HirePage().showWindow();
+		// TODO Auto-generated method stub
 
 	}
 }

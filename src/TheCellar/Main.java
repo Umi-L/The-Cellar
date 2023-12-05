@@ -23,8 +23,6 @@ public class Main {
 	// entry point of program
 	public static void main(String[] args) {
 		new StartMenuPage();
-
-		SaveLoadSystem.saveGame(game);
 	}
 }
 

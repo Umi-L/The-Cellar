@@ -31,8 +31,8 @@ public class Business {
     protected double demand;
     protected int debt;
     protected Equipment cookingEquipment;
-    protected ArrayList<Chef> chefs;
-    protected ArrayList<Cleaner> cleaners;
+    protected ArrayList<Chef> chefs = new ArrayList<Chef>();
+    protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
     protected Knife knives;
     protected Food foodType;
     protected int daysOfFood;
@@ -164,6 +164,18 @@ public class Business {
     }
 
     public void Update() {
+        // foreach chef, update
+        for (Chef chef : chefs) {
+            // subtract price of chef from money
+            money -= chef.getPrice();
+        }
+
+        // foreach cleaner, update
+        for (Cleaner cleaner : cleaners) {
+            // subtract price of cleaner from money
+            money -= cleaner.getPrice();
+        }
+
 
     }
 }

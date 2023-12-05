@@ -13,22 +13,27 @@ public class Game {
     public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
 
     public int GameSpeed = 1000;
+    public final int GameSpeedMax = 5000;
+    public final int GameSpeedMin = 10;
     public int TotalTime = 0;
     public Timer timer = new Timer();
 
-    private int goingRate;
+    private int goingRate = 5;
 
     public Game() {
-    	goingRate = 5; // avg price of steak with quality of 50%
+        Update();
     }
 
     public int getGoingRate() {
     	return goingRate;
     }
 
+    public void SetGameSpeed(int speed) {
+        GameSpeed = speed;
+    }
+
     public void Update(){
         TotalTime++;
-
 
         PlayerBusiness.Update();
         for (AI ai : AIBusinesses) {

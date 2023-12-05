@@ -3,6 +3,7 @@ package TheCellar.GUI;
 import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
 import TheCellar.Charts.PieChart;
+import TheCellar.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -35,7 +36,7 @@ public class GamePage {
 
 		// set close operation
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 800, 450);
+		frame.setBounds(100, 100, 800, 500);
 		frame.getContentPane().setLayout(null);
 		
 		Button bankButton = new Button("Bank");
@@ -59,15 +60,28 @@ public class GamePage {
 				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
 				pause.showWindow();		}
 		});
-		pauseButton.setBounds(23, 8, 119, 41);
+		pauseButton.setBounds(10, 10, 119, 41);
 		frame.getContentPane().add(pauseButton);
 		
 		JSlider slider = new JSlider();
-		slider.setBounds(10, 374, 151, 26);
+		slider.setBounds(623, 424, 151, 26);
 		frame.getContentPane().add(slider);
+		slider.addChangeListener(e -> {
+			if (textListenerEnabled) {
+				System.out.println("Slider value: " + slider.getValue());
+
+				float percent = slider.getValue() / 100.0f;
+				int min = Main.game.GameSpeedMin;
+				int max = Main.game.GameSpeedMax;
+				int range = max - min;
+				int value = (int) (min + range * percent);
+
+				Main.game.SetGameSpeed(value);
+			}
+		});
 		
 		JLabel timeLabel = new JLabel("TheCellar.Game Speed");
-		timeLabel.setBounds(50, 359, 81, 14);
+		timeLabel.setBounds(663, 409, 81, 14);
 		frame.getContentPane().add(timeLabel);
 		
 		Button shopButton = new Button("Shop");
@@ -89,11 +103,6 @@ public class GamePage {
 		networthLabel.setBounds(697, 8, 81, 38);
 		frame.getContentPane().add(networthLabel);
 		
-		Canvas canvas = new Canvas();
-		canvas.setBackground(new Color(192, 192, 192));
-		canvas.setBounds(0, 54, 161, 289);
-		frame.getContentPane().add(canvas);
-		
 //		Canvas canvas_1 = new Canvas();
 //		canvas_1.setBackground(Color.LIGHT_GRAY);
 //		canvas_1.setBounds(167, 0, 520, 411);
@@ -112,15 +121,15 @@ public class GamePage {
 		names.add("brrrr");
 
 		PieChart pieChart = new PieChart(names, values);
-		pieChart.setBounds(167, 0, 300, 150);
+		pieChart.setBounds(10, 69, 119, 119);
 		frame.getContentPane().add(pieChart);
 
 		LineGraph lineGraph = new LineGraph("time", "company value", values);
-		lineGraph.setBounds(167, 160, 300, 150);
+		lineGraph.setBounds(10, 196, 264, 116);
 		frame.getContentPane().add(lineGraph);
 
 		BarGraph barGraph = new BarGraph("value", names, values);
-		barGraph.setBounds(167, 320, 300, 150);
+		barGraph.setBounds(10, 323, 264, 118);
 		frame.getContentPane().add(barGraph);
 
 

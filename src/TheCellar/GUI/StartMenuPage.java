@@ -1,5 +1,7 @@
 package TheCellar.GUI;
 
+import TheCellar.Game;
+import TheCellar.Main;
 import TheCellar.SaveLoadSystem;
 
 import javax.swing.JFrame;
@@ -20,34 +22,35 @@ public class StartMenuPage {
 		frame = new JFrame("");
 		frame.getContentPane().setBackground(new Color(192, 192, 192));
 		frame.setTitle("The Cellar");
-		frame.setBounds(100, 100, 440, 450);
+		frame.setBounds(100, 100, 350, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("The Cellar");
 		lblNewLabel.setBackground(new Color(0, 0, 0));
 		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 32));
-		lblNewLabel.setBounds(128, 49, 169, 56);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 38));
+		lblNewLabel.setBounds(72, 28, 219, 56);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Start New Game");
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 18));
+		JButton btnNewButton = new JButton("New Game");
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 21));
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(116, 116, 116));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game = new Game();
 				GamePage window2 = new GamePage();
 				window2.showWindow();
 			}
 		});
-		btnNewButton.setBounds(104, 118, 219, 70);
+		btnNewButton.setBounds(60, 95, 219, 70);
 		frame.getContentPane().add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea("");
-		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
-		textArea.setBounds(385, 11, 390, 379);
+		textArea.setFont(new Font("Arial", Font.PLAIN, 8));
+		textArea.setBounds(385, 11, 350, 379);
 		frame.getContentPane().add(textArea);
 		textArea.setVisible(false);
 		textArea.setWrapStyleWord(true);
@@ -58,7 +61,7 @@ public class StartMenuPage {
 		exitButton.setVisible(false);
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setBounds(100, 100, 440, 450);
+				frame.setBounds(100, 100, 350, 450);
 				textArea.setVisible(false);
 				exitButton.setVisible(false);
 			}
@@ -70,7 +73,7 @@ public class StartMenuPage {
 		
 		JButton btnNewButton_1 = new JButton("Instructions");
 		btnNewButton_1.setBackground(new Color(116, 116, 116));
-		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 18));
+		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 21));
 		btnNewButton_1.setForeground(new Color(0, 0, 0));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,20 +128,22 @@ public class StartMenuPage {
 				
 			}
 		});
-		btnNewButton_1.setBounds(104, 276, 219, 70);
+		btnNewButton_1.setBounds(60, 303, 219, 70);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Load Last Save");
+		JButton btnNewButton_2 = new JButton("Load Save");
 		btnNewButton_2.setBackground(new Color(116, 116, 116));
-		btnNewButton_2.setFont(new Font("Arial", Font.PLAIN, 18));
+		btnNewButton_2.setFont(new Font("Arial", Font.PLAIN, 21));
 		btnNewButton_2.setForeground(new Color(0, 0, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SaveLoadSystem.loadGame();
+				Main.game = SaveLoadSystem.loadGame();
+				frame.setVisible(false);
+				GamePage window2 = new GamePage();
 			}
 		});
 
-		btnNewButton_2.setBounds(104, 194, 219, 70);
+		btnNewButton_2.setBounds(60, 198, 219, 70);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		frame.setVisible(true);
