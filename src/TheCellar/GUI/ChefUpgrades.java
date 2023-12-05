@@ -55,10 +55,6 @@ public class ChefUpgrades {
 		JLabel lblNewLabel_1 = new JLabel("Current Chefs:");
 		lblNewLabel_1.setBounds(351, 46, 124, 16);
 		frame.getContentPane().add(lblNewLabel_1);
-		JLabel currentChefsLabel = new JLabel("Current Chefs:");
-		currentChefsLabel.setBounds(17, 46, 124, 16);
-		frame.getContentPane().add(currentChefsLabel);
-
 
 		JButton btnNewButton_2 = new JButton("Upgrade");
 		btnNewButton_2.setBounds(341, 74, 117, 29);
@@ -106,7 +102,7 @@ public class ChefUpgrades {
 	}
 
 	public static void main(String[] args) {
-		new TheCellar.GUI.chefUpgrades();
+		new TheCellar.GUI.ChefUpgrades();
 		showWindow();
 	}
 }
