@@ -36,7 +36,7 @@ public class GamePage {
 
 		// set close operation
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 800, 500);
+		frame.setBounds(100, 100, 950, 500);
 		frame.getContentPane().setLayout(null);
 		
 		Button bankButton = new Button("Bank");
@@ -49,22 +49,23 @@ public class GamePage {
 		});
 		bankButton.setFont(new Font("SansSerif", Font.BOLD, 18));
 		bankButton.setBackground(new Color(248, 242, 22));
-		bankButton.setBounds(693, 54, 81, 81);
+		bankButton.setBounds(843, 52, 81, 81);
 		frame.getContentPane().add(bankButton);
 		
-		JButton pauseButton = new JButton("Pause Menu");
-		pauseButton.setBackground(new Color(255, 4, 0));
+		JButton pauseButton = new JButton("Pause");
+		pauseButton.setFont(new Font("Arial", Font.BOLD, 12));
+		pauseButton.setBackground(new Color(128, 128, 128));
 		pauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
 				pause.showWindow();		}
 		});
-		pauseButton.setBounds(10, 10, 119, 41);
+		pauseButton.setBounds(10, 8, 81, 50);
 		frame.getContentPane().add(pauseButton);
 		
 		JSlider slider = new JSlider();
-		slider.setBounds(623, 424, 151, 26);
+		slider.setBounds(783, 424, 151, 26);
 		frame.getContentPane().add(slider);
 		slider.addChangeListener(e -> {
 			if (textListenerEnabled) {
@@ -80,8 +81,8 @@ public class GamePage {
 			}
 		});
 		
-		JLabel timeLabel = new JLabel("TheCellar.Game Speed");
-		timeLabel.setBounds(663, 409, 81, 14);
+		JLabel timeLabel = new JLabel("Game Speed\r\n");
+		timeLabel.setBounds(823, 409, 81, 14);
 		frame.getContentPane().add(timeLabel);
 		
 		Button shopButton = new Button("Shop");
@@ -94,13 +95,13 @@ public class GamePage {
 		});
 		shopButton.setFont(new Font("SansSerif", Font.BOLD, 18));
 		shopButton.setBackground(new Color(0, 255, 255));
-		shopButton.setBounds(693, 141, 81, 81);
+		shopButton.setBounds(843, 156, 81, 81);
 		frame.getContentPane().add(shopButton);
 		
 		JLabel networthLabel = new JLabel("$10,000");
 		networthLabel.setBackground(new Color(192, 192, 192));
 		networthLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		networthLabel.setBounds(697, 8, 81, 38);
+		networthLabel.setBounds(843, 8, 81, 38);
 		frame.getContentPane().add(networthLabel);
 		
 //		Canvas canvas_1 = new Canvas();
@@ -121,15 +122,15 @@ public class GamePage {
 		names.add("brrrr");
 
 		PieChart pieChart = new PieChart(names, values);
-		pieChart.setBounds(10, 69, 119, 119);
+		pieChart.setBounds(10, 69, 200, 119);
 		frame.getContentPane().add(pieChart);
 
 		LineGraph lineGraph = new LineGraph("time", "company value", values);
-		lineGraph.setBounds(10, 196, 264, 116);
+		lineGraph.setBounds(10, 196, 200, 116);
 		frame.getContentPane().add(lineGraph);
 
 		BarGraph barGraph = new BarGraph("value", names, values);
-		barGraph.setBounds(10, 323, 264, 118);
+		barGraph.setBounds(10, 323, 200, 118);
 		frame.getContentPane().add(barGraph);
 
 
@@ -144,7 +145,7 @@ public class GamePage {
 				chefs.showWindow();	
 		}
 		});
-		hireButton.setBounds(693, 228, 81, 81);
+		hireButton.setBounds(843, 268, 81, 81);
 		frame.getContentPane().add(hireButton);
 		
 		
@@ -177,6 +178,5 @@ public class GamePage {
 			
 			
 	}
-
 }
 
