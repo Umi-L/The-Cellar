@@ -89,21 +89,55 @@ public class Business {
         return (quality + cleanliness) / 2;
     }
 
-    public void Update() {
-        // foreach chef, update
-        for (Chef chef : chefs) {
-            // subtract price of chef from money
-            money -= chef.getPrice();
+    public void PurchaseFood(Food food) {
+    	this.food = food;
+        setMoney(money -= food.getPrice());
+        this.daysOfFood = 7;
+    }
+
+    public int getExpenses() {
+    	int expense = 0;
+
+    	// foreach chef, add price to expense
+    	for (Chef chef : chefs) {
+    		expense += chef.getPrice();
+    	}
+
+    	// foreach cleaner, add price to expense
+    	for (Cleaner cleaner : cleaners) {
+    		expense += cleaner.getPrice();
+    	}
+
+    	// add food price to expenses if there is no food
+        if (daysOfFood == 0) {
+            expense += food.getPrice();
         }
 
-        // foreach cleaner, update
-        for (Cleaner cleaner : cleaners) {
-            // subtract price of cleaner from money
-            money -= cleaner.getPrice();
-        }
+    	return expense;
+    }
+
+    public int getProfit() {
+    	int profit = (int) (steaks * food.getModifier() * GetCustomerSatisfaction());
+    	return profit;
+    }
+
+    public void setMoney(int money) {
+
+        // PUT UI UPDATE HERE
+
+    	this.money = money;
+    }
+
+    public void Update() {
+        // calculate expenses
+        int expenses = getExpenses();
+
+        setMoney(money - expenses);
 
         // calculate profit
-        int profit = (int) (steaks * food.getModifier() * GetCustomerSatisfaction());
+        int profit = getProfit();
+
+        setMoney(money += profit);
 
         // if debt is greater than 0, increment days in debt
         if (debt > 0) {

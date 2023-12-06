@@ -4,6 +4,7 @@ This is seperated because it needs to be serialized and deserialized.
  */
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 
 import TheCellar.AI.AI;
@@ -17,6 +18,7 @@ public class Game {
     public final int GameSpeedMin = 10;
     public int TotalTime = 0;
     public Timer timer = new Timer();
+    public Random random = new Random();
 
     private int goingRate = 5;
 
@@ -33,8 +35,9 @@ public class Game {
     }
 
     public void Update(){
-        TotalTime++;
+        TotalTime++; // increment total time
 
+        // update all businesses
         PlayerBusiness.Update();
         for (AI ai : AIBusinesses) {
             ai.Update();

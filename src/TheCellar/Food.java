@@ -7,7 +7,15 @@ get&set for all fields
 
  */
 
+import TheCellar.Foods.FoodScraps;
+import TheCellar.Foods.WalmartFood;
+
 public abstract class Food {
+    public static final Food[] FoodTypes = {
+            new FoodScraps(),
+            new WalmartFood()
+    };
+
     protected String name;
     protected int price;
     protected double modifier;
