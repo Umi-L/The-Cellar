@@ -6,8 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
+
+
 
 public class ShopPage {
 	private JFrame frame;
