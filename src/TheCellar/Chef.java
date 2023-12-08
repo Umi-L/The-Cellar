@@ -5,43 +5,49 @@ package TheCellar;/*TheCellar.Chef (Abstract)
 get&set for all fields
 */
 
-public class Chef {
+import TheCellar.Chefs.GradChef;
+import TheCellar.Chefs.RamsayChef;
+import TheCellar.Chefs.TeenChef;
+
+public abstract class Chef {
+
+	public static final Chef[] ChefTypes = {
+			new TeenChef(),
+			new GradChef(),
+			new RamsayChef()
+	};
+
+	public Chef(String name, int price, double modifier) {
+		this.name = name;
+		this.price = price;
+		this.modifier = modifier;
+	}
 
 	protected String name;
 	protected int price;
-	protected int modifier;
-	
-	int teenCount;
-	int gradCount;
-	int ramsayCount; 
+	protected double modifier;
 	
 	public String getName() {
 		return name;
-		
 	}
 	
 	public void setName(String name) {
 		this.name = name;
-		
 	}
+
 	public int getPrice() {
 		return price;
-		
 	}
 	
 	public void setPrice(int price) {
 		this.price = price;
-		
 	}
-	public int getModifier() {
+
+	public double getModifier() {
 		return modifier;
-		
 	}
 	
 	public void setModifier(int modifier) {
 		this.modifier = modifier;
-		
 	}
-	
-
 }

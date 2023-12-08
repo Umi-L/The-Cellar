@@ -39,6 +39,7 @@ public class Business {
     protected Food food = new FoodScraps();
     protected int daysOfFood;
     protected int daysInDebt;
+    protected int price;
 
     public String getName() {
         return name;
@@ -95,6 +96,30 @@ public class Business {
         this.daysOfFood = 7;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void HireCleaner(Cleaner cleaner) {
+    	cleaners.add(cleaner);
+        setMoney(money -= cleaner.getPrice());
+    }
+
+    public void HireChef(Chef chef) {
+    	chefs.add(chef);
+        setMoney(money -= chef.getPrice());
+    }
+
+    public void UpgradeEquipment(Equipment equipment) {
+    	cookingEquipment = equipment;
+        setMoney(money -= equipment.getPrice());
+    }
+
+    public void UpgradeKnife(Knife knife) {
+    	knives = knife;
+        setMoney(money -= knife.getPrice());
+    }
+
     public int getExpenses() {
     	int expense = 0;
 
@@ -126,6 +151,11 @@ public class Business {
         // PUT UI UPDATE HERE
 
     	this.money = money;
+    }
+
+    public int getOptimalPrice() {
+        int optimalPrice = (int) (food.getModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
+        return optimalPrice;
     }
 
     public void Update() {

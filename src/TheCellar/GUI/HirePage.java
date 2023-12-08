@@ -27,9 +27,6 @@ public class HirePage {
 
 	public HirePage() {
 		
-		Chef obj = new Chef(); //initiate chef object
-		
-		
 		frame = new JFrame("");
 		frame.getContentPane().setFont(new Font("Dialog", Font.BOLD, 12));
 		frame.setTitle("The Cellar");

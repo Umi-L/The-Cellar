@@ -20,7 +20,7 @@ public class Game {
     public Timer timer = new Timer();
     public Random random = new Random();
 
-    private int goingRate = 5;
+    private int goingRate = 5; // going rate for a steak with 100% quality
 
     public Game() {
         Update();
