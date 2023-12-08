@@ -78,7 +78,7 @@ public class ShopPage {
 
     btnClearCart.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            // Clear the cart (textArea)
+            // Clear the cart 
             textArea.setText("");
         }
     });
@@ -91,26 +91,26 @@ public class ShopPage {
             if (textArea.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
             } else {
-                // Calculate the total cost and process the purchase (existing code)
+                // Calculate the total cost and purchase 
                 String[] cartItems = textArea.getText().split("\n");
                 int totalCost = 0;
 
                 for (String item : cartItems) {
-                    // Assume each line in the cart represents an item with a cost at the end
+                   
                     String[] parts = item.split("\\$");
                     if (parts.length > 1) {
                         try {
                             int itemCost = Integer.parseInt(parts[1].trim());
                             totalCost += itemCost;
                         } catch (NumberFormatException ex) {
-                            // Handle the case where the cost is not a valid integer
+                        
                         }
                     }
                 }
 
                 // Check if the total cost is less than or equal to $10,000
                 if (totalCost <= 10000) {
-                    // Deduct the total cost from the initial $10,000
+                    
                     int remainingBalance = 10000 - totalCost;
                     lblNewLabel_1.setText("$" + remainingBalance);
 
