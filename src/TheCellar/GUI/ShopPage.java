@@ -7,12 +7,15 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
+
 
 public class ShopPage {
 	private JFrame frame;
@@ -53,7 +56,7 @@ public class ShopPage {
 	frame.getContentPane().add(lblNewLabel);
 	
 	JTextArea textArea = new JTextArea();
-	textArea.setBounds(506, 40, 273, 275);
+	textArea.setBounds(510, 34, 273, 269);
 	frame.getContentPane().add(textArea);
 	
 	JLabel lblNewLabel_1 = new JLabel("$10,000");
@@ -61,15 +64,73 @@ public class ShopPage {
 	lblNewLabel_1.setFont(new Font("SansSerif", Font.ITALIC, 18));
 	lblNewLabel_1.setBounds(6, 378, 81, 38);
 	frame.getContentPane().add(lblNewLabel_1);
-	
 
+	// ...
+
+	JButton btnNewButton_5 = new JButton("Purchase");
+	btnNewButton_5.setBounds(520, 305, 117, 29);
+	frame.getContentPane().add(btnNewButton_5);
+	
+	JButton btnClearCart = new JButton("Clear Cart");
+    btnClearCart.setBounds(649, 305, 117, 29);
+    frame.getContentPane().add(btnClearCart);
+
+    btnClearCart.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Clear the cart 
+            textArea.setText("");
+        }
+    });
+
+	// ...
+
+    btnNewButton_5.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Check if the cart is empty
+            if (textArea.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
+            } else {
+                // Calculate the total cost and purchase 
+                String[] cartItems = textArea.getText().split("\n");
+                int totalCost = 0;
+
+                for (String item : cartItems) {
+                   
+                    String[] parts = item.split("\\$");
+                    if (parts.length > 1) {
+                        try {
+                            int itemCost = Integer.parseInt(parts[1].trim());
+                            totalCost += itemCost;
+                        } catch (NumberFormatException ex) {
+                        
+                        }
+                    }
+                }
+
+                // Check if the total cost is less than or equal to $10,000
+                if (totalCost <= 10000) {
+                    
+                    int remainingBalance = 10000 - totalCost;
+                    lblNewLabel_1.setText("$" + remainingBalance);
+
+                    // Clear the cart after successful purchase
+                    textArea.setText("");
+                    JOptionPane.showMessageDialog(frame, "Purchase successful!");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Insufficient funds. Remove items from the cart or add more funds.");
+                }
+            }
+        }
+    });
+
+	
 	JComboBox<String> equipment = new JComboBox<String>();
 	equipment.setBounds(192, 34, 178, 30);
 	frame.getContentPane().add(equipment);
 	equipment.addItem("");
-	equipment.addItem("Hotplate");
-	equipment.addItem("Stove Burner Upgrade");
-	equipment.addItem("Energy Efficient Appliances");
+	equipment.addItem("Hotplate $300");
+	equipment.addItem("Stove Burner Upgrade $2700");
+	equipment.addItem("Energy Efficient Appliances $4000");
 	equipment.setVisible(false);
 	
 	JButton addToCartButton = new JButton("Add to cart");
@@ -121,10 +182,10 @@ public class ShopPage {
 	food.setBounds(192, 76, 178, 30);
 	frame.getContentPane().add(food);
 	food.addItem("");
-	food.addItem("Premium Meat Supplier");
-	food.addItem("Organic Farm Partnership");
-	food.addItem("Gourmet Recipe Book");
-	food.addItem("Seasonal Menu Updates");
+	food.addItem("Premium Meat Supplier $50000");
+	food.addItem("Organic Farm Partnership $100000");
+	food.addItem("Gourmet Recipe Book $500");
+	food.addItem("Seasonal Menu Updates $5000");
 	food.setVisible(false);
 	
 	JButton addToCartButton1 = new JButton("Add to cart");
@@ -169,9 +230,9 @@ public class ShopPage {
 	knife.setBounds(192, 118, 178, 30);
 	frame.getContentPane().add(knife);
 	knife.addItem("");
-	knife.addItem("Blade Upgrade");
-	knife.addItem("handle Upgrade");
-	knife.addItem("Sharpner Upgrade");
+	knife.addItem("Blade Upgrade $500");
+	knife.addItem("handle Upgrade $100");
+	knife.addItem("Sharpner Upgrade $100");
 	knife.setVisible(false);
 	
 	JButton addToCartButton2 = new JButton("Add to cart");
@@ -233,10 +294,10 @@ public class ShopPage {
 	cleaner.setBounds(192, 160, 178, 30);
 	frame.getContentPane().add(cleaner);
 	cleaner.addItem("");
-	cleaner.addItem("Industrial Grade Cleaning Supplies");
-	cleaner.addItem("Cleaning Robots");
-	cleaner.addItem("Eco Friendly Cleaning supplies");
-	cleaner.addItem("24/7 Cleaning Staff");
+	cleaner.addItem("Industrial Grade Cleaning Supplies $2000");
+	cleaner.addItem("Cleaning Robots $10000");
+	cleaner.addItem("Eco Friendly Cleaning supplies $1200");
+	cleaner.addItem("24/7 Cleaning Staff $10000");
 	cleaner.setVisible(false);
 	
 	JButton addToCartButton4 = new JButton("Add to cart");
@@ -281,11 +342,6 @@ public class ShopPage {
 	JLabel lblNewLabel_11 = new JLabel("Cart");
 	lblNewLabel_11.setBounds(629, 11, 61, 16);
 	frame.getContentPane().add(lblNewLabel_11);
-	
-	
-	JButton btnNewButton_5 = new JButton("Purchase");
-	btnNewButton_5.setBounds(590, 327, 117, 29);
-	frame.getContentPane().add(btnNewButton_5);
 	
 	JLabel lblNewLabel_2 = new JLabel("Additional Upgrades");
 	lblNewLabel_2.setBounds(192, 219, 136, 16);

@@ -2,13 +2,6 @@ package TheCellar.AI;
 
 import TheCellar.*;
 
-/*
- TheCellar.AIBusiness extends TheCellar.Business
-#level: int
-+MakeDecision(): void
-get&set for all fields
-
- */
 public class AI extends Business {
 
 	private boolean isBroke;
@@ -16,7 +9,33 @@ public class AI extends Business {
 	int level; // level from 1 to 10, 1 being the lowest and 10 being the highest
 
 	public void MakeDecision() {
-		
+
+		int random = Main.game.random.nextInt(10);
+
+		// if we have no food
+		if (daysOfFood == 0) {
+			// make a food decision
+			FoodDecision();
+		}
+
+		// if we have no chefs
+		if (chefs.isEmpty()) {
+			// make a chef decision
+			ChefDecision();
+		}
+
+		// if we have no cleaners
+		if (cleaners.isEmpty()) {
+			// make a cleaner decision
+			CleanerDecision();
+		}
+
+
+
+		if (random <= level) { // this will make the AI more likely to change their pricing as the AI level increases
+			// update pricing
+			UpdatePricing();
+		}
 	}
 
 	private void FoodDecision() {

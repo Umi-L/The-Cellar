@@ -67,6 +67,22 @@ public class BankPage {
 	frame.getContentPane().add(lblNewLabel_3);
 	
 	JButton btnNewButton_1 = new JButton("Request");
+	btnNewButton_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			
+			
+//			String input = textField.getText();
+//			textField.getText();
+			
+			
+			
+			
+			
+			
+		}
+	});
 	btnNewButton_1.setBounds(509, 99, 117, 29);
 	frame.getContentPane().add(btnNewButton_1);
 	btnNewButton_1.addActionListener(new ActionListener() {
