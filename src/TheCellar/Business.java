@@ -41,6 +41,14 @@ public class Business {
     protected int daysInDebt;
     protected int price;
 
+    public void setDebt(int NewDebt) {
+    	debt = NewDebt;
+    }
+    
+    public int getDebt() {
+    	return debt;
+    }
+    
     public String getName() {
         return name;
     }

@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import TheCellar.Main;
+import TheCellar.AI.AI;
+
 public class BankPage {
 	private JFrame frame;
 	private JTextField textField;
@@ -66,6 +69,17 @@ public class BankPage {
 	JButton btnNewButton_1 = new JButton("Request");
 	btnNewButton_1.setBounds(509, 99, 117, 29);
 	frame.getContentPane().add(btnNewButton_1);
+	btnNewButton_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			int requestedLoan = Integer.parseInt(textField.getText());
+				if((Main.game.PlayerBusiness.getProfit()-Main.game.PlayerBusiness.getExpenses())>0) {
+				if(requestedLoan < Main.game.PlayerBusiness.getProfit()*(Main.game.random.nextInt(10)+2)) {
+					Main.game.PlayerBusiness.setMoney(Main.game.PlayerBusiness.getMoney()+requestedLoan);
+					Main.game.PlayerBusiness.setDebt(Main.game.PlayerBusiness.getDebt()+requestedLoan);
+				}
+			}
+	}
+});
 	
 	frame.setVisible(true);
 	

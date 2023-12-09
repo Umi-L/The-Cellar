@@ -127,7 +127,7 @@ public class AI extends Business {
 	}
 
 	private void CleanerDecision() {
-		int random = Main.game.random.nextInt(10);
+		int random = Main.game.random.nextInt(6);
 
 		// if we have no cleaners and we have money
 		if (getMoney() > 1000 && level < 3 && random < 3) {
@@ -135,4 +135,5 @@ public class AI extends Business {
 			HireCleaner(new Cleaner()); // TODO: Maybe make cleaners have different tiers like chefs?
 		}
 	}
+
 }
