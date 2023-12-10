@@ -179,7 +179,7 @@ public class ShopPage {
 	frame.getContentPane().add(knife);
 	knife.addItem("");
 	knife.addItem("Blade Upgrade $500");
-	knife.addItem("handle Upgrade $100");
+	knife.addItem("Handle Upgrade $100");
 	knife.addItem("Sharpner Upgrade $100");
 	knife.setVisible(false);
 	
@@ -243,9 +243,9 @@ public class ShopPage {
 	frame.getContentPane().add(cleaner);
 	cleaner.addItem("");
 	cleaner.addItem("Industrial Grade Cleaning Supplies $2000");
-	cleaner.addItem("Cleaning Robots $10000");
+	cleaner.addItem("Cleaning Robots $50000");
 	cleaner.addItem("Eco Friendly Cleaning supplies $1200");
-	cleaner.addItem("24/7 Cleaning Staff $10000");
+	cleaner.addItem("24/7 Cleaning Staff $100000");
 	cleaner.setVisible(false);
 	
 	JButton addToCartButton4 = new JButton("Add to cart");
@@ -364,7 +364,10 @@ public class ShopPage {
                     cleaner.setVisible(false);
                 } else {
                     // User has insufficient funds
-                    JOptionPane.showMessageDialog(frame, "Insufficient funds. Remove items from the cart or add more funds.");
+                    JOptionPane.showMessageDialog(frame, "Insufficient funds.");
+
+                    // Clear the cart
+                    textArea.setText("");
 
                     // Hide "Add to cart" buttons
                     addToCartButton.setVisible(false);
@@ -397,7 +400,7 @@ public class ShopPage {
 	btnNewButton_6_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(frame, "Premium Meat Supplier: 45% quality increase, 30 s/d increase" + "\n" + "Organic Farm Partnership: 35% quality increase, 30 s/d increase" + "\n" + "Gourmet Recipe Book: 50% quality increase, 20 s/d increase" + "\n"
-		+ "Seasonal Menu Updates: ");
+		+ "Seasonal Menu Updates: 10 s/d increase ");
 			
 		}
 	});
@@ -407,7 +410,7 @@ public class ShopPage {
 	JButton btnNewButton_6_2 = new JButton("?");
 	btnNewButton_6_2.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(frame, "Blade Upgrade: " + "\n" + "Handle Upgrade: " + "\n" + "Sharpner Upgrade: ");
+			JOptionPane.showMessageDialog(frame, "Blade Upgrade: Increase Speed" + "\n" + "Handle Upgrade: Increase Comfort" + "\n" + "Sharpner Upgrade: Increase Speed");
 		}
 	});
 	btnNewButton_6_2.setBounds(6, 121, 23, 24);
@@ -416,7 +419,7 @@ public class ShopPage {
 	JButton btnNewButton_6_3 = new JButton("?");
 	btnNewButton_6_3.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(frame, "Industrial Grade Cleaning Supplies: " + "\n" + "Cleaning Robots: " + "\n" + "Eco Friendly Cleaning Supplies: " + "\n" + "24/7 cleaning staff: ");
+			JOptionPane.showMessageDialog(frame, "Industrial Grade Cleaning Supplies: Cleanliness Increase 10% " + "\n" + "Cleaning Robots: Cleanliness Increase: 50% " + "\n" + "Eco Friendly Cleaning Supplies: Cleanliness Increase 15%" + "\n" + "24/7 cleaning staff: Cleanliness Increase 100%");
 			
 
 		}
