@@ -6,7 +6,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +23,8 @@ public class ShopPage {
     private JTextArea textArea;
     private JLabel lblNewLabel_1; 
     private int remainingBalance = 10000; 
-	
+    private Set<String> purchasedUpgrades = new HashSet<>();
+   
 	
 	public static void showWindow() {
 		
@@ -69,64 +71,6 @@ public class ShopPage {
     frame.getContentPane().add(lblNewLabel_1);
 	// ...
 
-	JButton btnNewButton_5 = new JButton("Purchase");
-	btnNewButton_5.setBounds(520, 305, 117, 29);
-	frame.getContentPane().add(btnNewButton_5);
-	
-	JButton btnClearCart = new JButton("Clear Cart");
-    btnClearCart.setBounds(649, 305, 117, 29);
-    frame.getContentPane().add(btnClearCart);
-
-    btnClearCart.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            // Clear the cart 
-            textArea.setText("");
-        }
-    });
-
-	// ...
-
-    btnNewButton_5.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-           
-        	// Check if the cart is empty
-            if (textArea.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
-            } else {
-                // Calculate the total cost and process the purchase
-                String[] cartItems = textArea.getText().split("\n");
-                int totalCost = 0;
-
-                for (String item : cartItems) {
-                    // Assume each line in the cart represents an item with a cost at the end
-                    String[] parts = item.split("\\$");
-                    if (parts.length > 1) {
-                        try {
-                            int itemCost = Integer.parseInt(parts[1].trim());
-                            totalCost += itemCost;
-                        } catch (NumberFormatException ex) {
-                            // Handle the case where the cost is not a valid integer
-                        }
-                    }
-                }
-
-                // Check if the total cost is less than or equal to remainingBalance
-                if (totalCost <= remainingBalance) {
-                    // Deduct the total cost from the remaining balance
-                    remainingBalance -= totalCost;
-                    lblNewLabel_1.setText("$" + remainingBalance);
-
-                    // Clear the cart after successful purchase
-                    textArea.setText("");
-                    JOptionPane.showMessageDialog(frame, "Purchase successful!");
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Insufficient funds. Remove items from the cart or add more funds.");
-                }
-            }
-        }
-    });
-
-	
 	JComboBox<String> equipment = new JComboBox<String>();
 	equipment.setBounds(192, 34, 178, 30);
 	frame.getContentPane().add(equipment);
@@ -140,6 +84,7 @@ public class ShopPage {
 	addToCartButton.setBounds(373, 34, 114, 30);
 	frame.getContentPane().add(addToCartButton);
 	addToCartButton.setVisible(false);
+
 	
 	equipment.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -349,6 +294,93 @@ public class ShopPage {
 	JLabel lblNewLabel_2 = new JLabel("Additional Upgrades");
 	lblNewLabel_2.setBounds(192, 219, 136, 16);
 	frame.getContentPane().add(lblNewLabel_2);
+	
+	JButton btnNewButton_5 = new JButton("Purchase");
+	btnNewButton_5.setBounds(520, 305, 117, 29);
+	frame.getContentPane().add(btnNewButton_5);
+	
+	JButton btnClearCart = new JButton("Clear Cart");
+    btnClearCart.setBounds(649, 305, 117, 29);
+    frame.getContentPane().add(btnClearCart);
+
+    btnClearCart.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Clear the cart 
+            textArea.setText("");
+        }
+    });
+
+
+
+    btnNewButton_5.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Check if the cart is empty
+            if (textArea.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
+            } else {
+                // Calculate the total cost and process the purchase
+                String[] cartItems = textArea.getText().split("\n");
+                int totalCost = 0;
+
+                for (String item : cartItems) {
+                    // Assume each line in the cart represents an item with a cost at the end
+                    String[] parts = item.split("\\$");
+                    if (parts.length > 1) {
+                        try {
+                            int itemCost = Integer.parseInt(parts[1].trim());
+                            totalCost += itemCost;
+                        } catch (NumberFormatException ex) {
+                            // Handle the case where the cost is not a valid integer
+                        }
+                    }
+                }
+
+                // Check if the total cost is less than or equal to remainingBalance
+                if (totalCost <= remainingBalance) {
+                    // Deduct the total cost from the remaining balance
+                    remainingBalance -= totalCost;
+                    lblNewLabel_1.setText("$" + remainingBalance);
+
+                    // Clear the cart after a successful purchase
+                    textArea.setText("");
+                    JOptionPane.showMessageDialog(frame, "Purchase successful!");
+
+                    // Reset JComboBox selection
+                    equipment.setSelectedIndex(0);
+                    food.setSelectedIndex(0);
+                    knife.setSelectedIndex(0);
+                    cleaner.setSelectedIndex(0);
+
+                    // Hide "Add to cart" buttons
+                    addToCartButton.setVisible(false);
+                    addToCartButton1.setVisible(false);
+                    addToCartButton2.setVisible(false);
+                    addToCartButton4.setVisible(false);
+
+                    // Hide JComboBox components
+                    equipment.setVisible(false);
+                    food.setVisible(false);
+                    knife.setVisible(false);
+                    cleaner.setVisible(false);
+                } else {
+                    // User has insufficient funds
+                    JOptionPane.showMessageDialog(frame, "Insufficient funds. Remove items from the cart or add more funds.");
+
+                    // Hide "Add to cart" buttons
+                    addToCartButton.setVisible(false);
+                    addToCartButton1.setVisible(false);
+                    addToCartButton2.setVisible(false);
+                    addToCartButton4.setVisible(false);
+
+                    // Hide JComboBox components
+                    equipment.setVisible(false);
+                    food.setVisible(false);
+                    knife.setVisible(false);
+                    cleaner.setVisible(false);
+                }
+            }
+        }
+    });
 	
 	JButton btnNewButton_6 = new JButton("?");
 	btnNewButton_6.addActionListener(new ActionListener() {
