@@ -18,7 +18,10 @@ import javax.swing.JTextArea;
 
 
 public class ShopPage {
-	private JFrame frame;
+    private JFrame frame;
+    private JTextArea textArea;
+    private JLabel lblNewLabel_1; 
+    private int remainingBalance = 10000; 
 	
 	
 	public static void showWindow() {
@@ -55,16 +58,15 @@ public class ShopPage {
 	lblNewLabel.setBounds(373, 0, 61, 30);
 	frame.getContentPane().add(lblNewLabel);
 	
-	JTextArea textArea = new JTextArea();
+	textArea = new JTextArea();
 	textArea.setBounds(510, 34, 273, 269);
 	frame.getContentPane().add(textArea);
 	
-	JLabel lblNewLabel_1 = new JLabel("$10,000");
-	lblNewLabel_1.setBackground(new Color(192, 192, 192));
-	lblNewLabel_1.setFont(new Font("SansSerif", Font.ITALIC, 18));
-	lblNewLabel_1.setBounds(6, 378, 81, 38);
-	frame.getContentPane().add(lblNewLabel_1);
-
+	lblNewLabel_1 = new JLabel("$" + remainingBalance);
+    lblNewLabel_1.setBackground(new Color(192, 192, 192));
+    lblNewLabel_1.setFont(new Font("SansSerif", Font.ITALIC, 18));
+    lblNewLabel_1.setBounds(6, 378, 81, 38);
+    frame.getContentPane().add(lblNewLabel_1);
 	// ...
 
 	JButton btnNewButton_5 = new JButton("Purchase");
@@ -86,31 +88,32 @@ public class ShopPage {
 
     btnNewButton_5.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            // Check if the cart is empty
+           
+        	// Check if the cart is empty
             if (textArea.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
             } else {
-                // Calculate the total cost and purchase 
+                // Calculate the total cost and process the purchase
                 String[] cartItems = textArea.getText().split("\n");
                 int totalCost = 0;
 
                 for (String item : cartItems) {
-                   
+                    // Assume each line in the cart represents an item with a cost at the end
                     String[] parts = item.split("\\$");
                     if (parts.length > 1) {
                         try {
                             int itemCost = Integer.parseInt(parts[1].trim());
                             totalCost += itemCost;
                         } catch (NumberFormatException ex) {
-                        
+                            // Handle the case where the cost is not a valid integer
                         }
                     }
                 }
 
-                // Check if the total cost is less than or equal to $10,000
-                if (totalCost <= 10000) {
-                    
-                    int remainingBalance = 10000 - totalCost;
+                // Check if the total cost is less than or equal to remainingBalance
+                if (totalCost <= remainingBalance) {
+                    // Deduct the total cost from the remaining balance
+                    remainingBalance -= totalCost;
                     lblNewLabel_1.setText("$" + remainingBalance);
 
                     // Clear the cart after successful purchase
