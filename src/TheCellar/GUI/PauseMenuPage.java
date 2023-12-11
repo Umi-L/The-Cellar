@@ -16,10 +16,6 @@ import java.awt.Font;
 public class PauseMenuPage {
 	private JFrame frame;
 	
-	
-	public static void showWindow() {
-		
-	}
 		
 	public PauseMenuPage() {
 		frame = new JFrame("");
@@ -174,11 +170,5 @@ public class PauseMenuPage {
 		
 	}
 
-	public static void main(String[] args) {
-		new PauseMenuPage();
-		showWindow();
-		
-		// TODO Auto-generated method stub
 
-	}
 }

@@ -1,5 +1,6 @@
 package TheCellar.GUI;
 
+import TheCellar.Charts.Animation;
 import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
 import TheCellar.Charts.PieChart;
@@ -68,7 +69,7 @@ public class GamePage {
 		frame.getContentPane().add(networthLabel);
 
 		ArrayList<Double> values = new ArrayList<Double>();
-		values.add(10.0);
+		values.add(40.0);
 		values.add(20.0);
 		values.add(30.0);
 		values.add(40.0);
@@ -91,11 +92,11 @@ public class GamePage {
 		barGraph.setBounds(175, 331, 200, 122);
 		frame.getContentPane().add(barGraph);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new CompoundBorder());
-		panel.setBackground(new Color(248, 248, 248));
-		panel.setBounds(101, 11, 732, 312);
-		frame.getContentPane().add(panel);
+		JPanel Animation = new Animation();
+		Animation.setBorder(new CompoundBorder());
+		Animation.setBackground(new Color(248, 248, 248));
+		Animation.setBounds(101, 11, 732, 312);
+		frame.getContentPane().add(Animation);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(192, 192, 192));
@@ -111,8 +112,7 @@ public class GamePage {
 		pauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
-				pause.showWindow();		}
+				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();	}
 		});
 		
 		Button bankButton = new Button("Bank");
@@ -160,6 +160,7 @@ public class GamePage {
 		
 		frame.setVisible(true);
 	}
+	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
