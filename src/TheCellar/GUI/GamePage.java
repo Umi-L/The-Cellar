@@ -112,8 +112,7 @@ public class GamePage {
 		pauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
-				pause.showWindow();		}
+				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();	}
 		});
 		
 		Button bankButton = new Button("Bank");
