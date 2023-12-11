@@ -146,6 +146,10 @@ public class Business {
     	return profit;
     }
 
+    public int getPrice() {
+    	return price;
+    }
+
     public void setMoney(int money) {
 
         // PUT UI UPDATE HERE

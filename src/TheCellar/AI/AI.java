@@ -2,7 +2,7 @@ package TheCellar.AI;
 
 import TheCellar.*;
 
-public class AI extends Business {
+public class AI extends Business implements Cloneable{
 
 	private boolean isBroke;
 
@@ -121,28 +121,33 @@ public class AI extends Business {
 					HireChef(currChef);
 					break;
 				} else {
-					// if we have a chef
-					if (chefs.size() == 1) {
-						// if the chef is not the same type as the current chef
-						if (chefs.get(0).getClass() != currChef.getClass()) {
+					if (level < 3){ // if low ai level we're stupid and ignore the simulation
+						HireChef(currChef);
+						break;
+					} else{
+						// simulate hiring the chef on the business
+						AI temp = this.clone();
+						temp.HireChef(currChef);
+
+						// simulate AILevel/2 days
+						for (int j = 0; j < level/2; j++) {
+							temp.MakeDecision(); // MAY RECURSE!!!!
+						}
+
+						// check if net worth is greater than current net worth
+						if (temp.GetNetWorth() > GetNetWorth()) {
 							// hire the chef
 							HireChef(currChef);
 							break;
-						}
-					} else {
-						// if we have more than one chef
-						if (chefs.size() > 1) {
-							// if the chef is not the same type as the current chef
-							if (chefs.get(0).getClass() != currChef.getClass()) {
-								// hire the chef
-								HireChef(currChef);
-								break;
-							}
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private void EquipmentDecision(){
+
 	}
 
 	private void CleanerDecision() {
@@ -154,4 +159,15 @@ public class AI extends Business {
 			HireCleaner(new Cleaner()); // TODO: Maybe make cleaners have different tiers like chefs?
 		}
 	}
+
+    @Override
+    public AI clone() {
+        try {
+            AI clone = (AI) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }
