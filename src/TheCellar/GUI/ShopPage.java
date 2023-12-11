@@ -328,8 +328,9 @@ public class ShopPage {
 
 		btnClearCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Clear the cart 
-				textArea.setText("");
+				 
+				
+		        textArea.setText("");
 
 				equipment.setSelectedIndex(0);
 				food.setSelectedIndex(0);
@@ -343,6 +344,7 @@ public class ShopPage {
 				cleaner.setVisible(false);
 				addToCartButton.setVisible(false);
 			}
+			
 		});
 
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -351,6 +353,8 @@ public class ShopPage {
 				if (textArea.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
 				} else {
+					
+					
 					// Calculate the total cost and process the purchase
 					String[] cartItems = textArea.getText().split("\n");
 					int totalCost = 0;
@@ -375,9 +379,14 @@ public class ShopPage {
 						lblNewLabel_1.setText("$" + remainingBalance);
 
 						// Clear the cart after a successful purchase
+						
+						 String purchaseDetails = "Items Purchased:\n" + textArea.getText() +
+				                    "\n\nRemaining Balance: $" + remainingBalance;
+						 
+						 JOptionPane.showMessageDialog(frame, "Purchase successful!\n\n" + purchaseDetails);
+						 
 						textArea.setText("");
-						JOptionPane.showMessageDialog(frame, "Purchase successful!");
-
+						
 						// Reset JComboBox selection
 						equipment.setSelectedIndex(0);
 						food.setSelectedIndex(0);
@@ -470,7 +479,7 @@ public class ShopPage {
 		}
 		new TheCellar.GUI.ShopPage();
 		showWindow();
-		// TODO Auto-generated method stub
+	
 
 	}
 }
