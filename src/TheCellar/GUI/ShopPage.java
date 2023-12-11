@@ -328,7 +328,13 @@ public class ShopPage {
 
 		btnClearCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 
+				
+				if (textArea.getText().trim().isEmpty()) {
+		            JOptionPane.showMessageDialog(frame, "Your cart is already empty.");
+		        } else {
+		            int option = JOptionPane.showConfirmDialog(frame, "Are you sure you want to clear the cart?", "Clear Cart", JOptionPane.YES_NO_OPTION);
+		            if (option == JOptionPane.YES_OPTION) {
+		                textArea.setText("");
 				
 		        textArea.setText("");
 
@@ -344,7 +350,8 @@ public class ShopPage {
 				cleaner.setVisible(false);
 				addToCartButton.setVisible(false);
 			}
-			
+		    }
+			}
 		});
 
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -353,6 +360,10 @@ public class ShopPage {
 				if (textArea.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "Your cart is empty. Add items before purchasing.");
 				} else {
+			
+			            int option = JOptionPane.showConfirmDialog(frame, "Confirm Purchase?", "Purchase", JOptionPane.YES_NO_OPTION);
+			            if (option == JOptionPane.YES_OPTION) {
+			               
 					
 					
 					// Calculate the total cost and process the purchase
@@ -378,13 +389,13 @@ public class ShopPage {
 						remainingBalance -= totalCost;
 						lblNewLabel_1.setText("$" + remainingBalance);
 
-						// Clear the cart after a successful purchase
-						
-						 String purchaseDetails = "Items Purchased:\n" + textArea.getText() +
+						//Purchase details
+						 String purchaseDetails = "Items Purchased:\n\n" + textArea.getText() +
 				                    "\n\nRemaining Balance: $" + remainingBalance;
 						 
 						 JOptionPane.showMessageDialog(frame, "Purchase successful!\n\n" + purchaseDetails);
 						 
+						// Clear the cart after a successful purchase
 						textArea.setText("");
 						
 						// Reset JComboBox selection
@@ -412,6 +423,7 @@ public class ShopPage {
 						cleaner.setVisible(false);
 					}
 				}
+			}
 			}
 		});
 
