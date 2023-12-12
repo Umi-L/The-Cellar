@@ -30,7 +30,6 @@ public class Business {
     protected int steaks;
     protected double quality; // range from 0-1 representing 0-100%
     protected double cleanliness; // range from 0-1 representing 0-100%
-    protected double demand;
     protected int debt;
     protected Equipment cookingEquipment;
     protected ArrayList<Chef> chefs = new ArrayList<Chef>();
@@ -149,8 +148,35 @@ public class Business {
     	return expense;
     }
 
+    public double getDemand() {
+
+        // if clenliness is less than 0.1, demand is 0
+        if (cleanliness < 0.1) {
+            return 0;
+        }
+
+        // get all competition
+        ArrayList<Business> competition = Main.game.getCompetitors(this);
+
+        // get mean price of competition multiplied by customer satisfaction
+        double meanPrice = 0;
+        for (Business b : competition) {
+            meanPrice += b.getPrice()*b.GetCustomerSatisfaction();
+        }
+        meanPrice /= competition.size();
+
+        // get difference between mean price and our price
+        double difference = meanPrice - getPrice();
+
+        // get exponential fall off or rise
+        double curve = 0.01*Math.pow(3, difference);
+
+    	return curve;
+    }
+
+
     public int getProfit() {
-    	int profit = (int) (steaks * food.getModifier() * GetCustomerSatisfaction());
+    	int profit = (int) (steaks * getDemand());
     	return profit;
     }
 

@@ -54,4 +54,18 @@ public class Game {
                 GameSpeed
         );
     }
+
+    public ArrayList<Business> getCompetitors(Business b){
+        // for every business in the game if not the business passed in add to the array
+        ArrayList<Business> businesses = new ArrayList<Business>();
+        for (AI ai : AIBusinesses) {
+            if (ai != b) {
+                businesses.add(ai);
+            }
+        }
+        if (PlayerBusiness != b) {
+            businesses.add(PlayerBusiness);
+        }
+        return businesses;
+    }
 }
