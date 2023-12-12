@@ -1,5 +1,8 @@
 package TheCellar.GUI;
 
+import TheCellar.Business;
+import TheCellar.Game;
+import TheCellar.Main;
 import TheCellar.GUI.Components.PurchaseArea;
 
 import java.awt.Color;
@@ -20,18 +23,19 @@ import javax.swing.UIManager;
 
 
 
+
 public class ShopPage {
 	private JFrame frame;
 	private JTextArea textArea;
 	private JLabel lblNewLabel_1; 
 	private JButton addToCartButton;
-	private int remainingBalance = 10000; 
 	private JComboBox<String> selectedComboBox; 
 	private JComboBox<String> equipment = new JComboBox<>();
 	private JComboBox<String> food = new JComboBox<>();
 	private JComboBox<String> knife = new JComboBox<>();
 	private JComboBox<String> cleaner = new JComboBox<>();
 	private Set<String> purchasedUpgrades = new HashSet<>();
+	private Business PlayerBusiness;
 
 
 	public static void showWindow() {
@@ -86,6 +90,10 @@ public class ShopPage {
 	 * @wbp.parser.entryPoint
 	 */
 	public ShopPage() {
+		
+		
+		this.PlayerBusiness = Main.game != null ? Main.game.PlayerBusiness : new Business();
+		
 		frame = new JFrame("");
 		frame.getContentPane().setBackground(new Color(145, 145, 145));
 		frame.setTitle("The Cellar");
@@ -119,7 +127,7 @@ public class ShopPage {
 		textArea.setBounds(510, 34, 273, 269);
 		frame.getContentPane().add(textArea);
 
-		lblNewLabel_1 = new JLabel("$" + remainingBalance);
+		lblNewLabel_1 = new JLabel("$" + Main.game.PlayerBusiness.getMoney());
 		lblNewLabel_1.setBackground(new Color(192, 192, 192));
 		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblNewLabel_1.setBounds(713, 375, 81, 38);
@@ -384,14 +392,17 @@ public class ShopPage {
 					}
 
 					// Check if the total cost is less than or equal to remainingBalance
-					if (totalCost <= remainingBalance) {
-						// Deduct the total cost from the remaining balance
-						remainingBalance -= totalCost;
-						lblNewLabel_1.setText("$" + remainingBalance);
+					if (totalCost <= PlayerBusiness.getMoney()) {
+					    // Deduct the total cost from the remaining balance
+					    PlayerBusiness.setMoney(PlayerBusiness.getMoney() - totalCost);
+					    
+					    // Update the UI with the new remaining balance
+					    lblNewLabel_1.setText("$" + PlayerBusiness.getMoney());
 
-						//Purchase details
-						 String purchaseDetails = "Items Purchased:\n\n" + textArea.getText() +
-				                    "\n\nRemaining Balance: $" + remainingBalance;
+					    // Purchase details
+					    String purchaseDetails = "Items Purchased:\n\n" + textArea.getText() +
+					                             "\n\nRemaining Balance: $" + PlayerBusiness.getMoney();
+
 						 
 						 JOptionPane.showMessageDialog(frame, "Purchase successful!\n\n" + purchaseDetails);
 						 
@@ -489,6 +500,7 @@ public class ShopPage {
 		}	catch (Exception e) {
 
 		}
+		Main.game = new Game();
 		new TheCellar.GUI.ShopPage();
 		showWindow();
 	
