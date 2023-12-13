@@ -11,6 +11,13 @@ public class Animation extends JPanel {
 		super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         
+        int x = 0;
+        int y = 0;
+
+        int padding = 25;
+        int barPadding = 5;
+        int numYLabels = 5;
+        
         g2.fillRect(100,100,100,100);
 	}
 }
