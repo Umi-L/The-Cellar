@@ -26,6 +26,7 @@ public class ChefUpgrades {
 		frame.setTitle("The Cellar");
 		frame.setBounds(100, 100, 800, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
 		JButton btnNewButton = new JButton("Back");

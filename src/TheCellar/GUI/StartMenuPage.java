@@ -24,6 +24,7 @@ public class StartMenuPage {
 		frame.setTitle("The Cellar");
 		frame.setBounds(100, 100, 350, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("The Cellar");
@@ -42,7 +43,7 @@ public class StartMenuPage {
 				frame.setVisible(false);
 				Main.game = new Game();
 				GamePage window2 = new GamePage();
-				window2.showWindow();
+				GamePage.showWindow();
 			}
 		});
 		btnNewButton.setBounds(60, 95, 219, 70);

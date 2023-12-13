@@ -8,6 +8,7 @@ import TheCellar.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Canvas;
 import java.awt.Button;
@@ -33,13 +34,20 @@ public class GamePage {
 	public GamePage() {
 		// set title
 		frame = new JFrame();
-		
+		frame.setLocationRelativeTo(null);
 		frame.setTitle("The Cellar");
+		frame.pack();
 
 		// set close operation
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 950, 500);
 		frame.getContentPane().setLayout(null);
+		
+		JPanel Animation = new Animation();
+		Animation.setBorder(new CompoundBorder());
+		Animation.setBackground(new Color(248, 248, 248));
+		Animation.setBounds(101, 11, 732, 312);
+		frame.getContentPane().add(Animation);
 		
 		JSlider slider = new JSlider();
 		slider.setBounds(14, 384, 151, 26);
@@ -91,12 +99,6 @@ public class GamePage {
 		BarGraph barGraph = new BarGraph("value", names, values);
 		barGraph.setBounds(175, 331, 200, 122);
 		frame.getContentPane().add(barGraph);
-		
-		JPanel Animation = new Animation();
-		Animation.setBorder(new CompoundBorder());
-		Animation.setBackground(new Color(248, 248, 248));
-		Animation.setBounds(101, 11, 732, 312);
-		frame.getContentPane().add(Animation);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(192, 192, 192));
@@ -155,9 +157,7 @@ public class GamePage {
 						chefs.showWindow();	
 				}
 				});
-		
-		
-		
+		Animation.requestFocusInWindow();
 		frame.setVisible(true);
 	}
 	
