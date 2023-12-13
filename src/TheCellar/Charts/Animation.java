@@ -33,7 +33,6 @@ public class Animation extends JPanel {
 		super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         
-<<<<<<< HEAD
         int x = 0;
         int y = 0;
 
@@ -41,9 +40,6 @@ public class Animation extends JPanel {
         int barPadding = 5;
         int numYLabels = 5;
         
-        g2.fillRect(100,100,100,100);
-=======
 		g2.fillRect(0 + xMove,0 + yMove, 100, 100);
->>>>>>> 443b1dadd16df483847d7e7484308e67a0dfcd56
 	}
 }
