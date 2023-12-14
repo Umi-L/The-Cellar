@@ -147,7 +147,49 @@ public class AI extends Business implements Cloneable{
 	}
 
 	private void EquipmentDecision(){
+		// for every equipment type
+		for (int i = 0; i < Equipment.EquipmentTypes.length; i++) {
+			int random = Main.game.random.nextInt(10);
 
+			int invertedAI = 10 - level;
+
+			int offset = random/invertedAI;
+
+			int offsetIndex = (i + offset)%Equipment.EquipmentTypes.length;
+
+			Equipment currEquipment = Equipment.EquipmentTypes[offsetIndex]; // as AI level increases, the equipment types the AI can possibly pick becomes less random.
+
+			// if we have enough money to buy the equipment
+			if (getMoney() > currEquipment.getPrice()) {
+				// if we have no equipment
+				if (cookingEquipment == null) {
+					// buy the equipment
+					PurchaseEquipment(currEquipment);
+					break;
+				} else {
+					if (level < 3){ // if low ai level we're stupid and ignore the simulation
+						PurchaseEquipment(currEquipment);
+						break;
+					} else{
+						// simulate buying the equipment on the business
+						AI temp = this.clone();
+						temp.PurchaseEquipment(currEquipment);
+
+						// simulate AILevel/2 days
+						for (int j = 0; j < level/2; j++) {
+							temp.MakeDecision(); // MAY RECURSE!!!!
+						}
+
+						// check if net worth is greater than current net worth
+						if (temp.GetNetWorth() > GetNetWorth()) {
+							// buy the equipment
+							PurchaseEquipment(currEquipment);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void CleanerDecision() {
