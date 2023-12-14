@@ -87,16 +87,23 @@ public class ShopPage {
 
         addToCartButton.setVisible(false);
     }
-
-
-
-
-
+	
+	private int extractItemCost(String itemString) {
+	    // Assume each line in the cart represents an item with a cost at the end
+	    String[] parts = itemString.split("\\$");
+	    if (parts.length > 1) {
+	        try {
+	            return Integer.parseInt(parts[1].trim());
+	        } catch (NumberFormatException ex) {
+	            // Handle parsing error if needed
+	        }
+	    }
+	    return 0; // Default to 0 if cost extraction fails
+	}
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public ShopPage() {
-		
 		
 		this.PlayerBusiness = Main.game != null ? Main.game.PlayerBusiness : new Business();
 		
@@ -186,30 +193,37 @@ public class ShopPage {
 
 
 		addToCartButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (selectedComboBox != null) {
-					Object selectedItem = selectedComboBox.getSelectedItem();
+		    public void actionPerformed(ActionEvent e) {
+		        if (selectedComboBox != null) {
+		            Object selectedItem = selectedComboBox.getSelectedItem();
 
-					if (selectedItem != null && !selectedItem.toString().isEmpty()) {
-						// Check if the item is already in the cart
-						if (textArea.getText().contains(selectedItem.toString())) {
-							JOptionPane.showMessageDialog(frame, "Item already in the cart.");
-						} else {
-							// Check if the item is already owned
-							if (purchasedUpgrades.contains(selectedItem.toString())) {
-								JOptionPane.showMessageDialog(frame, "You already own this item.");
-							} else {
-								// Add the item to the cart and mark it as owned
-								textArea.append(selectedItem + "\n" + "\n");
-								purchasedUpgrades.add(selectedItem.toString());
-								setButtonLocation();
-								addToCartButton.setVisible(true);
-								selectedComboBox.setSelectedIndex(0);
-							}
-						}
-					}
-				}
-			}
+		            if (selectedItem != null && !selectedItem.toString().isEmpty()) {
+		                // Check if the item is already in the cart
+		                if (textArea.getText().contains(selectedItem.toString())) {
+		                    JOptionPane.showMessageDialog(frame, "Item already in the cart.");
+		                } else {
+		                    // Check if the item is already owned
+		                    if (purchasedUpgrades.contains(selectedItem.toString())) {
+		                        JOptionPane.showMessageDialog(frame, "You already own this item.");
+		                    } else {
+		                        // Check if the user has sufficient funds
+		                        int itemCost = extractItemCost(selectedItem.toString());
+		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
+		                            // Add the item to the cart and mark it as owned
+		                            textArea.append(selectedItem + "\n" + "\n");
+		                            purchasedUpgrades.add(selectedItem.toString());
+		                            setButtonLocation();
+		                            addToCartButton.setVisible(true);
+		                            selectedComboBox.setSelectedIndex(0);
+		                        } else {
+		                            // User has insufficient funds
+		                            JOptionPane.showMessageDialog(frame, "Insufficient funds.");
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
 		});
 
 		JButton btnEquipment = new JButton("Equipment Upgrades");

@@ -28,21 +28,18 @@ public class HirePage {
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
-		frame.setFocusable(true);
+		 InputMap inputMap = frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+	        ActionMap actionMap = frame.getRootPane().getActionMap();
 
-        // Add KeyBindings to listen for Escape key press
-        InputMap inputMap = frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        ActionMap actionMap = frame.getRootPane().getActionMap();
-
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "resumeGame");
-        actionMap.put("resumeGame", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                GamePage window2 = new GamePage();
-                window2.showWindow();
-            }
-        });
+	        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "resumeGame");
+	        actionMap.put("resumeGame", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                frame.setVisible(false);
+	                GamePage window2 = new GamePage();
+	                window2.showWindow();
+	            }
+	        });
 
 		
 		//RESUME BUTTON
