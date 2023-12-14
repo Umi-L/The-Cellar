@@ -1,4 +1,4 @@
-package TheCellar.Foods;
+package TheCellar.Items.Foods;
 
 import TheCellar.Food;
 

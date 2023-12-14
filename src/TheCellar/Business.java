@@ -20,7 +20,7 @@ get&set for all fields
 
  */
 
-import TheCellar.Foods.FoodScraps;
+import TheCellar.Items.Foods.FoodScraps;
 
 import java.util.ArrayList;
 

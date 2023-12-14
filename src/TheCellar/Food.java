@@ -7,8 +7,8 @@ get&set for all fields
 
  */
 
-import TheCellar.Foods.FoodScraps;
-import TheCellar.Foods.WalmartFood;
+import TheCellar.Items.Foods.FoodScraps;
+import TheCellar.Items.Foods.WalmartFood;
 
 public abstract class Food {
     public static final Food[] FoodTypes = {
