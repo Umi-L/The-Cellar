@@ -28,6 +28,8 @@ public class HirePage {
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
+		frame.setFocusable(true);
+		
 		 InputMap inputMap = frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 	        ActionMap actionMap = frame.getRootPane().getActionMap();
 

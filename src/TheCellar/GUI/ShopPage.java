@@ -23,6 +23,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -33,6 +34,7 @@ import javax.swing.UIManager;
 public class ShopPage {
 	private JFrame frame;
 	private JTextArea textArea;
+	private JScrollPane scrollPane;
 	private JLabel moneyLabel; 
 	private JButton addToCartButton;
 	private JComboBox<String> selectedComboBox; 
@@ -89,16 +91,16 @@ public class ShopPage {
     }
 	
 	private int extractItemCost(String itemString) {
-	    // Assume each line in the cart represents an item with a cost at the end
+	    
 	    String[] parts = itemString.split("\\$");
 	    if (parts.length > 1) {
 	        try {
 	            return Integer.parseInt(parts[1].trim());
 	        } catch (NumberFormatException ex) {
-	            // Handle parsing error if needed
+	          
 	        }
 	    }
-	    return 0; // Default to 0 if cost extraction fails
+	    return 0; 
 	}
 	/**
 	 * @wbp.parser.entryPoint
@@ -156,12 +158,15 @@ public class ShopPage {
 		textArea = new JTextArea();
 		textArea.setBackground(new Color(202, 202, 202));
 		textArea.setBounds(510, 34, 273, 269);
-		frame.getContentPane().add(textArea);
+		
+		scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(510, 34, 273, 269);
+		frame.getContentPane().add(scrollPane);
 
 		moneyLabel = new JLabel("$" + Main.game.PlayerBusiness.getMoney());
 		moneyLabel.setBackground(new Color(192, 192, 192));
 		moneyLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
-		moneyLabel.setBounds(713, 375, 81, 38);
+		moneyLabel.setBounds(649, 375, 145, 38);
 		frame.getContentPane().add(moneyLabel);
 
 		equipment = new JComboBox<String>();
