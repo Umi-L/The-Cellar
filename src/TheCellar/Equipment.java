@@ -10,14 +10,14 @@ import TheCellar.Items.Equipment.Hotplate;
 public abstract class Equipment {
 	protected String name;
 	protected int price;
-	protected int modifier;
+	protected double modifier;
 	protected int upgradePrice;
 
 	public static final Equipment[] EquipmentTypes = {
 			new Hotplate(),
 	};
 
-	public Equipment(String name, int price, int modifier, int upgradePrice) {
+	public Equipment(String name, int price, double modifier, int upgradePrice) {
 		this.name = name;
 		this.price = price;
 		this.modifier = modifier;
@@ -43,7 +43,7 @@ public abstract class Equipment {
 		
 	}
 	
-	public int getModifier() {
+	public double getModifier() {
 		return modifier;
 		
 	}
