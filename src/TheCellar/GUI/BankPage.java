@@ -99,9 +99,9 @@ public class BankPage {
 	btnNewButton_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			int requestedLoan = Integer.parseInt(textField.getText());
-			if((Main.game.PlayerBusiness.getProfit()-Main.game.PlayerBusiness.getExpenses())>0)
+			if((Main.game.PlayerBusiness.getProfit()-Main.game.PlayerBusiness.getExpenses())<0&&requestedLoan>0)
 			{
-				if(requestedLoan < Main.game.PlayerBusiness.getProfit()*(Main.game.random.nextInt(4)+2))
+				if(requestedLoan > Main.game.PlayerBusiness.getProfit()*(Main.game.random.nextInt(4)+2))
 				{
 					Main.game.PlayerBusiness.setMoney(Main.game.PlayerBusiness.getMoney()+requestedLoan);
 					Main.game.PlayerBusiness.setDebt(Main.game.PlayerBusiness.getDebt()+requestedLoan);
