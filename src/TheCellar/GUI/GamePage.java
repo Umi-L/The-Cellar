@@ -1,5 +1,7 @@
 package TheCellar.GUI;
 
+import TheCellar.Main;
+import TheCellar.TickListener;
 import TheCellar.Charts.Animation;
 import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
@@ -77,11 +79,11 @@ public class GamePage {
 		timeLabel.setBounds(54, 369, 81, 14);
 		frame.getContentPane().add(timeLabel);
 		
-		JLabel networthLabel = new JLabel("$10,000");
-		networthLabel.setBackground(new Color(192, 192, 192));
-		networthLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		networthLabel.setBounds(843, 8, 81, 38);
-		frame.getContentPane().add(networthLabel);
+		JLabel moneyLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getMoney()));
+		moneyLabel.setBackground(new Color(192, 192, 192));
+		moneyLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		moneyLabel.setBounds(843, 8, 81, 38);
+		frame.getContentPane().add(moneyLabel);
 
 		ArrayList<Double> values = new ArrayList<Double>();
 		values.add(40.0);
@@ -180,9 +182,16 @@ public class GamePage {
 		    }
 		});
 		
+		Main.game.addTickListener(new TickListener() {
+			public void onTick() {
+				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
+			}
+		});
+		
 		
 		frame.setVisible(true);
 	}
+	
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
