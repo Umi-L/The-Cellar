@@ -7,16 +7,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import java.awt.event.KeyEvent;
 
 import TheCellar.Chef;
-
-import javax.swing.JTextArea;
-import javax.swing.JList;
-import javax.swing.JToggleButton;
 
 public class HirePage {
 	private JFrame frame;
@@ -34,6 +27,23 @@ public class HirePage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
+		
+		frame.setFocusable(true);
+
+        // Add KeyBindings to listen for Escape key press
+        InputMap inputMap = frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = frame.getRootPane().getActionMap();
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "resumeGame");
+        actionMap.put("resumeGame", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                GamePage window2 = new GamePage();
+                window2.showWindow();
+            }
+        });
+
 		
 		//RESUME BUTTON
 		JButton resumeButton = new JButton("Resume");

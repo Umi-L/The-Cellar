@@ -175,7 +175,6 @@ public class GamePage {
 		actionMap.put("pauseMenu", new AbstractAction() {
 		   
 		    public void actionPerformed(ActionEvent e) {
-		        frame.setVisible(false);
 		        PauseMenuPage pause = new PauseMenuPage();
 		        pause.showWindow();
 		    }
