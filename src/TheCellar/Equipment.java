@@ -6,6 +6,9 @@ package TheCellar;// TheCellar.Equipment (Abstract)
 // get&set for all fields
 
 import TheCellar.Items.Equipment.Hotplate;
+import TheCellar.Items.Equipment.StoveBurnerUpgrade;
+import TheCellar.Items.Equipment.EnergyEfficientAppliances;
+
 
 public abstract class Equipment {
 	protected String name;
@@ -15,6 +18,8 @@ public abstract class Equipment {
 
 	public static final Equipment[] EquipmentTypes = {
 			new Hotplate(),
+			new StoveBurnerUpgrade(),
+			new EnergyEfficientAppliances(),
 	};
 
 	public Equipment(String name, int price, double modifier, int upgradePrice) {
