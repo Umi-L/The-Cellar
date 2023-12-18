@@ -9,16 +9,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import TheCellar.Business;
 import TheCellar.Chef;
 
-public class HirePage {
+public class HirePage  {
+	
 	private JFrame frame;
+	//private Business PlayerBusiness;
 	
 	public static void showWindow() {
 		
 	}
 
 	public HirePage() {
+		int netWorth = 10000; ///PLACE HOLDER
+		//int netWorth = PlayerBusiness.getMoney();
 		
 		frame = new JFrame("");
 		frame.getContentPane().setFont(new Font("Dialog", Font.BOLD, 12));
@@ -100,8 +105,8 @@ public class HirePage {
 		frame.getContentPane().add(currentChefs);
 		
 		//NETWOTH LABEL
-		JLabel networthLabel = new JLabel("Current Networth:");
-		networthLabel.setBounds(10, 20, 120, 13);
+		JLabel networthLabel = new JLabel("Current Networth: " + netWorth);
+		networthLabel.setBounds(10, 20, 276, 13);
 		frame.getContentPane().add(networthLabel);
 		
 		//GRAD HIRE BUTTON
@@ -116,7 +121,7 @@ public class HirePage {
 		
 		//S/D LABEL
 		JLabel SDLabel = new JLabel("Current S/D: ");
-		SDLabel.setBounds(10, 10, 120, 13);
+		SDLabel.setBounds(10, 10, 285, 13);
 		frame.getContentPane().add(SDLabel);
 	
 		//CLEANER HIRE BUTTON
@@ -151,27 +156,55 @@ public class HirePage {
 		cleanerList.setBounds(34, 282, 180, 110);
 		frame.getContentPane().add(cleanerList);
 		
-		JButton btnNewButton = new JButton("?");
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		
+		
+		JButton teenBenefits = new JButton("?");
+		teenBenefits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 JFrame jFrame = new JFrame();
-				 JOptionPane.showMessageDialog(jFrame, "Benefits of Teenage Chef Include: ...");
+				 JOptionPane.showMessageDialog(jFrame, "Benefits of Teenage Chef Include:"
+				 		+ " +3% Quality  "
+				 		+ "+0 S/D Increase");
 			}
 		});
-		btnNewButton.setBounds(435, 94, 37, 17);
-		frame.getContentPane().add(btnNewButton);
+		teenBenefits.setBounds(435, 94, 37, 17);
+		frame.getContentPane().add(teenBenefits);
 		
-		JButton btnNewButton_1 = new JButton("?");
-		btnNewButton_1.setBounds(435, 136, 37, 17);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton gradBenefits = new JButton("?");
+		gradBenefits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jFrame = new JFrame();
+				JOptionPane.showMessageDialog(jFrame, "Benefits of Culinary Grad Include:"
+				 		+ " +10% Quality  "
+				 		+ "+40 S/D Increase");
+			}
+		});
+		gradBenefits.setBounds(435, 136, 37, 17);
+		frame.getContentPane().add(gradBenefits);
 		
-		JButton btnNewButton_2 = new JButton("?");
-		btnNewButton_2.setBounds(435, 174, 37, 17);
-		frame.getContentPane().add(btnNewButton_2);
+		JButton ramsayBenefits = new JButton("?");
+		ramsayBenefits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jFrame = new JFrame();
+				JOptionPane.showMessageDialog(jFrame, "Benefits of Gordan Ramsay Include:"
+				 		+ " +40% Quality  "
+				 		+ "+100 S/D Increase");
+			}
+		});
+		ramsayBenefits.setBounds(435, 174, 37, 17);
+		frame.getContentPane().add(ramsayBenefits);
 		
-		JButton btnNewButton_3 = new JButton("?");
-		btnNewButton_3.setBounds(435, 260, 37, 17);
-		frame.getContentPane().add(btnNewButton_3);
+		JButton cleanerBenefits = new JButton("?");
+		cleanerBenefits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jFrame = new JFrame();
+				JOptionPane.showMessageDialog(jFrame, "Benefits of Cleaners Include:"
+				 		+ " +15% Cleaniness ");
+			}
+		});
+		cleanerBenefits.setBounds(435, 260, 37, 17);
+		frame.getContentPane().add(cleanerBenefits);
 	
 	
 		//ACTION LISTENERS
@@ -180,8 +213,8 @@ public class HirePage {
 		resumeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) { //execute when resume button clicked
 					frame.setVisible(false); //set frame to invisible
-					GamePage window2 = new GamePage(); //
-					window2.showWindow();
+					GamePage window2 = new GamePage(); 
+					window2.showWindow(); //show pop up
 			
 				}
 			});
@@ -190,25 +223,44 @@ public class HirePage {
 		teenHireButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //execute when hire teen button pressed
 				//Chef o = new Chef();
-
+				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
+				 System.out.println("name: " + name);
+				 if (name != null || name != "") { //only execute if name is given
+					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
+				 }
 			}	
 		});
 		
 		//HIRE CULINARY GRAD BUTTON
 		gradHireButton.addActionListener(new ActionListener() { //execute when hire grad button pressed
 			public void actionPerformed(ActionEvent e) { 
+				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
+				 System.out.println("name: " + name);
+				 if (name != null || name != "") { //only execute if name is given
+					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
+				 }
 			}
 		});
 		
 		//HIRE GORDAN RAMSAY BUTTON
 		ramsayHireButton.addActionListener(new ActionListener() { //execute when hire ramsay button pressed
 			public void actionPerformed(ActionEvent e) {
+				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
+				 System.out.println("name: " + name);
+				 if (name != null || name != "") { //only execute if name is given
+					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
+				 }
 			}
 		});
 		
 		//HIRE CLEANER BUTTON
 		cleanerHireButton.addActionListener(new ActionListener() { //execute when hire cleaner button pressed
 			public void actionPerformed(ActionEvent e) {
+				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
+				 System.out.println("name: " + name);
+				 if (name != null || name != "") { //only execute if name is given
+					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
+				 }
 			}
 		});
 		frame.setVisible(true);
