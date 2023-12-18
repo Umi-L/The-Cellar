@@ -9,8 +9,9 @@ package TheCellar;// TheCellar.Knife (Abstract)
 import TheCellar.Items.Knife.BladeUpgrade;
 import TheCellar.Items.Knife.HandleUpgrade;
 import TheCellar.Items.Knife.SharpnerUpgrade;
+import TheCellar.Items.Knives.PlasticKnives;
 
-TheCellar.Items.Knives.PlasticKnives;
+
 
 
 public abstract class Knife {
@@ -24,6 +25,7 @@ public abstract class Knife {
     		new HandleUpgrade(),
     		new SharpnerUpgrade(),
     		new PlasticKnives(),
+    		
 			
 	};
 
