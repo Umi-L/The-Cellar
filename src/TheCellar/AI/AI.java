@@ -1,6 +1,7 @@
 package TheCellar.AI;
 
 import TheCellar.*;
+import TheCellar.Cleaner;
 
 public class AI extends Business implements Cloneable{
 

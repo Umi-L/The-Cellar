@@ -5,26 +5,61 @@ package TheCellar;/*
 get&set for all fields
  */
 
+import TheCellar.Items.Cleaner.CleaningStaff;
+import TheCellar.Items.Cleaner.CleaningRobots;
+import TheCellar.Items.Cleaner.EcoFriendlyCleaningSupplies;
+import TheCellar.Items.Cleaner.IndustrialGradeCleaningSupplies;
+
+
+
+
 public class Cleaner {
-    protected int price;
-    protected int modifier;
+	protected String name;
+	protected int price;
+	protected double modifier;
 
-    public int getPrice() {
-        return price;
+	public static final Cleaner[] CleanerTypes = {
+			new CleaningStaff(),
+			new CleaningRobots(),
+			new EcoFriendlyCleaningSupplies(),
+			new IndustrialGradeCleaningSupplies(),
 
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
+	};
 
-    }
+	public Cleaner(String name, int price, double modifier) {
+		this.name = name;
+		this.price = price;
+		this.modifier = modifier;
+		
+		}
 
-    public int getModifier() {
-        return modifier;
 
-    }
+		public String getName() {
+			return name;
+		}
 
-    public void setModifier(int modifier) {
-        this.modifier = modifier;
-    }
-}
+		public void setName(String name) {
+			this.name = name;
+
+		}
+
+		public int getPrice() {
+			return price;
+
+		}
+
+		public void setPrice(int price) {
+			this.price = price;
+
+		}
+
+		public double getModifier() {
+			return modifier;
+
+		}
+
+		public void setModifier(int modifier) {
+			this.modifier = modifier;
+		}
+	}
