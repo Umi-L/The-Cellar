@@ -17,16 +17,24 @@ public class BarGraph extends JPanel {
     private final int bgValue = 220;
     protected Color backgroundColor = new Color(bgValue, bgValue, bgValue, 255);
 
-    public BarGraph(String yAxis, ArrayList<String > labels, ArrayList<Double> values) {
+    public BarGraph(String yAxis) {
         this.yAxis = yAxis;
 
-        this.labels = labels;
-        this.values = values;
+        this.labels = new ArrayList<>();
+        this.values = new ArrayList<>();
+    }
+
+    public void Update(ArrayList<String> labels, ArrayList<Double> values) {
+    	this.labels = labels;
+    	this.values = values;
+    	this.repaint();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         int x = 0;
         int y = 0;

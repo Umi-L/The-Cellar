@@ -20,7 +20,9 @@ get&set for all fields
 
  */
 
+import TheCellar.Items.Equipment.Hotplate;
 import TheCellar.Items.Foods.FoodScraps;
+import TheCellar.Items.Knives.PlasticKnives;
 
 import java.util.ArrayList;
 
@@ -31,10 +33,10 @@ public class Business {
     protected double quality; // range from 0-1 representing 0-100%
     protected double cleanliness; // range from 0-1 representing 0-100%
     protected int debt;
-    protected Equipment cookingEquipment;
+    protected Equipment cookingEquipment = new Hotplate();
     protected ArrayList<Chef> chefs = new ArrayList<Chef>();
     protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
-    protected Knife knives;
+    protected Knife knives = new PlasticKnives();
     protected Food food = new FoodScraps();
     protected int daysOfFood;
     protected int daysInDebt;
@@ -234,6 +236,12 @@ public class Business {
         int expenses = getExpenses();
 
         setMoney(money - expenses);
+        // if money is less than 0, increment debt
+        if (money < 0) {
+            debt += money;
+            setDebt(debt);
+            setMoney(0);
+        }
 
         // calculate profit
         int profit = getProfit();
