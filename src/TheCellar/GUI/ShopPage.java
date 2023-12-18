@@ -10,15 +10,22 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 
@@ -27,7 +34,8 @@ import javax.swing.UIManager;
 public class ShopPage {
 	private JFrame frame;
 	private JTextArea textArea;
-	private JLabel lblNewLabel_1; 
+	private JScrollPane scrollPane;
+	private JLabel moneyLabel; 
 	private JButton addToCartButton;
 	private JComboBox<String> selectedComboBox; 
 	private JComboBox<String> equipment = new JComboBox<>();
@@ -41,14 +49,14 @@ public class ShopPage {
 	public static void showWindow() {
 
 	}
-	//Method to Set location of button relative to which combo box is currently being used
+	//Method to Set location of add to cart button relative to which combo box is currently being used
 	private void setButtonLocation() {
 		if (selectedComboBox != null && addToCartButton != null) {
 			Rectangle comboBoxBounds = selectedComboBox.getBounds();
 			addToCartButton.setBounds(comboBoxBounds.x + comboBoxBounds.width + 1, comboBoxBounds.y, 114, 30);
 		}
 	}
-	//handle combo box selection
+	//handle combo box selection and set location of add to cart button
 	private void handleComboBoxSelection() {
 		if (selectedComboBox != null && addToCartButton != null) {
 			Object selectedItem = selectedComboBox.getSelectedItem();
@@ -81,16 +89,23 @@ public class ShopPage {
 
         addToCartButton.setVisible(false);
     }
-
-
-
-
-
+	
+	private int extractItemCost(String itemString) {
+	    
+	    String[] parts = itemString.split("\\$");
+	    if (parts.length > 1) {
+	        try {
+	            return Integer.parseInt(parts[1].trim());
+	        } catch (NumberFormatException ex) {
+	          
+	        }
+	    }
+	    return 0; 
+	}
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public ShopPage() {
-		
 		
 		this.PlayerBusiness = Main.game != null ? Main.game.PlayerBusiness : new Business();
 		
@@ -101,13 +116,30 @@ public class ShopPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
+		
+		frame.setFocusable(true);
 
-		JButton btnNewButton = new JButton("Resume TheCellar.Game");
-		btnNewButton.setOpaque(true);
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color(255, 18, 29));
-		btnNewButton.addActionListener(new ActionListener() {
+        // Add KeyBindings to listen for Escape key press
+        InputMap inputMap = frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = frame.getRootPane().getActionMap();
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "resumeGame");
+        actionMap.put("resumeGame", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                GamePage window2 = new GamePage();
+                window2.showWindow();
+            }
+        });
+
+
+		JButton btnResume = new JButton("Resume TheCellar.Game");
+		btnResume.setOpaque(true);
+		btnResume.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnResume.setForeground(new Color(0, 0, 0));
+		btnResume.setBackground(new Color(255, 18, 29));
+		btnResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				TheCellar.GUI.GamePage window2 = new TheCellar.GUI.GamePage();
@@ -115,24 +147,27 @@ public class ShopPage {
 
 			}
 		});
-		btnNewButton.setBounds(6, 378, 219, 38);
-		frame.getContentPane().add(btnNewButton);
+		btnResume.setBounds(6, 378, 219, 38);
+		frame.getContentPane().add(btnResume);
 
-		JLabel lblNewLabel = new JLabel("Shop");
-		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
-		lblNewLabel.setBounds(373, 0, 61, 30);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblShop = new JLabel("Shop");
+		lblShop.setFont(new Font("SansSerif", Font.BOLD, 24));
+		lblShop.setBounds(373, 0, 61, 30);
+		frame.getContentPane().add(lblShop);
 
 		textArea = new JTextArea();
 		textArea.setBackground(new Color(202, 202, 202));
 		textArea.setBounds(510, 34, 273, 269);
-		frame.getContentPane().add(textArea);
+		
+		scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(510, 34, 273, 269);
+		frame.getContentPane().add(scrollPane);
 
-		lblNewLabel_1 = new JLabel("$" + Main.game.PlayerBusiness.getMoney());
-		lblNewLabel_1.setBackground(new Color(192, 192, 192));
-		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(713, 375, 81, 38);
-		frame.getContentPane().add(lblNewLabel_1);
+		moneyLabel = new JLabel("$" + Main.game.PlayerBusiness.getMoney());
+		moneyLabel.setBackground(new Color(192, 192, 192));
+		moneyLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+		moneyLabel.setBounds(649, 375, 145, 38);
+		frame.getContentPane().add(moneyLabel);
 
 		equipment = new JComboBox<String>();
 		equipment.setBounds(203, 34, 178, 30);
@@ -163,37 +198,44 @@ public class ShopPage {
 
 
 		addToCartButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (selectedComboBox != null) {
-					Object selectedItem = selectedComboBox.getSelectedItem();
+		    public void actionPerformed(ActionEvent e) {
+		        if (selectedComboBox != null) {
+		            Object selectedItem = selectedComboBox.getSelectedItem();
 
-					if (selectedItem != null && !selectedItem.toString().isEmpty()) {
-						// Check if the item is already in the cart
-						if (textArea.getText().contains(selectedItem.toString())) {
-							JOptionPane.showMessageDialog(frame, "Item already in the cart.");
-						} else {
-							// Check if the item is already owned
-							if (purchasedUpgrades.contains(selectedItem.toString())) {
-								JOptionPane.showMessageDialog(frame, "You already own this item.");
-							} else {
-								// Add the item to the cart and mark it as owned
-								textArea.append(selectedItem + "\n" + "\n");
-								purchasedUpgrades.add(selectedItem.toString());
-								setButtonLocation();
-								addToCartButton.setVisible(true);
-								selectedComboBox.setSelectedIndex(0);
-							}
-						}
-					}
-				}
-			}
+		            if (selectedItem != null && !selectedItem.toString().isEmpty()) {
+		                // Check if the item is already in the cart
+		                if (textArea.getText().contains(selectedItem.toString())) {
+		                    JOptionPane.showMessageDialog(frame, "Item already in the cart.");
+		                } else {
+		                    // Check if the item is already owned
+		                    if (purchasedUpgrades.contains(selectedItem.toString())) {
+		                        JOptionPane.showMessageDialog(frame, "You already own this item.");
+		                    } else {
+		                        // Check if the user has sufficient funds
+		                        int itemCost = extractItemCost(selectedItem.toString());
+		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
+		                            // Add the item to the cart and mark it as owned
+		                            textArea.append(selectedItem + "\n" + "\n");
+		                            purchasedUpgrades.add(selectedItem.toString());
+		                            setButtonLocation();
+		                            addToCartButton.setVisible(true);
+		                            selectedComboBox.setSelectedIndex(0);
+		                        } else {
+		                            // User has insufficient funds
+		                            JOptionPane.showMessageDialog(frame, "Insufficient funds.");
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
 		});
 
-		JButton btnNewButton_1 = new JButton("Equipment Upgrades");
-		btnNewButton_1.setBackground(new Color(70, 70, 234));
-		btnNewButton_1.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_1.setOpaque(true);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnEquipment = new JButton("Equipment Upgrades");
+		btnEquipment.setBackground(new Color(70, 70, 234));
+		btnEquipment.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnEquipment.setOpaque(true);
+		btnEquipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				equipment.setVisible(true);
 				hideOtherComboBoxes(equipment);
@@ -201,8 +243,8 @@ public class ShopPage {
 
 			}
 		});
-		btnNewButton_1.setBounds(36, 34, 165, 30);
-		frame.getContentPane().add(btnNewButton_1);
+		btnEquipment.setBounds(36, 34, 165, 30);
+		frame.getContentPane().add(btnEquipment);
 
 		food = new JComboBox<String>();
 		food.setBounds(203, 76, 178, 30);
@@ -221,19 +263,19 @@ public class ShopPage {
 			}
 		});
 
-		JButton btnNewButton_2 = new JButton("Food Upgrades");
-		btnNewButton_2.setBackground(new Color(70, 70, 234));
-		btnNewButton_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_2.setOpaque(true);
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnFood = new JButton("Food Upgrades");
+		btnFood.setBackground(new Color(70, 70, 234));
+		btnFood.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnFood.setOpaque(true);
+		btnFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				food.setVisible(true);
 				hideOtherComboBoxes(food);
 
 			}
 		});
-		btnNewButton_2.setBounds(36, 76, 165, 30);
-		frame.getContentPane().add(btnNewButton_2);
+		btnFood.setBounds(36, 76, 165, 30);
+		frame.getContentPane().add(btnFood);
 
 		knife = new JComboBox<String>();
 		knife.setBounds(203, 118, 178, 30);
@@ -253,11 +295,11 @@ public class ShopPage {
 			}
 		});
 
-		JButton btnNewButton_3 = new JButton("Knife Upgrades");
-		btnNewButton_3.setBackground(new Color(70, 70, 234));
-		btnNewButton_3.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_3.setOpaque(true);
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnKnife = new JButton("Knife Upgrades");
+		btnKnife.setBackground(new Color(70, 70, 234));
+		btnKnife.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnKnife.setOpaque(true);
+		btnKnife.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				knife.setVisible(true);
 				hideOtherComboBoxes(knife);
@@ -266,14 +308,14 @@ public class ShopPage {
 
 			}
 		});
-		btnNewButton_3.setBounds(36, 118, 165, 30);
-		frame.getContentPane().add(btnNewButton_3);
+		btnKnife.setBounds(36, 118, 165, 30);
+		frame.getContentPane().add(btnKnife);
 
-		JButton btnNewButton_4 = new JButton("Chef Upgrades");
-		btnNewButton_4.setBackground(new Color(70, 70, 234));
-		btnNewButton_4.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_4.setOpaque(true);
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton btnChef = new JButton("Chef Upgrades");
+		btnChef.setBackground(new Color(70, 70, 234));
+		btnChef.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnChef.setOpaque(true);
+		btnChef.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				ChefUpgrades window3 = new TheCellar.GUI.ChefUpgrades();
@@ -281,9 +323,9 @@ public class ShopPage {
 
 			}
 		});
-		btnNewButton_4.setBounds(36, 233, 165, 30);
-		btnNewButton_4.setVisible(true);
-		frame.getContentPane().add(btnNewButton_4);
+		btnChef.setBounds(36, 233, 165, 30);
+		btnChef.setVisible(true);
+		frame.getContentPane().add(btnChef);
 
 		cleaner = new JComboBox<String>();
 		cleaner.setBounds(203, 160, 178, 30);
@@ -302,31 +344,31 @@ public class ShopPage {
 			}
 		});
 
-		JButton btnNewButton_3_1 = new JButton("Cleaner Upgrades");
-		btnNewButton_3_1.setBackground(new Color(70, 70, 234));
-		btnNewButton_3_1.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_3_1.setOpaque(true);
-		btnNewButton_3_1.addActionListener(new ActionListener() {
+		JButton btnCleaner = new JButton("Cleaner Upgrades");
+		btnCleaner.setBackground(new Color(70, 70, 234));
+		btnCleaner.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnCleaner.setOpaque(true);
+		btnCleaner.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cleaner.setVisible(true);
 				hideOtherComboBoxes(cleaner);
 
 			}
 		});
-		btnNewButton_3_1.setBounds(36, 160, 165, 30);
-		frame.getContentPane().add(btnNewButton_3_1);
+		btnCleaner.setBounds(36, 160, 165, 30);
+		frame.getContentPane().add(btnCleaner);
 
-		JLabel lblNewLabel_11 = new JLabel("Cart");
-		lblNewLabel_11.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblNewLabel_11.setBounds(621, 7, 61, 23);
-		frame.getContentPane().add(lblNewLabel_11);
+		JLabel lblCart = new JLabel("Cart");
+		lblCart.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblCart.setBounds(621, 7, 61, 23);
+		frame.getContentPane().add(lblCart);
 
-		JButton btnNewButton_5 = new JButton("Purchase");
-		btnNewButton_5.setBackground(new Color(225, 6, 0));
-		btnNewButton_5.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_5.setOpaque(true);
-		btnNewButton_5.setBounds(520, 315, 117, 29);
-		frame.getContentPane().add(btnNewButton_5);
+		JButton btnPurchase = new JButton("Purchase");
+		btnPurchase.setBackground(new Color(225, 6, 0));
+		btnPurchase.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnPurchase.setOpaque(true);
+		btnPurchase.setBounds(520, 315, 117, 29);
+		frame.getContentPane().add(btnPurchase);
 
 		JButton btnClearCart = new JButton("Clear Cart");
 		btnClearCart.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -363,7 +405,7 @@ public class ShopPage {
 			}
 		});
 
-		btnNewButton_5.addActionListener(new ActionListener() {
+		btnPurchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Check if the cart is empty
 				if (textArea.getText().trim().isEmpty()) {
@@ -398,7 +440,7 @@ public class ShopPage {
 					    PlayerBusiness.setMoney(PlayerBusiness.getMoney() - totalCost);
 					    
 					    // Update the UI with the new remaining balance
-					    lblNewLabel_1.setText("$" + PlayerBusiness.getMoney());
+					    moneyLabel.setText("$" + PlayerBusiness.getMoney());
 
 					    // Purchase details
 					    String purchaseDetails = "Items Purchased:\n\n" + textArea.getText() +
@@ -439,55 +481,55 @@ public class ShopPage {
 			}
 		});
 
-		JButton btnNewButton_6 = new JButton("?");
-		btnNewButton_6.setOpaque(true);
-		btnNewButton_6.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_6.addActionListener(new ActionListener() {
+		JButton equipmentHelp = new JButton("?");
+		equipmentHelp.setOpaque(true);
+		equipmentHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
+		equipmentHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 				JOptionPane.showMessageDialog(frame, "Hotplate: Increases speed (3% quality increase)" + "\n" + "Stove Burner Upgrade: Increases speed (10% quality increase, 50 s/d increase)" 
 						+ "\n" + "Energy Efficient Appliances: Reduces utility cost");
 
 			}
 		});
-		btnNewButton_6.setBounds(6, 37, 23, 24);
-		frame.getContentPane().add(btnNewButton_6);
+		equipmentHelp.setBounds(6, 37, 23, 24);
+		frame.getContentPane().add(equipmentHelp);
 
-		JButton btnNewButton_6_1 = new JButton("?");
-		btnNewButton_6_1.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_6_1.setOpaque(true);
-		btnNewButton_6_1.addActionListener(new ActionListener() {
+		JButton foodHelp = new JButton("?");
+		foodHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
+		foodHelp.setOpaque(true);
+		foodHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(frame, "Premium Meat Supplier: 45% quality increase, 30 s/d increase" + "\n" + "Organic Farm Partnership: 35% quality increase, 30 s/d increase" + "\n" + "Gourmet Recipe Book: 50% quality increase, 20 s/d increase" + "\n"
 						+ "Seasonal Menu Updates: 10 s/d increase ");
 
 			}
 		});
-		btnNewButton_6_1.setBounds(6, 79, 23, 24);
-		frame.getContentPane().add(btnNewButton_6_1);
+		foodHelp.setBounds(6, 79, 23, 24);
+		frame.getContentPane().add(foodHelp);
 
-		JButton btnNewButton_6_2 = new JButton("?");
-		btnNewButton_6_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_6_2.setOpaque(true);
-		btnNewButton_6_2.addActionListener(new ActionListener() {
+		JButton knifeHelp = new JButton("?");
+		knifeHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
+		knifeHelp.setOpaque(true);
+		knifeHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(frame, "Blade Upgrade: Increase Speed" + "\n" + "Handle Upgrade: Increase Comfort" + "\n" + "Sharpner Upgrade: Increase Speed");
 			}
 		});
-		btnNewButton_6_2.setBounds(6, 121, 23, 24);
-		frame.getContentPane().add(btnNewButton_6_2);
+		knifeHelp.setBounds(6, 121, 23, 24);
+		frame.getContentPane().add(knifeHelp);
 
-		JButton btnNewButton_6_3 = new JButton("?");
-		btnNewButton_6_3.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton_6_3.setOpaque(true);
-		btnNewButton_6_3.addActionListener(new ActionListener() {
+		JButton cleanerHelp = new JButton("?");
+		cleanerHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
+		cleanerHelp.setOpaque(true);
+		cleanerHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(frame, "Industrial Grade Cleaning Supplies: Cleanliness Increase 10% " + "\n" + "Cleaning Robots: Cleanliness Increase: 50% " + "\n" + "Eco Friendly Cleaning Supplies: Cleanliness Increase 15%" + "\n" + "24/7 cleaning staff: Cleanliness Increase 100%");
 
 
 			}
 		});
-		btnNewButton_6_3.setBounds(6, 163, 23, 24);
-		frame.getContentPane().add(btnNewButton_6_3);
+		cleanerHelp.setBounds(6, 163, 23, 24);
+		frame.getContentPane().add(cleanerHelp);
 
 
 		frame.setVisible(true);

@@ -9,6 +9,8 @@ import java.util.Timer;
 
 import TheCellar.AI.AI;
 
+
+
 public class Game {
     public Business PlayerBusiness = new Business();
     public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
@@ -19,6 +21,8 @@ public class Game {
     public int TotalTime = 0;
     public Timer timer = new Timer();
     public Random random = new Random();
+
+    public ArrayList<TickListener> tickListeners = new ArrayList<TickListener>();
 
     private int goingRate = 5; // going rate for a steak with 100% quality
 
@@ -53,6 +57,11 @@ public class Game {
                 },
                 GameSpeed
         );
+
+        // call tick listeners
+        for (TickListener listener : tickListeners) {
+            listener.onTick();
+        }
     }
 
     public ArrayList<Business> getCompetitors(Business b){
@@ -67,5 +76,13 @@ public class Game {
             businesses.add(PlayerBusiness);
         }
         return businesses;
+    }
+
+    public void addTickListener(TickListener listener) {
+        tickListeners.add(listener);
+    }
+
+    public void removeTickListener(TickListener listener) {
+        tickListeners.remove(listener);
     }
 }

@@ -1,4 +1,4 @@
-package TheCellar.Chefs;
+package TheCellar.Items.Chefs;
 
 import TheCellar.Chef;
 

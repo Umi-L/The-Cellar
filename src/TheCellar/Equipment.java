@@ -5,15 +5,32 @@ package TheCellar;// TheCellar.Equipment (Abstract)
 // #UpgradePrice: int
 // get&set for all fields
 
+import TheCellar.Items.Equipment.Hotplate;
+import TheCellar.Items.Equipment.StoveBurnerUpgrade;
+import TheCellar.Items.Equipment.EnergyEfficientAppliances;
+
+
 public abstract class Equipment {
 	protected String name;
 	protected int price;
-	protected int modifier;
+	protected double modifier;
 	protected int upgradePrice;
+
+	public static final Equipment[] EquipmentTypes = {
+			new Hotplate(),
+			new StoveBurnerUpgrade(),
+			new EnergyEfficientAppliances(),
+	};
+
+	public Equipment(String name, int price, double modifier, int upgradePrice) {
+		this.name = name;
+		this.price = price;
+		this.modifier = modifier;
+		this.upgradePrice = upgradePrice;
+	}
 
 	public String getName() {
 		return name;
-		
 	}
 	
 	public void setName(String name) {
@@ -31,7 +48,7 @@ public abstract class Equipment {
 		
 	}
 	
-	public int getModifier() {
+	public double getModifier() {
 		return modifier;
 		
 	}

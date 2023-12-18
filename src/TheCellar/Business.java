@@ -20,7 +20,7 @@ get&set for all fields
 
  */
 
-import TheCellar.Foods.FoodScraps;
+import TheCellar.Items.Foods.FoodScraps;
 
 import java.util.ArrayList;
 
@@ -101,6 +101,39 @@ public class Business {
     	this.food = food;
         setMoney(money -= food.getPrice());
         this.daysOfFood = 7;
+    }
+
+    public void PurchaseEquipment(Equipment equipment) {
+    	cookingEquipment = equipment;
+        setMoney(money -= GetEquipmentPrice(equipment));
+    }
+
+    public int GetEquipmentPrice(Equipment equipment) {
+    	int price = equipment.getPrice();
+
+    	// determine if we have prior equipment
+        if (cookingEquipment != null) {
+            int currIndex = GetEquipmentIndex(cookingEquipment);
+            int newIndex = GetEquipmentIndex(equipment);
+
+            // if new equipment is i+1 of current equipment, price is 1.5x
+            if (newIndex == currIndex + 1) {
+                price = equipment.getUpgradePrice();
+            }
+        }
+
+        return price;
+    }
+
+    protected static int GetEquipmentIndex(Equipment equipment) {
+        	int index = 0;
+        	for (int i = 0; i < Equipment.EquipmentTypes.length; i++) {
+        		if (Equipment.EquipmentTypes[i].getName().equals(equipment.getName())) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return index;
     }
 
     public void setPrice(int price) {

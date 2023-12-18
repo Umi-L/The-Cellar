@@ -7,13 +7,22 @@ get&set for all fields
 
  */
 
-import TheCellar.Foods.FoodScraps;
-import TheCellar.Foods.WalmartFood;
+import TheCellar.Items.Foods.FoodScraps;
+import TheCellar.Items.Foods.WalmartFood;
+import TheCellar.Items.Foods.PremiumMeatSupplier;
+import TheCellar.Items.Foods.OrganicFarmPartnership;
+import TheCellar.Items.Foods.GourmetRecipeBook;
+import TheCellar.Items.Foods.SeasonalMenuUpdates;
 
 public abstract class Food {
     public static final Food[] FoodTypes = {
             new FoodScraps(),
-            new WalmartFood()
+            new WalmartFood(),
+            new PremiumMeatSupplier(),
+            new OrganicFarmPartnership(),
+            new GourmetRecipeBook(),
+            new SeasonalMenuUpdates()
+            
     };
 
     protected String name;

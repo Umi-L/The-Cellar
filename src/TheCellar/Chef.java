@@ -5,9 +5,9 @@ package TheCellar;/*TheCellar.Chef (Abstract)
 get&set for all fields
 */
 
-import TheCellar.Chefs.GradChef;
-import TheCellar.Chefs.RamsayChef;
-import TheCellar.Chefs.TeenChef;
+import TheCellar.Items.Chefs.GradChef;
+import TheCellar.Items.Chefs.RamsayChef;
+import TheCellar.Items.Chefs.TeenChef;
 
 public abstract class Chef {
 
