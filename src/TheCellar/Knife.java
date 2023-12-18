@@ -5,11 +5,24 @@ package TheCellar;// TheCellar.Knife (Abstract)
 // #UpgradePrice: int
 // get&set for all fields
 
+import TheCellar.Items.Knives.PlasticKnives;
+
 public abstract class Knife {
     protected String name;
     protected int price;
-    protected int modifier;
+    protected double modifier;
     protected int upgradePrice;
+
+	public static final Knife[] KnifeTypes = {
+			new PlasticKnives(),
+	};
+
+	public Knife(String name, int price, double modifier, int upgradePrice) {
+		this.name = name;
+		this.price = price;
+		this.modifier = modifier;
+		this.upgradePrice = upgradePrice;
+	}
     
     public String getName() {
 		return name;
@@ -31,12 +44,11 @@ public abstract class Knife {
 		
 	}
 	
-	public int getModifier() {
+	public double getModifier() {
 		return modifier;
-		
 	}
 	
-	public void setModifier(int modifier) {
+	public void setModifier(double modifier) {
 		this.modifier = modifier;
 		
 	}
