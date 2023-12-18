@@ -12,13 +12,23 @@ public class PieChart extends JPanel {
 
     Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.CYAN, Color.MAGENTA, Color.PINK, Color.GRAY, Color.BLACK};
 
-	public PieChart(ArrayList<String> labels, ArrayList<Double> values) {
-        this.labels = labels;
-        this.values = values;
+	public PieChart() {
+        this.labels = new ArrayList<>();
+        this.values = new ArrayList<>();
+    }
+
+    public void Update(ArrayList<String> labels, ArrayList<Double> values) {
+    	this.labels = labels;
+    	this.values = values;
+
+    	this.repaint();
     }
 
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+
+        // paint all clear
+        g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         Arc2D.Float arc = new Arc2D.Float(Arc2D.PIE);
 

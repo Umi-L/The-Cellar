@@ -17,16 +17,23 @@ public class LineGraph  extends JPanel {
     private final int bgValue = 220;
     protected Color backgroundColor = new Color(bgValue, bgValue, bgValue, 255);
 
-    public LineGraph(String xAxis, String yAxis, ArrayList<Double> values) {
+    public LineGraph(String xAxis, String yAxis) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
 
-        this.values = values;
+        this.values = new ArrayList<>();
+    }
+
+    public void Update(ArrayList<Double> values) {
+    	this.values = values;
+    	this.repaint();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         int x = 0;
         int y = 0;

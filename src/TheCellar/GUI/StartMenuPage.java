@@ -34,20 +34,21 @@ public class StartMenuPage {
 		lblNewLabel.setBounds(72, 28, 219, 56);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("New Game");
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 21));
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color(116, 116, 116));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton newGame = new JButton("New Game");
+		newGame.setFont(new Font("Arial", Font.PLAIN, 21));
+		newGame.setForeground(new Color(0, 0, 0));
+		newGame.setBackground(new Color(116, 116, 116));
+		newGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				Main.game = new Game();
+				Main.game.GenerateAI();
 				GamePage window2 = new GamePage();
 				GamePage.showWindow();
 			}
 		});
-		btnNewButton.setBounds(60, 95, 219, 70);
-		frame.getContentPane().add(btnNewButton);
+		newGame.setBounds(60, 95, 219, 70);
+		frame.getContentPane().add(newGame);
 		
 		JTextArea textArea = new JTextArea("");
 		textArea.setFont(new Font("Arial", Font.PLAIN, 8));

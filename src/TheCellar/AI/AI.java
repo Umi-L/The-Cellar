@@ -5,8 +5,6 @@ import TheCellar.Cleaner;
 
 public class AI extends Business implements Cloneable{
 
-	private boolean isBroke;
-
 	int level; // level from 1 to 10, 1 being the lowest and 10 being the highest
 
 	public void MakeDecision() {
@@ -19,18 +17,15 @@ public class AI extends Business implements Cloneable{
 			FoodDecision();
 		}
 
-		// if we have no chefs
-		if (chefs.isEmpty()) {
-			// make a chef decision
+		if (random <= 3) { // 30% chance to make a chef decision
 			ChefDecision();
 		}
 
-		// if we have no cleaners
-		if (cleaners.isEmpty()) {
-			// make a cleaner decision
+		if (random <= 2) { // 20% chance to make a cleaner decision
 			CleanerDecision();
 		}
 
+		EquipmentDecision();
 
 
 		if (random <= level) { // this will make the AI more likely to change their pricing as the AI level increases
@@ -93,7 +88,7 @@ public class AI extends Business implements Cloneable{
 		int buffer = (int)(((double)random)*inverseAI); // buffer that tends to be larger as AI level is smaller
 
 		// if we're broke and AI level is greater than 5 then the buffer shrinks
-		if (isBroke && level > 5){
+		if ((getExpenses() > getProfit()) && level > 5){
 			buffer = (int)(((double)random)*inverseAI/2); // buffer is 1/2 of normal
 		}
 
@@ -160,8 +155,8 @@ public class AI extends Business implements Cloneable{
 
 			Equipment currEquipment = Equipment.EquipmentTypes[offsetIndex]; // as AI level increases, the equipment types the AI can possibly pick becomes less random.
 
-			// if we have enough money to buy the equipment
-			if (getMoney() > currEquipment.getPrice()) {
+			// if we have enough money to buy the equipment and some random chance
+			if (getMoney() > currEquipment.getPrice() && random < level) {
 				// if we have no equipment
 				if (cookingEquipment == null) {
 					// buy the equipment
@@ -213,4 +208,46 @@ public class AI extends Business implements Cloneable{
             throw new AssertionError();
         }
     }
+
+	public static AI generateAI(int level) {
+		AI ai = new AI();
+		ai.setName("AI " + (level + 1));
+		ai.level = level;
+
+		// as AI level is higher start the AI with more stuff
+		ai.setMoney(999999999); // give a ton of money to buy stuff initially
+
+		if (level > 9) {
+			ai.PurchaseEquipment(Equipment.EquipmentTypes[Equipment.EquipmentTypes.length - 2]);
+			ai.PurchaseEquipment(Equipment.EquipmentTypes[Equipment.EquipmentTypes.length - 1]);
+			ai.HireChef(Chef.ChefTypes[Chef.ChefTypes.length - 1]);
+			ai.PurchaseFood(Food.FoodTypes[4]);
+		} else if (level > 7) {
+			ai.PurchaseEquipment(Equipment.EquipmentTypes[Equipment.EquipmentTypes.length - 2]);
+			ai.HireChef(Chef.ChefTypes[Chef.ChefTypes.length - 2]);
+			ai.PurchaseFood(Food.FoodTypes[3]);
+		} else if (level > 5) {
+			ai.PurchaseEquipment(Equipment.EquipmentTypes[Equipment.EquipmentTypes.length - 3]);
+			ai.HireChef(Chef.ChefTypes[2]);
+			ai.PurchaseFood(Food.FoodTypes[2]);
+		} else if (level > 3) {
+			ai.PurchaseEquipment(Equipment.EquipmentTypes[1]);
+			ai.HireChef(Chef.ChefTypes[1]);
+			ai.PurchaseFood(Food.FoodTypes[1]);
+		} else if (level > 1) {
+			ai.PurchaseEquipment(Equipment.EquipmentTypes[0]);
+			ai.HireChef(Chef.ChefTypes[0]);
+			ai.PurchaseFood(Food.FoodTypes[0]);
+		}
+
+		// hire level /2 cleaners
+		for (int i = 0; i < level/2; i++) {
+			ai.HireCleaner(new Cleaner());
+		}
+
+		// set AI money to ai level * 5000
+		ai.setMoney(level * 5000);
+
+		return ai;
+	}
 }

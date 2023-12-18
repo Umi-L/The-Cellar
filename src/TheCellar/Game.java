@@ -12,6 +12,8 @@ import TheCellar.AI.AI;
 
 
 public class Game {
+    public final int numAI = 6;
+
     public Business PlayerBusiness = new Business();
     public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
 
@@ -27,7 +29,16 @@ public class Game {
     private int goingRate = 5; // going rate for a steak with 100% quality
 
     public Game() {
+        PlayerBusiness.setName("Your Business");
         Update();
+    }
+
+
+    public void GenerateAI() {
+        for (int i = 0; i < numAI; i++) {
+            AI ai = AI.generateAI(i);
+            AIBusinesses.add(ai);
+        }
     }
 
     public int getGoingRate() {
