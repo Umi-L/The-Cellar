@@ -35,6 +35,11 @@ public class Cleaner {
 		}
 
 
+		public Cleaner() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 		public String getName() {
 			return name;
 		}
