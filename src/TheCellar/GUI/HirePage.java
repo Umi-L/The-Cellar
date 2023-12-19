@@ -10,20 +10,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import TheCellar.Business;
+
 import TheCellar.Chef;
+import TheCellar.Cleaner;
+import TheCellar.Equipment;
+import TheCellar.Game;
+import TheCellar.Main;
 
 public class HirePage  {
 	
 	private JFrame frame;
-	//private Business PlayerBusiness;
+	private Business PlayerBusiness;
 	
 	public static void showWindow() {
 		
 	}
 
 	public HirePage() {
-		int netWorth = 10000; ///PLACE HOLDER
-		//int netWorth = PlayerBusiness.getMoney();
+		
+		this.PlayerBusiness = Main.game != null ? Main.game.PlayerBusiness : new Business(); //fix null error		
 		
 		frame = new JFrame("");
 		frame.getContentPane().setFont(new Font("Dialog", Font.BOLD, 12));
@@ -51,10 +56,10 @@ public class HirePage  {
 		
 		//RESUME BUTTON
 		JButton resumeButton = new JButton("Resume");
-		resumeButton.setFont(new Font("Dialog", Font.PLAIN, 36));
+		resumeButton.setFont(new Font("Dialog", Font.PLAIN, 17));
 		resumeButton.setForeground(new Color(0, 0, 0));
 		resumeButton.setBackground(new Color(255, 18, 29));
-		resumeButton.setBounds(300, 346, 219, 70);
+		resumeButton.setBounds(10, 353, 165, 50);
 		frame.getContentPane().add(resumeButton);
 		
 		resumeButton.addActionListener(new ActionListener() {
@@ -75,88 +80,86 @@ public class HirePage  {
 		//CHEFS LABEL
 		JLabel chefsLabel = new JLabel("CHEFS");
 		chefsLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-		chefsLabel.setBounds(557, 54, 61, 16);
+		chefsLabel.setBounds(24, 53, 61, 16);
 		frame.getContentPane().add(chefsLabel);
 		
 		//CLEANERS LABEL
 		JLabel cleanersLabel = new JLabel("CLEANERS");
 		cleanersLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-		cleanersLabel.setBounds(568, 228, 78, 16);
+		cleanersLabel.setBounds(25, 187, 78, 16);
 		frame.getContentPane().add(cleanersLabel);
 		
 		//TEEN HIRE BUTTON
 		JButton teenHireButton = new JButton("Hire");
-		teenHireButton.setBounds(479, 94, 61, 17);
+		teenHireButton.setBounds(67, 79, 61, 17);
 		frame.getContentPane().add(teenHireButton);
 		
 		//TEEN LABEL BUTTON
 		JLabel teenLabel = new JLabel("Teenage Chef ($500/week)");
-		teenLabel.setBounds(557, 96, 255, 13);
+		teenLabel.setBounds(142, 81, 255, 13);
 		frame.getContentPane().add(teenLabel);
 		
 		//GRAD LABEL
 		JLabel gradLabel = new JLabel("Culinary School Grad ($2,000/week)");
-		gradLabel.setBounds(557, 138, 255, 13);
+		gradLabel.setBounds(142, 107, 255, 13);
 		frame.getContentPane().add(gradLabel);
 		
 		//CURRENT CHEF LABEL
 		JLabel currentChefs = new JLabel("Gordon Ramsay ($10,000/week)");
-		currentChefs.setBounds(557, 176, 255, 13);
+		currentChefs.setBounds(142, 142, 255, 13);
 		frame.getContentPane().add(currentChefs);
 		
 		//NETWOTH LABEL
-		JLabel networthLabel = new JLabel("Current Networth: " + netWorth);
+		JLabel networthLabel = new JLabel("Current Networth: " +  Main.game.PlayerBusiness.getMoney());
 		networthLabel.setBounds(10, 20, 276, 13);
 		frame.getContentPane().add(networthLabel);
 		
 		//GRAD HIRE BUTTON
 		JButton gradHireButton = new JButton("Hire");
-		gradHireButton.setBounds(479, 136, 61, 17);
+		gradHireButton.setBounds(67, 105, 61, 17);
 		frame.getContentPane().add(gradHireButton);
 		
 		//RAMSAY HIRE BUTTON
 		JButton ramsayHireButton = new JButton("Hire");
-		ramsayHireButton.setBounds(479, 174, 61, 17);
+		ramsayHireButton.setBounds(67, 140, 61, 17);
 		frame.getContentPane().add(ramsayHireButton);
 		
 		//S/D LABEL
-		JLabel SDLabel = new JLabel("Current S/D: ");
+		JLabel SDLabel = new JLabel("Current S/D: " + Main.game.PlayerBusiness.getSteaks());
 		SDLabel.setBounds(10, 10, 285, 13);
 		frame.getContentPane().add(SDLabel);
 	
 		//CLEANER HIRE BUTTON
 		JButton cleanerHireButton = new JButton("Hire");
-		cleanerHireButton.setBounds(479, 260, 61, 17);
+		cleanerHireButton.setBounds(67, 213, 61, 17);
 		frame.getContentPane().add(cleanerHireButton);
 		
 		//CLEANER LABEL
 		JLabel cleanerButton = new JLabel("Cleaner ($1,200/week)");
-		cleanerButton.setBounds(578, 262, 174, 13);
+		cleanerButton.setBounds(149, 215, 174, 13);
 		frame.getContentPane().add(cleanerButton);
 		
 		//CURRENT CHEFS LABEL
 		JLabel currentChefsLabel = new JLabel("CURRENT CHEFS");
 		currentChefsLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-		currentChefsLabel.setBounds(24, 56, 157, 13);
+		currentChefsLabel.setBounds(487, 55, 157, 13);
 		frame.getContentPane().add(currentChefsLabel);
-		
-		//CHEF LIST
-		JList chefList = new JList();
-		chefList.setBounds(34, 79, 180, 160);
-		frame.getContentPane().add(chefList);
 		
 		//CUURENT CLEANES LABEL
 		JLabel currentCleanersLabel = new JLabel("CURRENT CLEANERS");
 		currentCleanersLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-		currentCleanersLabel.setBounds(24, 261, 157, 13);
+		currentCleanersLabel.setBounds(487, 253, 157, 13);
 		frame.getContentPane().add(currentCleanersLabel);
 		
-		//CLEANERS LIST
-		JList cleanerList = new JList();
-		cleanerList.setBounds(34, 282, 180, 110);
-		frame.getContentPane().add(cleanerList);
+		for (Chef currentChef : Chef.ChefTypes) {
+
+			String str = currentChef.getName();
+
+
+			equipment.addItem(str);
+		}
 		
-		
+
 		
 		
 		JButton teenBenefits = new JButton("?");
@@ -168,7 +171,7 @@ public class HirePage  {
 				 		+ "+0 S/D Increase");
 			}
 		});
-		teenBenefits.setBounds(435, 94, 37, 17);
+		teenBenefits.setBounds(24, 79, 37, 17);
 		frame.getContentPane().add(teenBenefits);
 		
 		JButton gradBenefits = new JButton("?");
@@ -180,7 +183,7 @@ public class HirePage  {
 				 		+ "+40 S/D Increase");
 			}
 		});
-		gradBenefits.setBounds(435, 136, 37, 17);
+		gradBenefits.setBounds(24, 105, 37, 17);
 		frame.getContentPane().add(gradBenefits);
 		
 		JButton ramsayBenefits = new JButton("?");
@@ -192,7 +195,7 @@ public class HirePage  {
 				 		+ "+100 S/D Increase");
 			}
 		});
-		ramsayBenefits.setBounds(435, 174, 37, 17);
+		ramsayBenefits.setBounds(24, 140, 37, 17);
 		frame.getContentPane().add(ramsayBenefits);
 		
 		JButton cleanerBenefits = new JButton("?");
@@ -203,8 +206,16 @@ public class HirePage  {
 				 		+ " +15% Cleaniness ");
 			}
 		});
-		cleanerBenefits.setBounds(435, 260, 37, 17);
+		cleanerBenefits.setBounds(24, 213, 37, 17);
 		frame.getContentPane().add(cleanerBenefits);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(497, 75, 233, 151);
+		frame.getContentPane().add(textArea);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBounds(497, 275, 233, 115);
+		frame.getContentPane().add(textArea_1);
 	
 	
 		//ACTION LISTENERS
@@ -215,7 +226,6 @@ public class HirePage  {
 					frame.setVisible(false); //set frame to invisible
 					GamePage window2 = new GamePage(); 
 					window2.showWindow(); //show pop up
-			
 				}
 			});
 		
@@ -225,9 +235,7 @@ public class HirePage  {
 				//Chef o = new Chef();
 				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
 				 System.out.println("name: " + name);
-				 if (name != null || name != "") { //only execute if name is given
-					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
-				 }
+
 			}	
 		});
 		
@@ -236,9 +244,7 @@ public class HirePage  {
 			public void actionPerformed(ActionEvent e) { 
 				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
 				 System.out.println("name: " + name);
-				 if (name != null || name != "") { //only execute if name is given
-					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
-				 }
+
 			}
 		});
 		
@@ -247,20 +253,16 @@ public class HirePage  {
 			public void actionPerformed(ActionEvent e) {
 				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
 				 System.out.println("name: " + name);
-				 if (name != null || name != "") { //only execute if name is given
-					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
+
 				 }
-			}
-		});
+			});
 		
 		//HIRE CLEANER BUTTON
 		cleanerHireButton.addActionListener(new ActionListener() { //execute when hire cleaner button pressed
 			public void actionPerformed(ActionEvent e) {
 				 String name = JOptionPane.showInputDialog("Enter the employee's name: ");
 				 System.out.println("name: " + name);
-				 if (name != null || name != "") { //only execute if name is given
-					 JOptionPane.showMessageDialog(frame,  name + " was hired!");
-				 }
+
 			}
 		});
 		frame.setVisible(true);
@@ -276,7 +278,7 @@ public class HirePage  {
 		// TODO Auto-generated method stub
 
 
-
+		Main.game = new Game();
 		new HirePage().showWindow();
 		// TODO Auto-generated method stub
 
