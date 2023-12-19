@@ -35,21 +35,17 @@ public class Inputs implements KeyListener{
 			animation.ChangexMove(+5);
 			break;
 		}
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			try {
-				GamePage.frame.setVisible(false);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();
-		}
+		// TODO Auto-generated method stub
 		
 	}
-	
 }
+
+	
+
+	
+		
+	

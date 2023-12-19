@@ -41,12 +41,12 @@ public class ShopPage {
 	private JScrollPane scrollPane;
 	private JLabel moneyLabel; 
 	private JButton addToCartButton;
-	private JComboBox<String> selectedComboBox; 
+	private JComboBox<?> selectedComboBox;
 	private JComboBox<String> equipment = new JComboBox<>();
 	private JComboBox<String> food = new JComboBox<>();
 	private JComboBox<String> knife = new JComboBox<>();
 	private JComboBox<String> cleaner = new JComboBox<>();
-	private Set<String> purchasedUpgrades = new HashSet<>();
+	private Set<Object> purchasedUpgrades = new HashSet<>();
 	private Business PlayerBusiness;
 
 
@@ -62,16 +62,16 @@ public class ShopPage {
 	}
 	//handle combo box selection and set location of add to cart button
 	private void handleComboBoxSelection() {
-		if (selectedComboBox != null && addToCartButton != null) {
-			Object selectedItem = selectedComboBox.getSelectedItem();
+	    if (selectedComboBox != null && addToCartButton != null) {
+	        Object selectedItem = selectedComboBox.getSelectedItem();
 
-			if (selectedItem != null && !selectedItem.toString().isEmpty()) {
-				setButtonLocation();
-				addToCartButton.setVisible(true);
-			} else {
-				addToCartButton.setVisible(false);
-			}
-		}
+	        if (selectedItem != null) {
+	            setButtonLocation();
+	            addToCartButton.setVisible(true);
+	        } else {
+	            addToCartButton.setVisible(false);
+	        }
+	    }
 	}
 	//Method to hide other combo boxes when another upgrade type is clicked
 	private void hideOtherComboBoxes(JComboBox<String> selectedComboBox) {
@@ -94,17 +94,29 @@ public class ShopPage {
 		addToCartButton.setVisible(false);
 	}
 
-	private int extractItemCost(String itemString) {
-
-		String[] parts = itemString.split("\\$");
-		if (parts.length > 1) {
-			try {
-				return Integer.parseInt(parts[1].trim());
-			} catch (NumberFormatException ex) {
-
-			}
-		}
-		return 0; 
+	private Object getSelectedItem() {
+	    if (selectedComboBox != null) {
+	        int selectedIndex = selectedComboBox.getSelectedIndex();
+	        if (selectedIndex >= 0) {
+	            return selectedComboBox.getItemAt(selectedIndex);
+	        }
+	    }
+	    return null;
+	}
+	
+	private int getPrice(Object selectedItem) {
+	    if (selectedItem instanceof Equipment) {
+	        return ((Equipment) selectedItem).getPrice();
+	    } else if (selectedItem instanceof Food) {
+	        return ((Food) selectedItem).getPrice();
+	    } else if (selectedItem instanceof Knife) {
+	        return ((Knife) selectedItem).getPrice();
+	    } else if (selectedItem instanceof Cleaner) {
+	        return ((Cleaner) selectedItem).getPrice();
+	    } else {
+	       
+	        return 0;
+	    }
 	}
 	/**
 	 * @wbp.parser.entryPoint
@@ -208,39 +220,41 @@ public class ShopPage {
 
 
 		addToCartButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (selectedComboBox != null) {
-					Object selectedItem = selectedComboBox.getSelectedItem();
+		    public void actionPerformed(ActionEvent e) {
+		        if (selectedComboBox != null) {
+		            Object selectedItem = getSelectedItem();
 
-					if (selectedItem != null && !selectedItem.toString().isEmpty()) {
-						// Check if the item is already in the cart
-						if (textArea.getText().contains(selectedItem.toString())) {
-							JOptionPane.showMessageDialog(frame, "Item already in the cart.");
-						} else {
-							// Check if the item is already owned
-							if (purchasedUpgrades.contains(selectedItem.toString())) {
-								JOptionPane.showMessageDialog(frame, "You already own this item.");
-							} else {
-								// Check if the user has sufficient funds
-								int itemCost = extractItemCost(selectedItem.toString());
-								if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
-									// Add the item to the cart and mark it as owned
-									textArea.append(selectedItem + "\n" + "\n");
-									purchasedUpgrades.add(selectedItem.toString());
-									setButtonLocation();
-									addToCartButton.setVisible(true);
-									selectedComboBox.setSelectedIndex(0);
-								} else {
-									// User has insufficient funds
-									JOptionPane.showMessageDialog(frame, "Insufficient funds.");
-								}
-							}
-						}
-					}
-				}
-			}
+		            if (selectedItem != null) {
+		                // Check if the item is already in the cart
+		                if (textArea.getText().contains(selectedItem.toString())) {
+		                    JOptionPane.showMessageDialog(frame, "Item already in the cart.");
+		                } else {
+		                    // Check if the item is already owned
+		                    if (purchasedUpgrades.contains(selectedItem)) {
+		                        JOptionPane.showMessageDialog(frame, "You already own this item.");
+		                    } else {
+		                        // Assume each upgrade has a getPrice() method
+		                        int itemCost = getPrice(selectedItem);
+
+		                        // Ensure that the casted item is an instance of Upgradable before accessing getPrice()
+		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
+		                            // Add the item to the cart and mark it as owned
+		                            textArea.append(selectedItem + " - $" + itemCost + "\n");
+		                            purchasedUpgrades.add(selectedItem);
+		                            setButtonLocation();
+		                            addToCartButton.setVisible(true);
+		                            selectedComboBox.setSelectedIndex(0);
+		                        } else {
+		                            // User has insufficient funds
+		                            JOptionPane.showMessageDialog(frame, "Insufficient funds.");
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
 		});
-
+		
 		JButton btnEquipment = new JButton("Equipment Upgrades");
 		btnEquipment.setBackground(new Color(70, 70, 234));
 		btnEquipment.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -552,6 +566,8 @@ public class ShopPage {
 		});
 		cleanerHelp.setBounds(6, 163, 23, 24);
 		frame.getContentPane().add(cleanerHelp);
+		
+
 
 
 		frame.setVisible(true);
