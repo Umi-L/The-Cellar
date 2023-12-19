@@ -2,40 +2,53 @@ package TheCellar.AI;
 
 import TheCellar.*;
 
-public class AI extends Business implements Cloneable{
+import java.io.Serializable;
+
+public class AI extends Business implements Cloneable, Serializable {
 
 	int level; // level from 1 to 10, 1 being the lowest and 10 being the highest
 
-	public void MakeDecision() {
+	public void MakeDecision(boolean simulated) {
 
-		int random = Main.game.random.nextInt(10);
+		int random = Main.game.random.nextInt(10)+1;
 
 		// if we have no food
 		if (daysOfFood == 0) {
 			// make a food decision
-			FoodDecision();
+			FoodDecision(simulated);
 		}
 
 		if (random <= 3) { // 30% chance to make a chef decision
-			ChefDecision();
+			ChefDecision(simulated);
 		}
 
 		if (random <= 2) { // 20% chance to make a cleaner decision
-			CleanerDecision();
+			CleanerDecision(simulated);
 		}
 
-		EquipmentDecision();
+		EquipmentDecision(simulated);
 
 
 		if (random <= level) { // this will make the AI more likely to change their pricing as the AI level increases
 			// update pricing
-			UpdatePricing();
+			UpdatePricing(simulated);
 		}
 	}
 
-	private void FoodDecision() {
+	@Override
+	public void Update() {
+		MakeDecision(false);
+		super.Update();
+	}
 
-		int random = Main.game.random.nextInt(10);
+	public void Update(boolean simulated){
+		MakeDecision(simulated);
+		super.Update();
+	}
+
+	private void FoodDecision(boolean simulated){
+
+		int random = Main.game.random.nextInt(10)+1;
 
 		Food selected = food;
 
@@ -44,7 +57,7 @@ public class AI extends Business implements Cloneable{
 		int profit = getProfit();
 
 		// calculate buffer, generally as the AI level increases, the buffer increases
-		int buffer = 500/(random/5)*(level/2);
+		int buffer = 500/((random/5)+1)*((level/2)+1);
 
 		// if we're broke and AI level is greater than 5 then the buffer shrinks
 		if (money < buffer*5 && level > 5){
@@ -72,7 +85,7 @@ public class AI extends Business implements Cloneable{
 		PurchaseFood(selected);
 	}
 
-	private void UpdatePricing(){
+	private void UpdatePricing(boolean simulated){
 		// get optimal price for steak at price
 		int optimalPrice = getOptimalPrice();
 
@@ -94,11 +107,11 @@ public class AI extends Business implements Cloneable{
 		setPrice(optimalPrice + buffer); // price is modulated +/- buffer
 	}
 
-	private void ChefDecision(){
+	private void ChefDecision(boolean simulated){
 
 		// for every chef type
 		for (int i = 0; i < Chef.ChefTypes.length; i++) {
-			int random = Main.game.random.nextInt(10);
+			int random = Main.game.random.nextInt(10)+1;
 
 			int invertedAI = 10 - level;
 
@@ -119,14 +132,14 @@ public class AI extends Business implements Cloneable{
 					if (level < 3){ // if low ai level we're stupid and ignore the simulation
 						HireChef(currChef);
 						break;
-					} else{
+					} else if (!simulated){
 						// simulate hiring the chef on the business
 						AI temp = this.clone();
 						temp.HireChef(currChef);
 
 						// simulate AILevel/2 days
 						for (int j = 0; j < level/2; j++) {
-							temp.MakeDecision(); // MAY RECURSE!!!!
+							temp.Update(true); // MAY RECURSE!!!!
 						}
 
 						// check if net worth is greater than current net worth
@@ -141,10 +154,10 @@ public class AI extends Business implements Cloneable{
 		}
 	}
 
-	private void EquipmentDecision(){
+	private void EquipmentDecision(boolean simulated){
 		// for every equipment type
 		for (int i = 0; i < Equipment.EquipmentTypes.length; i++) {
-			int random = Main.game.random.nextInt(10);
+			int random = Main.game.random.nextInt(10)+1;
 
 			int invertedAI = 10 - level;
 
@@ -165,14 +178,14 @@ public class AI extends Business implements Cloneable{
 					if (level < 3){ // if low ai level we're stupid and ignore the simulation
 						PurchaseEquipment(currEquipment);
 						break;
-					} else{
+					} else if (!simulated){
 						// simulate buying the equipment on the business
 						AI temp = this.clone();
 						temp.PurchaseEquipment(currEquipment);
 
 						// simulate AILevel/2 days
 						for (int j = 0; j < level/2; j++) {
-							temp.MakeDecision(); // MAY RECURSE!!!!
+							temp.Update(true); // MAY RECURSE!!!!
 						}
 
 						// check if net worth is greater than current net worth
@@ -187,8 +200,8 @@ public class AI extends Business implements Cloneable{
 		}
 	}
 
-	private void CleanerDecision() {
-		int random = Main.game.random.nextInt(10);
+	private void CleanerDecision(boolean simulated) {
+		int random = Main.game.random.nextInt(10)+1;
 
 		// if we have no cleaners and we have money
 		if (getMoney() > 1000 && level < 3 && random < 3) {
@@ -244,8 +257,8 @@ public class AI extends Business implements Cloneable{
 			ai.HireCleaner(new Cleaner());
 		}
 
-		// set AI money to ai level * 5000
-		ai.setMoney(level * 5000);
+		// set AI money to ai level * some value
+		ai.setMoney(level * 1000);
 
 		return ai;
 	}

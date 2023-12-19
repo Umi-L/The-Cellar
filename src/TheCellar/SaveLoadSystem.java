@@ -1,6 +1,7 @@
 package TheCellar;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class SaveLoadSystem {
     // save file path
@@ -11,7 +12,13 @@ public class SaveLoadSystem {
         // save game object to a file
         try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(path))) // create a new file output stream and object output stream
         {
-            write.writeObject(game); // write game object to file. It's that easy!
+            Game toWrite = game; // create a new game object to write to file
+
+            toWrite.tickListeners = new ArrayList<>(); // remove tick listeners from game object (they are not serializable)
+            toWrite.timer = null; // remove timer from game object (it is not serializable)
+            toWrite.random = null; // remove random from game object (it is not serializable)
+
+            write.writeObject(toWrite); // write game object to file. It's that easy!
         }
         catch(NotSerializableException nse) // catch any non-serializable exceptions (may occur if the class is recursive)
         {

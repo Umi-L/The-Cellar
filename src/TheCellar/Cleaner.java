@@ -5,7 +5,9 @@ package TheCellar;/*
 get&set for all fields
  */
 
-public class Cleaner {
+import java.io.Serializable;
+
+public class Cleaner  implements Serializable {
     protected int price;
     protected int modifier;
 

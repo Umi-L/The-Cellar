@@ -24,9 +24,10 @@ import TheCellar.Items.Equipment.Hotplate;
 import TheCellar.Items.Foods.FoodScraps;
 import TheCellar.Items.Knives.PlasticKnives;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Business {
+public class Business implements Serializable {
     protected String name;
     protected int money;
     protected int steaks;

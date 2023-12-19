@@ -9,8 +9,10 @@ import TheCellar.Items.Equipment.Hotplate;
 import TheCellar.Items.Equipment.StoveBurnerUpgrade;
 import TheCellar.Items.Equipment.EnergyEfficientAppliances;
 
+import java.io.Serializable;
 
-public abstract class Equipment {
+
+public abstract class Equipment implements Serializable {
 	protected String name;
 	protected int price;
 	protected double modifier;

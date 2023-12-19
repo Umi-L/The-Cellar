@@ -7,7 +7,9 @@ package TheCellar;// TheCellar.Knife (Abstract)
 
 import TheCellar.Items.Knives.PlasticKnives;
 
-public abstract class Knife {
+import java.io.Serializable;
+
+public abstract class Knife implements Serializable {
     protected String name;
     protected int price;
     protected double modifier;

@@ -9,7 +9,9 @@ import TheCellar.Items.Chefs.GradChef;
 import TheCellar.Items.Chefs.RamsayChef;
 import TheCellar.Items.Chefs.TeenChef;
 
-public abstract class Chef {
+import java.io.Serializable;
+
+public abstract class Chef implements Serializable {
 
 	public static final Chef[] ChefTypes = {
 			new TeenChef(),

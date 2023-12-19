@@ -14,7 +14,9 @@ import TheCellar.Items.Foods.OrganicFarmPartnership;
 import TheCellar.Items.Foods.GourmetRecipeBook;
 import TheCellar.Items.Foods.SeasonalMenuUpdates;
 
-public abstract class Food {
+import java.io.Serializable;
+
+public abstract class Food implements Serializable {
     public static final Food[] FoodTypes = {
             new FoodScraps(),
             new WalmartFood(),

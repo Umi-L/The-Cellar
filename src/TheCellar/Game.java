@@ -3,6 +3,8 @@ TheCellar.Game class for all game data to be stored in.
 This is seperated because it needs to be serialized and deserialized.
  */
 
+import java.io.Console;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -11,7 +13,7 @@ import TheCellar.AI.AI;
 
 
 
-public class Game {
+public class Game implements Serializable {
     public final int numAI = 6;
 
     public Business PlayerBusiness = new Business();
@@ -87,6 +89,18 @@ public class Game {
             businesses.add(PlayerBusiness);
         }
         return businesses;
+    }
+
+    public void JustLoaded(){
+        timer = new Timer();
+        random = new Random();
+        tickListeners = new ArrayList<TickListener>();
+
+        System.out.println("Game just loaded");
+        System.out.println("Game speed: " + GameSpeed);
+        System.out.println("Total time: " + TotalTime);
+
+        Update();
     }
 
     public void addTickListener(TickListener listener) {

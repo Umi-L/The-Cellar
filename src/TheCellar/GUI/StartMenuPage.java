@@ -140,6 +140,7 @@ public class StartMenuPage {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.game = SaveLoadSystem.loadGame();
+				Main.game.JustLoaded();
 				frame.setVisible(false);
 				GamePage window2 = new GamePage();
 			}
