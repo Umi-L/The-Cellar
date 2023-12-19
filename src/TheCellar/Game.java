@@ -29,7 +29,7 @@ public class Game {
     private int goingRate = 5; // going rate for a steak with 100% quality
 
     public Game() {
-        PlayerBusiness.setName("Your Business");
+        PlayerBusiness.setName("You");
         Update();
     }
 

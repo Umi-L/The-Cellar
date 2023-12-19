@@ -53,11 +53,11 @@ public class GamePage {
 		frame.setBounds(100, 100, 950, 500);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel Animation = new Animation();
-		Animation.setBorder(new CompoundBorder());
-		Animation.setBackground(new Color(248, 248, 248));
-		Animation.setBounds(101, 11, 732, 312);
-		frame.getContentPane().add(Animation);
+//		JPanel Animation = new Animation();
+//		Animation.setBorder(new CompoundBorder());
+//		Animation.setBackground(new Color(248, 248, 248));
+//		Animation.setBounds(101, 11, 732, 312);
+//		frame.getContentPane().add(Animation);
 		
 		JSlider slider = new JSlider();
 		slider.setBounds(14, 384, 151, 26);
@@ -87,7 +87,7 @@ public class GamePage {
 		frame.getContentPane().add(moneyLabel);
 
 		PieChart pieChart = new PieChart();
-		pieChart.setBounds(406, 331, 200, 122);
+		pieChart.setBounds(100, 10, 300, 200);
 		frame.getContentPane().add(pieChart);
 
 		LineGraph lineGraph = new LineGraph("time", "company value");
@@ -186,7 +186,7 @@ public class GamePage {
 						chefs.showWindow();	
 				}
 				});
-		Animation.requestFocusInWindow();
+		//Animation.requestFocusInWindow();
 		
 		frame.setFocusable(true);
 
