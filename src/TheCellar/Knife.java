@@ -5,6 +5,10 @@ package TheCellar;// TheCellar.Knife (Abstract)
 // #UpgradePrice: int
 // get&set for all fields
 
+
+import TheCellar.Items.Knife.BladeUpgrade;
+import TheCellar.Items.Knife.HandleUpgrade;
+import TheCellar.Items.Knife.SharpnerUpgrade;
 import TheCellar.Items.Knives.PlasticKnives;
 
 import java.io.Serializable;
@@ -15,8 +19,13 @@ public abstract class Knife implements Serializable {
     protected double modifier;
     protected int upgradePrice;
 
-	public static final Knife[] KnifeTypes = {
-			new PlasticKnives(),
+    public static final Knife[] KnifeTypes = {
+    		new BladeUpgrade(),
+    		new HandleUpgrade(),
+    		new SharpnerUpgrade(),
+    		new PlasticKnives(),
+
+
 	};
 
 	public Knife(String name, int price, double modifier, int upgradePrice) {

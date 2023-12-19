@@ -1,6 +1,7 @@
 package TheCellar.AI;
 
 import TheCellar.*;
+import TheCellar.Cleaner;
 
 import java.io.Serializable;
 
