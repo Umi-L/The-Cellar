@@ -73,7 +73,7 @@ public class HirePage  {
 		//TITLE PAGE LABEL
 		JLabel lblNewLabel = new JLabel("HIRING PAGE");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 		lblNewLabel.setBounds(281, 10, 204, 23);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -86,27 +86,28 @@ public class HirePage  {
 		//CLEANERS LABEL
 		JLabel cleanersLabel = new JLabel("CLEANERS");
 		cleanersLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-		cleanersLabel.setBounds(25, 187, 78, 16);
+		cleanersLabel.setBounds(7, 251, 78, 16);
 		frame.getContentPane().add(cleanersLabel);
 		
 		//TEEN HIRE BUTTON
 		JButton teenHireButton = new JButton("Hire");
-		teenHireButton.setBounds(67, 79, 61, 17);
+		teenHireButton.setBounds(10, 80, 140, 42);
 		frame.getContentPane().add(teenHireButton);
 		
 		//TEEN LABEL BUTTON
 		JLabel teenLabel = new JLabel("Teenage Chef ($500/week)");
-		teenLabel.setBounds(142, 81, 255, 13);
+		teenLabel.setBounds(154, 95, 255, 13);
 		frame.getContentPane().add(teenLabel);
 		
 		//GRAD LABEL
 		JLabel gradLabel = new JLabel("Culinary School Grad ($2,000/week)");
-		gradLabel.setBounds(142, 107, 255, 13);
+		gradLabel.setBounds(154, 148, 255, 13);
 		frame.getContentPane().add(gradLabel);
 		
 		//CURRENT CHEF LABEL
 		JLabel currentChefs = new JLabel("Gordon Ramsay ($10,000/week)");
-		currentChefs.setBounds(142, 142, 255, 13);
+		currentChefs.setFont(new Font("Arial", Font.BOLD, 18));
+		currentChefs.setBounds(154, 194, 285, 23);
 		frame.getContentPane().add(currentChefs);
 		
 		//NETWOTH LABEL
@@ -116,12 +117,12 @@ public class HirePage  {
 		
 		//GRAD HIRE BUTTON
 		JButton gradHireButton = new JButton("Hire");
-		gradHireButton.setBounds(67, 105, 61, 17);
+		gradHireButton.setBounds(10, 133, 140, 42);
 		frame.getContentPane().add(gradHireButton);
 		
 		//RAMSAY HIRE BUTTON
 		JButton ramsayHireButton = new JButton("Hire");
-		ramsayHireButton.setBounds(67, 140, 61, 17);
+		ramsayHireButton.setBounds(10, 186, 140, 42);
 		frame.getContentPane().add(ramsayHireButton);
 		
 		//S/D LABEL
@@ -131,12 +132,12 @@ public class HirePage  {
 	
 		//CLEANER HIRE BUTTON
 		JButton cleanerHireButton = new JButton("Hire");
-		cleanerHireButton.setBounds(67, 213, 61, 17);
+		cleanerHireButton.setBounds(10, 296, 104, 30);
 		frame.getContentPane().add(cleanerHireButton);
 		
 		//CLEANER LABEL
 		JLabel cleanerButton = new JLabel("Cleaner ($1,200/week)");
-		cleanerButton.setBounds(149, 215, 174, 13);
+		cleanerButton.setBounds(124, 305, 174, 13);
 		frame.getContentPane().add(cleanerButton);
 		
 		//CURRENT CHEFS LABEL
@@ -171,7 +172,7 @@ public class HirePage  {
 				 		+ "+0 S/D Increase");
 			}
 		});
-		teenBenefits.setBounds(24, 79, 37, 17);
+		teenBenefits.setBounds(385, 77, 41, 37);
 		frame.getContentPane().add(teenBenefits);
 		
 		JButton gradBenefits = new JButton("?");
@@ -183,7 +184,7 @@ public class HirePage  {
 				 		+ "+40 S/D Increase");
 			}
 		});
-		gradBenefits.setBounds(24, 105, 37, 17);
+		gradBenefits.setBounds(385, 109, 41, 37);
 		frame.getContentPane().add(gradBenefits);
 		
 		JButton ramsayBenefits = new JButton("?");
@@ -195,7 +196,7 @@ public class HirePage  {
 				 		+ "+100 S/D Increase");
 			}
 		});
-		ramsayBenefits.setBounds(24, 140, 37, 17);
+		ramsayBenefits.setBounds(385, 151, 41, 37);
 		frame.getContentPane().add(ramsayBenefits);
 		
 		JButton cleanerBenefits = new JButton("?");
@@ -206,7 +207,7 @@ public class HirePage  {
 				 		+ " +15% Cleaniness ");
 			}
 		});
-		cleanerBenefits.setBounds(24, 213, 37, 17);
+		cleanerBenefits.setBounds(435, 189, 41, 37);
 		frame.getContentPane().add(cleanerBenefits);
 		
 		JTextArea textArea = new JTextArea();
@@ -272,7 +273,7 @@ public class HirePage  {
 	
 	public static void main(String[] args) {
 
-		new HirePage();
+
 		showWindow();
 
 		// TODO Auto-generated method stub

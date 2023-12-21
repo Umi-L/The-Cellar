@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
+import TheCellar.Game;
 import TheCellar.Main;
 import TheCellar.AI.AI;
 import java.awt.event.ActionEvent;
@@ -115,8 +116,13 @@ public class BankPage {
 	}
 	
 	public static void main(String[] args) {
-		new BankPage();
 		showWindow();
+
+		// TODO Auto-generated method stub
+
+
+		Main.game = new Game();
+		new BankPage().showWindow();
 		// TODO Auto-generated method stub
 
 	}

@@ -152,7 +152,7 @@ public class GamePage {
 		bankButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				TheCellar.GUI.BankPage bank = new TheCellar.GUI.BankPage();
+				TheCellar.GUI.BankPage bank = new BankPage();
 				bank.showWindow();
 			}
 		});
@@ -197,7 +197,8 @@ public class GamePage {
 		actionMap.put("pauseMenu", new AbstractAction() {
 		   
 		    public void actionPerformed(ActionEvent e) {
-		        PauseMenuPage pause = new PauseMenuPage();
+		        frame.setVisible(false);
+		    	PauseMenuPage pause = new PauseMenuPage();
 		        pause.showWindow();
 		    }
 		});
