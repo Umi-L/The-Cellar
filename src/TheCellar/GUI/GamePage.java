@@ -80,11 +80,27 @@ public class GamePage {
 		timeLabel.setBounds(54, 369, 81, 14);
 		frame.getContentPane().add(timeLabel);
 		
+		
+		JLabel money = new JLabel("Net Worth: ");
+		money.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		money.setBounds(720, 8, 100, 38);
+		frame.getContentPane().add(money);
+		
+		JLabel debt = new JLabel("Debt: ");
+		debt.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		debt.setBounds(720, 25, 100, 38);
+		frame.getContentPane().add(debt);
+		
 		JLabel moneyLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getMoney()));
 		moneyLabel.setBackground(new Color(192, 192, 192));
 		moneyLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		moneyLabel.setBounds(843, 8, 81, 38);
+		moneyLabel.setBounds(820, 8, 81, 38);
 		frame.getContentPane().add(moneyLabel);
+		
+		JLabel debtLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getDebt()));
+		debtLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		debtLabel.setBounds(770, 25, 81, 38);
+		frame.getContentPane().add(debtLabel);
 
 		PieChart pieChart = new PieChart();
 		pieChart.setBounds(100, 10, 300, 200);
