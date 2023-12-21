@@ -6,9 +6,9 @@ package TheCellar;// TheCellar.Knife (Abstract)
 // get&set for all fields
 
 
-import TheCellar.Items.Knife.BladeUpgrade;
-import TheCellar.Items.Knife.HandleUpgrade;
-import TheCellar.Items.Knife.SharpnerUpgrade;
+import TheCellar.Items.Knives.BladeUpgrade;
+import TheCellar.Items.Knives.HandleUpgrade;
+import TheCellar.Items.Knives.SharpnerUpgrade;
 import TheCellar.Items.Knives.PlasticKnives;
 
 import java.io.Serializable;
@@ -16,7 +16,8 @@ import java.io.Serializable;
 public abstract class Knife implements Serializable {
     protected String name;
     protected int price;
-    protected double modifier;
+    protected double QualityModifier;
+	protected int SteaksPerDayIncrease;
     protected int upgradePrice;
 
     public static final Knife[] KnifeTypes = {
@@ -24,15 +25,14 @@ public abstract class Knife implements Serializable {
     		new HandleUpgrade(),
     		new SharpnerUpgrade(),
     		new PlasticKnives(),
-
-
 	};
 
-	public Knife(String name, int price, double modifier, int upgradePrice) {
+	public Knife(String name, int price, double modifier, int SteaksPerDayIncrease, int upgradePrice) {
 		this.name = name;
 		this.price = price;
-		this.modifier = modifier;
+		this.QualityModifier = modifier;
 		this.upgradePrice = upgradePrice;
+		this.SteaksPerDayIncrease = SteaksPerDayIncrease;
 	}
     
     public String getName() {
@@ -55,12 +55,12 @@ public abstract class Knife implements Serializable {
 		
 	}
 	
-	public double getModifier() {
-		return modifier;
+	public double getQualityModifier() {
+		return QualityModifier;
 	}
 	
-	public void setModifier(double modifier) {
-		this.modifier = modifier;
+	public void setQualityModifier(double qualityModifier) {
+		this.QualityModifier = qualityModifier;
 		
 	}
 	

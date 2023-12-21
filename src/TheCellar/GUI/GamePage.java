@@ -90,7 +90,7 @@ public class GamePage {
 		pieChart.setBounds(100, 10, 300, 200);
 		frame.getContentPane().add(pieChart);
 
-		LineGraph lineGraph = new LineGraph("time", "company value");
+		LineGraph lineGraph = new LineGraph("time", "Going Rate");
 		lineGraph.setBounds(633, 331, 200, 122);
 		frame.getContentPane().add(lineGraph);
 

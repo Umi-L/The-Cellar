@@ -1,4 +1,4 @@
-package TheCellar.Items.Knife;
+package TheCellar.Items.Knives;
 
 import TheCellar.Knife;
 
