@@ -34,6 +34,11 @@ public abstract class Knife implements Serializable {
 		this.upgradePrice = upgradePrice;
 		this.SteaksPerDayIncrease = SteaksPerDayIncrease;
 	}
+
+
+	public int getSteaksPerDayIncrease() {
+		return SteaksPerDayIncrease;
+	}
     
     public String getName() {
 		return name;

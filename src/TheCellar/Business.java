@@ -220,8 +220,28 @@ public class Business implements Serializable {
     	return curve;
     }
 
+    private int calculateSteaksNumber() {
+        int steaks = 0;
+
+        // foreach chef, add steaks to steaks
+        for (Chef chef : chefs) {
+            steaks += chef.getSteaksPerDayIncrease();
+        }
+
+        // foreach food, add steaks to steaks
+        steaks += food.getSteaksPerDayIncrease();
+
+        // foreach Knife, add steaks to steaks
+        steaks += knives.getSteaksPerDayIncrease();
+
+        // foreach Equipment, add steaks to steaks
+        steaks += cookingEquipment.getSteaksPerDayIncrease();
+
+        return steaks;
+    }
 
     public int getProfit() {
+        steaks = calculateSteaksNumber();
     	int profit = (int) (steaks * getDemand());
     	return profit;
     }

@@ -39,6 +39,10 @@ public abstract class Food implements Serializable {
         this.SteaksPerDayIncrease = SteaksPerDayIncrease;
     }
 
+    public int getSteaksPerDayIncrease() {
+        return SteaksPerDayIncrease;
+    }
+
     public String getName() {
         return name;
     }

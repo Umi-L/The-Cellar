@@ -41,6 +41,10 @@ public abstract class Equipment implements Serializable {
 		this.name = name;
 		
 	}
+
+	public int getSteaksPerDayIncrease() {
+		return SteaksPerDayIncrease;
+	}
 	
 	public int getPrice() {
 		return price;

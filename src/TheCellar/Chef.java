@@ -19,15 +19,24 @@ public abstract class Chef implements Serializable {
 			new RamsayChef()
 	};
 
-	public Chef(String name, int price, double modifier) {
+
+	public Chef(String name, int price, double modifier, int SteaksPerDayIncrease) {
 		this.name = name;
 		this.price = price;
 		this.modifier = modifier;
+		this.SteaksPerDayIncrease = SteaksPerDayIncrease;
 	}
 
 	protected String name;
 	protected int price;
 	protected double modifier;
+	public int SteaksPerDayIncrease;
+
+
+
+	public int getSteaksPerDayIncrease() {
+		return SteaksPerDayIncrease;
+	}
 	
 	public String getName() {
 		return name;
