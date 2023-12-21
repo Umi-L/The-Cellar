@@ -151,14 +151,7 @@ public class HirePage  {
 		currentCleanersLabel.setBounds(487, 253, 157, 13);
 		frame.getContentPane().add(currentCleanersLabel);
 		
-		for (Chef currentChef : Chef.ChefTypes) {
 
-			String str = currentChef.getName();
-
-
-			equipment.addItem(str);
-		}
-		
 
 		
 		
@@ -209,13 +202,13 @@ public class HirePage  {
 		cleanerBenefits.setBounds(24, 213, 37, 17);
 		frame.getContentPane().add(cleanerBenefits);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(497, 75, 233, 151);
-		frame.getContentPane().add(textArea);
+		JTextArea chefList = new JTextArea();
+		chefList.setBounds(497, 75, 233, 151);
+		frame.getContentPane().add(chefList);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(497, 275, 233, 115);
-		frame.getContentPane().add(textArea_1);
+		JTextArea cleanerList = new JTextArea();
+		cleanerList.setBounds(497, 275, 233, 115);
+		frame.getContentPane().add(cleanerList);
 	
 	
 		//ACTION LISTENERS
