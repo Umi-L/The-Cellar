@@ -111,6 +111,16 @@ public class Business implements Serializable {
         setMoney(money -= GetEquipmentPrice(equipment));
     }
 
+    public void PurchaseKnife(Knife knife) {
+    	knives = knife;
+        setMoney(money -= knife.getPrice());
+    }
+
+    public void TakeOutLoan(int amount) {
+    	debt += amount;
+    	setMoney(money += amount);
+    }
+
     public int GetEquipmentPrice(Equipment equipment) {
     	int price = equipment.getPrice();
 
@@ -221,9 +231,6 @@ public class Business implements Serializable {
     }
 
     public void setMoney(int money) {
-
-        // PUT UI UPDATE HERE
-
     	this.money = money;
     }
 

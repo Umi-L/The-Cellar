@@ -39,7 +39,7 @@ public class LineGraph  extends JPanel {
         int y = 0;
 
         int padding = 20;
-        int dotSize = 8;
+        int dotSize = 4;
 
         // get max value in values
         double max = 0;

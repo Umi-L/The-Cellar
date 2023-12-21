@@ -22,6 +22,7 @@ public class Game implements Serializable {
     public int GameSpeed = 1000;
     public final int GameSpeedMax = 5000;
     public final int GameSpeedMin = 10;
+    public int period = 50;
     public int TotalTime = 0;
     public Timer timer = new Timer();
     public Random random = new Random();
@@ -52,7 +53,19 @@ public class Game implements Serializable {
     }
 
     public void Update(){
+
         TotalTime++; // increment total time
+
+        // Calculate the sinusoid value using the Math.sin function
+        double sinusoidValue = Math.sin(2 * Math.PI * TotalTime / period); // simulating seasonal changes
+
+        // Alternate the variable value by the sinusoid
+        goingRate = (int) (5 + 3 * sinusoidValue);  // Adjust the scaling factor as needed
+
+        // after each period randomize period
+        if (TotalTime % period == 0) {
+            period = random.nextInt(-25, 25) + 50;
+        }
 
         // update all businesses
         PlayerBusiness.Update();

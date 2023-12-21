@@ -4,6 +4,7 @@ import TheCellar.*;
 import TheCellar.Cleaner;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class AI extends Business implements Cloneable, Serializable {
 
@@ -25,6 +26,10 @@ public class AI extends Business implements Cloneable, Serializable {
 
 		if (random <= 2) { // 20% chance to make a cleaner decision
 			CleanerDecision(simulated);
+		}
+
+		if (random <= 1) { // 10% chance to make a knife decision
+			KnifeDecision(simulated);
 		}
 
 		EquipmentDecision(simulated);
@@ -198,6 +203,71 @@ public class AI extends Business implements Cloneable, Serializable {
 					}
 				}
 			}
+		}
+	}
+
+	private void KnifeDecision(boolean simulated){
+		// for every knife type
+		for (int i = 0; i < Knife.KnifeTypes.length; i++){
+			int random = Main.game.random.nextInt(10)+1;
+
+			int invertedAI = 10 - level;
+
+			int offset = random/invertedAI;
+
+			int offsetIndex = (i + offset)%Knife.KnifeTypes.length;
+
+			Knife currKnife = Knife.KnifeTypes[offsetIndex]; // as AI level increases, the knife types the AI can possibly pick becomes less random.
+
+			// if we have enough money to buy the knife and some random chance
+			if (getMoney() > currKnife.getPrice() && random < level) {
+				// if we have no knife
+				if (currKnife == null) {
+					// buy the knife
+					PurchaseKnife(currKnife);
+					break;
+				} else {
+					if (level < 3){ // if low ai level we're stupid and ignore the simulation
+						PurchaseKnife(currKnife);
+						break;
+					} else if (!simulated){
+						// simulate buying the knife on the business
+						AI temp = this.clone();
+						temp.PurchaseKnife(currKnife);
+
+						// simulate AILevel/2 days
+						for (int j = 0; j < level/2; j++) {
+							temp.Update(true); // MAY RECURSE!!!!
+						}
+
+						// check if net worth is greater than current net worth
+						if (temp.GetNetWorth() > GetNetWorth()) {
+							// buy the knife
+							PurchaseKnife(currKnife);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void LoanDecision(boolean simulated) {
+		int random = Main.game.random.nextInt(10)+1;
+
+		// if we have no loans and we have money
+		if (getMoney() < 100000 && level < 3) {
+			// determine loan amount
+			int loanAmount = 1000*(Main.game.random.nextInt(10)+1);
+
+			// take out a loan
+			TakeOutLoan(loanAmount);
+		} else if (random < 3) {
+			// determine loan amount
+			int loanAmount = 1000*(Main.game.random.nextInt(10)+1);
+
+			// take out a loan
+			TakeOutLoan(loanAmount);
 		}
 	}
 
