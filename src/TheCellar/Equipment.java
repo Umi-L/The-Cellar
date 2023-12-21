@@ -15,7 +15,8 @@ import java.io.Serializable;
 public abstract class Equipment implements Serializable {
 	protected String name;
 	protected int price;
-	protected double modifier;
+	protected double qualityModifier;
+	protected int SteaksPerDayIncrease;
 	protected int upgradePrice;
 
 	public static final Equipment[] EquipmentTypes = {
@@ -24,11 +25,12 @@ public abstract class Equipment implements Serializable {
 			new EnergyEfficientAppliances(),
 	};
 
-	public Equipment(String name, int price, double modifier, int upgradePrice) {
+	public Equipment(String name, int price, double modifier, int steaksPerDayIncrease, int upgradePrice) {
 		this.name = name;
 		this.price = price;
-		this.modifier = modifier;
+		this.qualityModifier = modifier;
 		this.upgradePrice = upgradePrice;
+		this.SteaksPerDayIncrease = steaksPerDayIncrease;
 	}
 
 	public String getName() {
@@ -38,6 +40,10 @@ public abstract class Equipment implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 		
+	}
+
+	public int getSteaksPerDayIncrease() {
+		return SteaksPerDayIncrease;
 	}
 	
 	public int getPrice() {
@@ -50,13 +56,13 @@ public abstract class Equipment implements Serializable {
 		
 	}
 	
-	public double getModifier() {
-		return modifier;
+	public double getQualityModifier() {
+		return qualityModifier;
 		
 	}
 	
-	public void setModifier(int modifier) {
-		this.modifier = modifier;
+	public void setQualityModifier(int qualityModifier) {
+		this.qualityModifier = qualityModifier;
 		
 	}
 	

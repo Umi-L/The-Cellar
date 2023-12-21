@@ -111,6 +111,16 @@ public class Business implements Serializable {
         setMoney(money -= GetEquipmentPrice(equipment));
     }
 
+    public void PurchaseKnife(Knife knife) {
+    	knives = knife;
+        setMoney(money -= knife.getPrice());
+    }
+
+    public void TakeOutLoan(int amount) {
+    	debt += amount;
+    	setMoney(money += amount);
+    }
+
     public int GetEquipmentPrice(Equipment equipment) {
     	int price = equipment.getPrice();
 
@@ -210,8 +220,28 @@ public class Business implements Serializable {
     	return curve;
     }
 
+    private int calculateSteaksNumber() {
+        int steaks = 0;
+
+        // foreach chef, add steaks to steaks
+        for (Chef chef : chefs) {
+            steaks += chef.getSteaksPerDayIncrease();
+        }
+
+        // foreach food, add steaks to steaks
+        steaks += food.getSteaksPerDayIncrease();
+
+        // foreach Knife, add steaks to steaks
+        steaks += knives.getSteaksPerDayIncrease();
+
+        // foreach Equipment, add steaks to steaks
+        steaks += cookingEquipment.getSteaksPerDayIncrease();
+
+        return steaks;
+    }
 
     public int getProfit() {
+        steaks = calculateSteaksNumber();
     	int profit = (int) (steaks * getDemand());
     	return profit;
     }
@@ -221,14 +251,11 @@ public class Business implements Serializable {
     }
 
     public void setMoney(int money) {
-
-        // PUT UI UPDATE HERE
-
     	this.money = money;
     }
 
     public int getOptimalPrice() {
-        int optimalPrice = (int) (food.getModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
+        int optimalPrice = (int) (food.getQualityModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
         return optimalPrice;
     }
 
