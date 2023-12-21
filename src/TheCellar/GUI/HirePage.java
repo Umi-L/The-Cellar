@@ -150,14 +150,14 @@ public class HirePage  {
 		currentCleanersLabel.setFont(new Font("Dialog", Font.BOLD, 12));
 		currentCleanersLabel.setBounds(487, 253, 157, 13);
 		frame.getContentPane().add(currentCleanersLabel);
-		
-		for (Chef currentChef : Chef.ChefTypes) {
-
-			String str = currentChef.getName();
-
-
-			equipment.addItem(str);
-		}
+//		
+//		for (Chef currentChef : Chef.ChefTypes) {
+//
+//			String str = currentChef.getName();
+//
+//
+//			equipment.addItem(str);
+//		}
 		
 
 		
