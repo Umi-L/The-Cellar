@@ -151,13 +151,13 @@ public class HirePage  {
 		currentCleanersLabel.setBounds(487, 253, 157, 13);
 		frame.getContentPane().add(currentCleanersLabel);
 
-		for (Chef currentChef : Chef.ChefTypes) {
-
-			String str = currentChef.getName();
-
-
-			equipment.addItem(str);
-		}
+//		for (Chef currentChef : Chef.ChefTypes) {
+//
+//			String str = currentChef.getName();
+//
+//
+//			equipment.addItem(str);
+//		}
 
 
 		
