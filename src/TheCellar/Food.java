@@ -29,12 +29,18 @@ public abstract class Food implements Serializable {
 
     protected String name;
     protected int price;
-    protected double modifier;
+    protected double QualityModifier;
+    protected int SteaksPerDayIncrease;
 
-    protected Food(String name, int price, double modifier) {
+    protected Food(String name, int price, double modifier, int SteaksPerDayIncrease) {
         this.name = name;
         this.price = price;
-        this.modifier = modifier;
+        this.QualityModifier = modifier;
+        this.SteaksPerDayIncrease = SteaksPerDayIncrease;
+    }
+
+    public int getSteaksPerDayIncrease() {
+        return SteaksPerDayIncrease;
     }
 
     public String getName() {
@@ -53,11 +59,11 @@ public abstract class Food implements Serializable {
         this.price = price;
     }
 
-    public double getModifier() {
-        return modifier;
+    public double getQualityModifier() {
+        return QualityModifier;
     }
 
-    public void setModifier(int modifier) {
-        this.modifier = modifier;
+    public void setQualityModifier(int qualityModifier) {
+        this.QualityModifier = qualityModifier;
     }
 }

@@ -32,9 +32,6 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
-
-
-
 public class ShopPage {
 	private JFrame frame;
 	private JTextArea textArea;
@@ -185,21 +182,6 @@ public class ShopPage {
 		moneyLabel.setBounds(649, 375, 145, 38);
 		frame.getContentPane().add(moneyLabel);
 
-		equipment = new JComboBox<String>();
-		equipment.setBounds(203, 34, 178, 30);
-		frame.getContentPane().add(equipment);
-		equipment.addItem("");
-
-		for (Equipment currentEquipment : Equipment.EquipmentTypes) {
-
-			String str = currentEquipment.getName();
-
-
-			equipment.addItem(str);
-		}
-
-		equipment.setVisible(false);
-
 		addToCartButton = new JButton("Add to cart"); 
 		addToCartButton.setBackground(new Color(225, 6, 0));
 		addToCartButton.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -207,16 +189,6 @@ public class ShopPage {
 		addToCartButton.setBounds(383, 34, 114, 30);
 		frame.getContentPane().add(addToCartButton);
 		addToCartButton.setVisible(false);
-
-
-		equipment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				selectedComboBox = equipment;
-				handleComboBoxSelection();
-
-			}
-		});
-
 
 
 		addToCartButton.addActionListener(new ActionListener() {
@@ -236,7 +208,7 @@ public class ShopPage {
 		                        // Assume each upgrade has a getPrice() method
 		                        int itemCost = getPrice(selectedItem);
 
-		                        // Ensure that the casted item is an instance of Upgradable before accessing getPrice()
+		                        
 		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
 		                            // Add the item to the cart and mark it as owned
 		                            textArea.append(selectedItem + " - $" + itemCost + "\n");
@@ -253,6 +225,29 @@ public class ShopPage {
 		            }
 		        }
 		    }
+		});
+		
+		equipment = new JComboBox<String>();
+		equipment.setBounds(203, 34, 178, 30);
+		frame.getContentPane().add(equipment);
+		equipment.addItem("");
+
+		for (Equipment currentEquipment : Equipment.EquipmentTypes) {
+
+			String str = currentEquipment.getName();
+
+
+			equipment.addItem(str);
+		}
+
+		equipment.setVisible(false);
+
+		equipment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedComboBox = equipment;
+				handleComboBoxSelection();
+
+			}
 		});
 		
 		JButton btnEquipment = new JButton("Equipment Upgrades");
@@ -343,21 +338,7 @@ public class ShopPage {
 		btnKnife.setBounds(36, 118, 165, 30);
 		frame.getContentPane().add(btnKnife);
 
-		JButton btnChef = new JButton("Chef Upgrades");
-		btnChef.setBackground(new Color(70, 70, 234));
-		btnChef.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnChef.setOpaque(true);
-		btnChef.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				ChefUpgrades window3 = new TheCellar.GUI.ChefUpgrades();
-				window3.showWindow();
-
-			}
-		});
-		btnChef.setBounds(36, 233, 165, 30);
-		btnChef.setVisible(true);
-		frame.getContentPane().add(btnChef);
+	
 
 		cleaner = new JComboBox<String>();
 		cleaner.setBounds(203, 160, 178, 30);
