@@ -235,7 +235,7 @@ public class Business implements Serializable {
     }
 
     public int getOptimalPrice() {
-        int optimalPrice = (int) (food.getModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
+        int optimalPrice = (int) (food.getQualityModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
         return optimalPrice;
     }
 
