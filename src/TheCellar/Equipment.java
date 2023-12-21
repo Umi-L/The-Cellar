@@ -7,7 +7,7 @@ package TheCellar;// TheCellar.Equipment (Abstract)
 
 import TheCellar.Items.Equipment.Hotplate;
 import TheCellar.Items.Equipment.StoveBurnerUpgrade;
-import TheCellar.Items.Equipment.EnergyEfficientAppliances;
+import TheCellar.Items.Equipment.Range;
 
 import java.io.Serializable;
 
@@ -22,7 +22,7 @@ public abstract class Equipment implements Serializable {
 	public static final Equipment[] EquipmentTypes = {
 			new Hotplate(),
 			new StoveBurnerUpgrade(),
-			new EnergyEfficientAppliances(),
+			new Range(),
 	};
 
 	public Equipment(String name, int price, double modifier, int steaksPerDayIncrease, int upgradePrice) {
