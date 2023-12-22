@@ -271,8 +271,7 @@ public class Business implements Serializable {
         setMoney(money - expenses);
         // if money is less than 0, increment debt
         if (money < 0) {
-            debt += money;
-            setDebt(debt);
+            setDebt(debt + Math.abs(money));
             setMoney(0);
         }
 
@@ -288,10 +287,10 @@ public class Business implements Serializable {
             daysInDebt = 0;
         }
 
-        // if debt is greater than 0 and days in debt is greater than 4, game over
-        if (debt > 0 && daysInDebt > 4) {
+        // if debt is greater than 0 and days in debt is greater than 7, game over
+        if (debt > 0 && daysInDebt > 7) {
             // game over
-            System.out.println("Game over!");
+            System.out.println("Game over! for " + name + "!");
         }
     }
 }

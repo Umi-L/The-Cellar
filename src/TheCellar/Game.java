@@ -19,9 +19,9 @@ public class Game implements Serializable {
     public Business PlayerBusiness = new Business();
     public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
 
-    public int GameSpeed = 1000;
+    public int GameSpeed = 4000;
     public final int GameSpeedMax = 5000;
-    public final int GameSpeedMin = 10;
+    public final int GameSpeedMin = 100;
     public int period = 50;
     public int TotalTime = 0;
     public Timer timer = new Timer();

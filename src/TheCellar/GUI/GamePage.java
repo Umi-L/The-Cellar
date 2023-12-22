@@ -59,7 +59,7 @@ public class GamePage {
 			if (textListenerEnabled) {
 				System.out.println("Slider value: " + slider.getValue());
 
-				float percent = slider.getValue() / 100.0f;
+				float percent = (100.0f - slider.getValue()) / 100.0f;
 				int min = Main.game.GameSpeedMin;
 				int max = Main.game.GameSpeedMax;
 				int range = max - min;
@@ -69,12 +69,15 @@ public class GamePage {
 			}
 		});
 
+		// set the slider value to the current game speed
+		slider.setValue(100-((Main.game.GameSpeed - Main.game.GameSpeedMin) * 100 / (Main.game.GameSpeedMax - Main.game.GameSpeedMin)));
+
 		JLabel timeLabel = new JLabel("Game Speed\r\n");
 		timeLabel.setBounds(54, 369, 81, 14);
 		frame.getContentPane().add(timeLabel);
 
 
-		JLabel money = new JLabel("Net Worth: ");
+		JLabel money = new JLabel("Money: ");
 		money.setFont(new Font("SansSerif", Font.ITALIC, 18));
 		money.setBounds(720, 8, 100, 38);
 		frame.getContentPane().add(money);
@@ -118,12 +121,27 @@ public class GamePage {
 				for (int i = 0; i < Main.game.AIBusinesses.size(); i++) {
 					Business b = Main.game.AIBusinesses.get(i);
 					labels.add(b.getName());
-					netWorthValues.add((double)b.GetNetWorth());
+
+					double netWorth = (double)b.GetNetWorth();
+
+					// make 0 if negative
+					if (netWorth < 0) {
+						netWorth = 0;
+					}
+
+					netWorthValues.add(netWorth);
 				}
 
 				// add player business
 				labels.add(Main.game.PlayerBusiness.getName());
-				netWorthValues.add((double)Main.game.PlayerBusiness.GetNetWorth());
+
+				double netWorth = (double)Main.game.PlayerBusiness.GetNetWorth();
+
+				if (netWorth < 0) {
+					netWorth = 0;
+				}
+
+				netWorthValues.add(netWorth);
 
 				goingRateValues.add((double)Main.game.getGoingRate());
 
