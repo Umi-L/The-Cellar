@@ -10,14 +10,15 @@ import java.util.Random;
 import java.util.Timer;
 
 import TheCellar.AI.AI;
+import TheCellar.GUI.ShopPage;
 
 
 
 public class Game implements Serializable {
-    public final int numAI = 6;
+	public final int numAI = 6;
 
-    public Business PlayerBusiness = new Business();
-    public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
+	public Business PlayerBusiness = new Business();
+	public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
 
     public int GameSpeed = 4000;
     public final int GameSpeedMax = 5000;
