@@ -42,6 +42,11 @@ public class Business implements Serializable {
     protected int daysOfFood;
     protected int daysInDebt;
     protected int price;
+    
+    public Business() {
+        // Set the starting net worth to $10,000
+        this.money = 10000;
+    }
 
     public void setDebt(int NewDebt) {
     	debt = NewDebt;
