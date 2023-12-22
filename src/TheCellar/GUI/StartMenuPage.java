@@ -17,7 +17,6 @@ import java.awt.Color;
 public class StartMenuPage {
 	private JFrame frame;
 	
-	
 	public StartMenuPage() {
 		frame = new JFrame("");
 		frame.getContentPane().setBackground(new Color(192, 192, 192));
@@ -43,6 +42,7 @@ public class StartMenuPage {
 				frame.setVisible(false);
 				Main.game = new Game();
 				Main.game.GenerateAI();
+				Main.game.clearPurchasedUpgrades(); 
 				GamePage window2 = new GamePage();
 				GamePage.showWindow();
 			}
