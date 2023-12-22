@@ -73,5 +73,10 @@ public abstract class Equipment implements Serializable {
 	
 	public void setUpgradePrice(int upgradePrice) {
 		this.upgradePrice = upgradePrice;
+		
+	}
+		
+	public String toString() {
+	    return getName();  
 	}
 }

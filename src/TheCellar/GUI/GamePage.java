@@ -23,11 +23,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.border.CompoundBorder;
 import java.awt.event.KeyEvent;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import javax.swing.KeyStroke;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
 
 
 // window builder class that creates the gui
@@ -35,30 +31,27 @@ import javax.swing.InputMap;
 public class GamePage {
 	public static JFrame frame;
 	public boolean textListenerEnabled = true;
-	
-	public static void showWindow() {
-		
-		
-	}
-	
-	public GamePage() {
-		// set title
-		frame = new JFrame();
-		frame.setLocationRelativeTo(null);
-		frame.setTitle("The Cellar");
-		frame.pack();
 
-		// set close operation
+	public static void showWindow() {
+
+
+	}
+
+	public GamePage() {
+		
+		frame = new JFrame();
+		frame.setTitle("The Cellar");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 950, 500);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
-		
-//		JPanel Animation = new Animation();
-//		Animation.setBorder(new CompoundBorder());
-//		Animation.setBackground(new Color(248, 248, 248));
-//		Animation.setBounds(101, 11, 732, 312);
-//		frame.getContentPane().add(Animation);
-		
+
+		//		JPanel Animation = new Animation();
+		//		Animation.setBorder(new CompoundBorder());
+		//		Animation.setBackground(new Color(248, 248, 248));
+		//		Animation.setBounds(101, 11, 732, 312);
+		//		frame.getContentPane().add(Animation);
+
 		JSlider slider = new JSlider();
 		slider.setBounds(14, 384, 151, 26);
 		frame.getContentPane().add(slider);
@@ -75,31 +68,31 @@ public class GamePage {
 				Main.game.SetGameSpeed(value);
 			}
 		});
-		
+
 		JLabel timeLabel = new JLabel("Game Speed\r\n");
 		timeLabel.setBounds(54, 369, 81, 14);
 		frame.getContentPane().add(timeLabel);
-		
-		
+
+
 		JLabel money = new JLabel("Net Worth: ");
 		money.setFont(new Font("SansSerif", Font.ITALIC, 18));
 		money.setBounds(720, 8, 100, 38);
 		frame.getContentPane().add(money);
-		
+
 		JLabel debt = new JLabel("Debt: ");
 		debt.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		debt.setBounds(720, 25, 100, 38);
+		debt.setBounds(720, 25, 113, 38);
 		frame.getContentPane().add(debt);
-		
+
 		JLabel moneyLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getMoney()));
 		moneyLabel.setBackground(new Color(192, 192, 192));
 		moneyLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		moneyLabel.setBounds(820, 8, 81, 38);
+		moneyLabel.setBounds(820, 8, 124, 38);
 		frame.getContentPane().add(moneyLabel);
-		
+
 		JLabel debtLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getDebt()));
 		debtLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		debtLabel.setBounds(770, 25, 81, 38);
+		debtLabel.setBounds(770, 25, 159, 38);
 		frame.getContentPane().add(debtLabel);
 
 		PieChart pieChart = new PieChart();
@@ -142,15 +135,18 @@ public class GamePage {
 				pieChart.Update(labels, netWorthValues);
 				barGraph.Update(labels, netWorthValues);
 				lineGraph.Update(goingRateValues);
+				
+				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
+		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.getDebt()));
 			}
 		});
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(192, 192, 192));
 		panel_1.setBounds(11, 9, 81, 311);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		JButton pauseButton = new JButton("Pause");
 		pauseButton.setBounds(6, 5, 69, 45);
 		panel_1.add(pauseButton);
@@ -161,7 +157,7 @@ public class GamePage {
 				frame.setVisible(false);
 				PauseMenuPage pause = new TheCellar.GUI.PauseMenuPage();	}
 		});
-		
+
 		Button bankButton = new Button("Bank");
 		bankButton.setBounds(6, 75, 69, 65);
 		panel_1.add(bankButton);
@@ -174,7 +170,7 @@ public class GamePage {
 		});
 		bankButton.setFont(new Font("SansSerif", Font.BOLD, 18));
 		bankButton.setBackground(new Color(248, 242, 22));
-		
+
 		Button shopButton = new Button("Shop");
 		shopButton.setBounds(7, 154, 69, 65);
 		panel_1.add(shopButton);
@@ -187,23 +183,47 @@ public class GamePage {
 		});
 		shopButton.setFont(new Font("SansSerif", Font.BOLD, 18));
 		shopButton.setBackground(new Color(0, 255, 255));
-		
-		
-				
-				Button hireButton = new Button("Hire");
-				hireButton.setBounds(6, 236, 69, 65);
-				panel_1.add(hireButton);
-				hireButton.setFont(new Font("SansSerif", Font.BOLD, 18));
-				hireButton.setBackground(new Color(255, 0, 255));
-				hireButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						frame.setVisible(false);
-						TheCellar.GUI.HirePage chefs = new HirePage();
-						chefs.showWindow();	
-				}
-				});
+
+
+
+		Button hireButton = new Button("Hire");
+		hireButton.setBounds(6, 236, 69, 65);
+		panel_1.add(hireButton);
+		hireButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+		hireButton.setBackground(new Color(255, 0, 255));
+		hireButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				TheCellar.GUI.HirePage chefs = new HirePage();
+				chefs.showWindow();	
+			}
+		});
+
+		JButton setSteakPriceButton = new JButton("Set Steak Price");
+		setSteakPriceButton.setBounds(14, 410, 150, 30); 
+		frame.getContentPane().add(setSteakPriceButton);
+
+		setSteakPriceButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Show an input dialog to get the steak price from the user
+		        String userInput = JOptionPane.showInputDialog(frame, "Enter the new steak price:");
+		        try {
+		            if (userInput != null) {
+		                int newPrice = Integer.parseInt(userInput);
+		                // Set the price of the steak in the PlayerBusiness
+		                Main.game.PlayerBusiness.setPrice(newPrice);
+		                
+		                // Display a message indicating the new steak price
+		                JOptionPane.showMessageDialog(frame, "Steak price changed to: " + newPrice);
+		            }
+		        } catch (NumberFormatException ex) {
+		            // Handle the case where the entered text is not a valid integer
+		            JOptionPane.showMessageDialog(frame, "Please enter a valid integer for the price.");
+		        }
+		    }
+		});
 		//Animation.requestFocusInWindow();
-		
+
 		frame.setFocusable(true);
 
 		InputMap inputMap = frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -211,25 +231,25 @@ public class GamePage {
 
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "pauseMenu");
 		actionMap.put("pauseMenu", new AbstractAction() {
-		   
-		    public void actionPerformed(ActionEvent e) {
-		        frame.setVisible(false);
-		    	PauseMenuPage pause = new PauseMenuPage();
-		        pause.showWindow();
-		    }
+
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				PauseMenuPage pause = new PauseMenuPage();
+				pause.showWindow();
+			}
 		});
-		
+
 		Main.game.addTickListener(new TickListener() {
 			public void onTick() {
 				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
 			}
 		});
-		
-		
+
+
 		frame.setVisible(true);
 	}
-	
-	
+
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -246,15 +266,15 @@ public class GamePage {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
-		
-		
+
+
 	}
-		
-		public static void main(String[] args) {
-			new GamePage();
-			showWindow();
-			
-			
+
+	public static void main(String[] args) {
+		new GamePage();
+		showWindow();
+
+
 	}
 }
 
