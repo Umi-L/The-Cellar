@@ -135,6 +135,9 @@ public class GamePage {
 				pieChart.Update(labels, netWorthValues);
 				barGraph.Update(labels, netWorthValues);
 				lineGraph.Update(goingRateValues);
+				
+				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
+		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.getDebt()));
 			}
 		});
 
