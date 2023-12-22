@@ -39,10 +39,10 @@ public class ShopPage {
 	private JLabel moneyLabel; 
 	private JButton addToCartButton;
 	private JComboBox<?> selectedComboBox;
-	private JComboBox<String> equipment = new JComboBox<>();
-	private JComboBox<String> food = new JComboBox<>();
-	private JComboBox<String> knife = new JComboBox<>();
-	private JComboBox<String> cleaner = new JComboBox<>();
+	private JComboBox<Object> equipment = new JComboBox<>();
+	private JComboBox<Object> food = new JComboBox<>();
+	private JComboBox<Object> knife = new JComboBox<>();
+	private JComboBox<Object> cleaner = new JComboBox<>();
 	private Set<Object> purchasedUpgrades = new HashSet<>();
 	private Business PlayerBusiness;
 
@@ -71,7 +71,7 @@ public class ShopPage {
 	    }
 	}
 	//Method to hide other combo boxes when another upgrade type is clicked
-	private void hideOtherComboBoxes(JComboBox<String> selectedComboBox) {
+	private void hideOtherComboBoxes(JComboBox<Object> selectedComboBox) {
 		if (equipment != null && equipment != selectedComboBox) {
 			equipment.setVisible(false);
 		}
@@ -101,6 +101,30 @@ public class ShopPage {
 	    return null;
 	}
 	
+//	private int getPrice(Object selectedItem) {
+//	    System.out.println("Selected item class: " + selectedItem.getClass().getName());
+//
+//	    if (selectedItem instanceof Equipment) {
+//	        int price = ((Equipment) selectedItem).getPrice();
+//	        System.out.println("Equipment price: " + price);
+//	        return price;
+//	    } else if (selectedItem instanceof Food) {
+//	        int price = ((Food) selectedItem).getPrice();
+//	        System.out.println("Food price: " + price);
+//	        return price;
+//	    } else if (selectedItem instanceof Knife) {
+//	        int price = ((Knife) selectedItem).getPrice();
+//	        System.out.println("Knife price: " + price);
+//	        return price;
+//	    } else if (selectedItem instanceof Cleaner) {
+//	        int price = ((Cleaner) selectedItem).getPrice();
+//	        System.out.println("Cleaner price: " + price);
+//	        return price;
+//	    } else {
+//	        System.out.println("Unknown item type, returning 0. Item value: " + selectedItem);
+//	        return 0;
+//	    }
+//	}
 	private int getPrice(Object selectedItem) {
 	    if (selectedItem instanceof Equipment) {
 	        return ((Equipment) selectedItem).getPrice();
@@ -190,6 +214,42 @@ public class ShopPage {
 		frame.getContentPane().add(addToCartButton);
 		addToCartButton.setVisible(false);
 
+		
+//		addToCartButton.addActionListener(new ActionListener() {
+//		    public void actionPerformed(ActionEvent e) {
+//		        if (selectedComboBox != null) {
+//		            Object selectedItem = getSelectedItem();
+//
+//		            if (selectedItem != null) {
+//		                // Check if the item is already in the cart
+//		                if (textArea.getText().contains(selectedItem.toString())) {
+//		                    JOptionPane.showMessageDialog(frame, "Item already in the cart.");
+//		                } else {
+//		                    // Check if the item is already owned
+//		                    if (purchasedUpgrades.contains(selectedItem)) {
+//		                        JOptionPane.showMessageDialog(frame, "You already own this item.");
+//		                    } else {
+//		                        int itemCost = getPrice(selectedItem);
+//		                        
+//		                        // Print for debugging
+//		                        System.out.println("Item Cost: $" + itemCost);
+//		                        System.out.println("Player's Money: $" + PlayerBusiness.getMoney());
+//
+//		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
+//		                            textArea.append(selectedItem + " - $" + itemCost + "\n");
+//		                            purchasedUpgrades.add(selectedItem);
+//		                            setButtonLocation();
+//		                            addToCartButton.setVisible(true);
+//		                            selectedComboBox.setSelectedIndex(0);
+//		                        } else {
+//		                            JOptionPane.showMessageDialog(frame, "Insufficient funds.");
+//		                        }
+//		                    }
+//		                }
+//		            }
+//		        }
+//		    }
+//		});
 
 		addToCartButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -227,17 +287,13 @@ public class ShopPage {
 		    }
 		});
 		
-		equipment = new JComboBox<String>();
+		equipment = new JComboBox<Object>();
 		equipment.setBounds(203, 34, 178, 30);
 		frame.getContentPane().add(equipment);
 		equipment.addItem("");
 
 		for (Equipment currentEquipment : Equipment.EquipmentTypes) {
-
-			String str = currentEquipment.getName();
-
-
-			equipment.addItem(str);
+		    equipment.addItem(currentEquipment); 
 		}
 
 		equipment.setVisible(false);
@@ -265,17 +321,13 @@ public class ShopPage {
 		btnEquipment.setBounds(36, 34, 165, 30);
 		frame.getContentPane().add(btnEquipment);
 
-		food = new JComboBox<String>();
+		food = new JComboBox<Object>();
 		food.setBounds(203, 76, 178, 30);
 		frame.getContentPane().add(food);
 		food.addItem("");
 
 		for (Food currentFood : Food.FoodTypes) {
-
-			String str = currentFood.getName();
-
-
-			food.addItem(str);
+		    food.addItem(currentFood); 
 		}
 		food.setVisible(false);
 
@@ -300,16 +352,12 @@ public class ShopPage {
 		btnFood.setBounds(36, 76, 165, 30);
 		frame.getContentPane().add(btnFood);
 
-		knife = new JComboBox<String>();
+		knife = new JComboBox<Object>();
 		knife.setBounds(203, 118, 178, 30);
 		frame.getContentPane().add(knife);
 		knife.addItem("");
 		for (Knife currentKnife : Knife.KnifeTypes) {
-
-			String str = currentKnife.getName();
-
-
-			knife.addItem(str);
+		    knife.addItem(currentKnife); 
 		}
 		knife.setVisible(false);
 
@@ -340,16 +388,12 @@ public class ShopPage {
 
 	
 
-		cleaner = new JComboBox<String>();
+		cleaner = new JComboBox<Object>();
 		cleaner.setBounds(203, 160, 178, 30);
 		frame.getContentPane().add(cleaner);
 		cleaner.addItem("");
-		for (Cleaner currentEquipment : Cleaner.CleanerTypes) {
-
-			String str = currentEquipment.getName();
-
-
-			cleaner.addItem(str);
+		for (Cleaner currentCleaner : Cleaner.CleanerTypes) {
+		    cleaner.addItem(currentCleaner); 
 		}
 
 		cleaner.setVisible(false);

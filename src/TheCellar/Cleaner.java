@@ -62,5 +62,10 @@ public class Cleaner  implements Serializable {
 
     public void setModifier(int modifier) {
         this.modifier = modifier;
+        
+    }
+	
+	public String toString() {
+	    return getName();  
     }
 }

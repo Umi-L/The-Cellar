@@ -77,6 +77,11 @@ public abstract class Knife implements Serializable {
 	
 	public void setUpgradePrice(int upgradePrice) {
 		this.upgradePrice = upgradePrice;
+		
+	}
+	
+	public String toString() {
+	    return getName();  
 	}
 }
 

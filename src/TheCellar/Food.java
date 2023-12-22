@@ -65,5 +65,10 @@ public abstract class Food implements Serializable {
 
     public void setQualityModifier(int qualityModifier) {
         this.QualityModifier = qualityModifier;
+        
+    }
+	
+	public String toString() {
+	    return getName();  
     }
 }
