@@ -4,7 +4,7 @@ import TheCellar.Food;
 
 public class GourmetRecipeBook extends Food{
 	public GourmetRecipeBook() {
-		super("Gourmet Recipe Book", 500, 1.5);
+		super("Gourmet Recipe Book", 500, 1.5, 40);
 	}
 
 }

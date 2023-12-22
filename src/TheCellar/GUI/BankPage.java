@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -29,6 +31,10 @@ public class BankPage {
 	public static void showWindow() {
 		
 	}
+	
+	private void showLoanStatusMessage(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Loan Status", JOptionPane.INFORMATION_MESSAGE);
+    }
 	
 	
 	public BankPage() {
@@ -97,20 +103,33 @@ public class BankPage {
 
 	btnNewButton_1.setBounds(509, 99, 117, 29);
 	frame.getContentPane().add(btnNewButton_1);
-	btnNewButton_1.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			int requestedLoan = Integer.parseInt(textField.getText());
-			if((Main.game.PlayerBusiness.getProfit()-Main.game.PlayerBusiness.getExpenses())>0&&requestedLoan>0)
-			{
-				if(requestedLoan < Main.game.PlayerBusiness.getProfit()*(Main.game.random.nextInt(4)+2))
-				{
-					Main.game.PlayerBusiness.setMoney(Main.game.PlayerBusiness.getMoney()+requestedLoan);
-					Main.game.PlayerBusiness.setDebt(Main.game.PlayerBusiness.getDebt()+requestedLoan);
-				}
-			}
-		}
-	});
-	
+	 btnNewButton_1.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+             try {
+                 int requestedLoan = Integer.parseInt(textField.getText());
+                 if ((Main.game.PlayerBusiness.getProfit() - Main.game.PlayerBusiness.getExpenses()) > 0
+                         && requestedLoan > 0) {
+                     if (requestedLoan < Main.game.PlayerBusiness.getProfit() * (Main.game.random.nextInt(4) + 2)) {
+                         Main.game.PlayerBusiness.setMoney(Main.game.PlayerBusiness.getMoney() + requestedLoan);
+                         Main.game.PlayerBusiness.setDebt(Main.game.PlayerBusiness.getDebt() + requestedLoan);
+
+                         // Loan accepted message
+                         showLoanStatusMessage("Loan accepted! You received $" + requestedLoan + " in your account.");
+                     } else {
+                         // Loan denied message
+                         showLoanStatusMessage("Loan denied. The requested amount is too high.");
+                     }
+                 } else {
+                     // Loan denied message
+                     showLoanStatusMessage("Loan denied. Insufficient profit or invalid loan amount.");
+                 }
+             } catch (NumberFormatException ex) {
+                 // Handle the case where the input is not a valid integer
+                 showLoanStatusMessage("Invalid input. Please enter a valid loan amount.");
+             }
+         }
+     });
+
 	frame.setVisible(true);
 	
 	}

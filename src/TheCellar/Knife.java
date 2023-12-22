@@ -6,10 +6,12 @@ package TheCellar;// TheCellar.Knife (Abstract)
 // get&set for all fields
 
 
-import TheCellar.Items.Knives.BladeUpgrade;
-import TheCellar.Items.Knives.HandleUpgrade;
-import TheCellar.Items.Knives.SharpnerUpgrade;
+
 import TheCellar.Items.Knives.PlasticKnives;
+import TheCellar.Items.Knives.Machete;
+import TheCellar.Items.Knives.Katana;
+
+
 
 import java.io.Serializable;
 
@@ -21,10 +23,9 @@ public abstract class Knife implements Serializable {
     protected int upgradePrice;
 
     public static final Knife[] KnifeTypes = {
-    		new BladeUpgrade(),
-    		new HandleUpgrade(),
-    		new SharpnerUpgrade(),
     		new PlasticKnives(),
+    		new Machete(),
+    		new Katana(),
 	};
 
 	public Knife(String name, int price, double modifier, int SteaksPerDayIncrease, int upgradePrice) {
