@@ -15,6 +15,11 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,7 +50,6 @@ public class ShopPage {
 	private JComboBox<Object> food = new JComboBox<>();
 	private JComboBox<Object> knife = new JComboBox<>();
 	private JComboBox<Object> cleaner = new JComboBox<>();
-	private Preferences preferences;
 	private static Set<Object> purchasedUpgrades = new HashSet<>();
 	private Business PlayerBusiness;
 
@@ -61,26 +65,30 @@ public class ShopPage {
 		}
 	}
 	//method to load purchased upgrades
-	private void loadPurchasedUpgrades() {
-	    String serializedSet = preferences.get("purchasedUpgrades", "");
-	    if (!serializedSet.isEmpty()) {
-	        purchasedUpgrades.clear(); // Clear the existing set
-	        purchasedUpgrades.addAll(Arrays.asList(serializedSet.split(",")));
+	private static void loadPurchasedUpgrades() {
+	    try (BufferedReader reader = new BufferedReader(new FileReader("purchasedUpgrades.csv"))) {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            purchasedUpgrades.add(line);
+	        }
+	        System.out.println("Loaded Purchased Upgrades: " + purchasedUpgrades);
+	    } catch (IOException e) {
+	        e.printStackTrace();
 	    }
-	    System.out.println("Loaded Purchased Upgrades: " + purchasedUpgrades);
 	}
 
 	    // Method to save purchased upgrades 
-	private void savePurchasedUpgrades() {
-	    String serializedSet = String.join(",", purchasedUpgrades.toArray(new String[0]));
-	    preferences.put("purchasedUpgrades", serializedSet);
-	}
-	//Method to clear purchased upgrades
-	 public static void clearPurchasedUpgrades() {
-	        if (purchasedUpgrades != null) {
-	            purchasedUpgrades.clear();
+	private static void savePurchasedUpgrades() {
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("purchasedUpgrades.csv"))) {
+	        for (Object upgrade : purchasedUpgrades) {
+	            writer.write(upgrade.toString());
+	            writer.newLine();
 	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
 	    }
+	}
+	
 	//handle combo box selection and set location of add to cart button
 	 private void handleComboBoxSelection() {
 		    if (selectedComboBox != null && addToCartButton != null) {
@@ -221,7 +229,7 @@ public class ShopPage {
 	 */
 	public ShopPage() {
 		
-		preferences = Preferences.userNodeForPackage(getClass());
+		
         loadPurchasedUpgrades();
 
 		this.PlayerBusiness = Main.game != null ? Main.game.PlayerBusiness : new Business();

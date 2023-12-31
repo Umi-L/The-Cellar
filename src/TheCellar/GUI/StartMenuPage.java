@@ -10,12 +10,36 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
 
 public class StartMenuPage {
 	private JFrame frame;
+	
+	private static void clearShopUpgradesFile() {
+        try {
+            File shopUpgradesFile = new File("purchasedUpgrades.csv");
+
+            if (shopUpgradesFile.exists()) {
+                try (FileWriter writer = new FileWriter(shopUpgradesFile)) {
+                    // Write an empty content to the file
+                    writer.write("");
+                    System.out.println("Shop upgrades file cleared successfully.");
+                } catch (IOException e) {
+                    System.out.println("Failed to clear shop upgrades file.");
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Shop upgrades file does not exist.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public StartMenuPage() {
 		frame = new JFrame("");
@@ -39,10 +63,10 @@ public class StartMenuPage {
 		newGame.setBackground(new Color(116, 116, 116));
 		newGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clearShopUpgradesFile();
 				frame.setVisible(false);
 				Main.game = new Game();
 				Main.game.GenerateAI();
-//				Main.game.clearPurchasedUpgrades();
 				GamePage window2 = new GamePage();
 				GamePage.showWindow();
 			}
