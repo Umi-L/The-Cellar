@@ -440,9 +440,7 @@ public class ShopPage {
 		cleaner.setBounds(203, 160, 178, 30);
 		frame.getContentPane().add(cleaner);
 		cleaner.addItem("");
-		for (Cleaner currentCleaner : Cleaner.CleanerTypes) {
-			cleaner.addItem(currentCleaner); 
-		}
+//		cleaner.add(new Cleaner())
 
 		cleaner.setVisible(false);
 		cleaner.addActionListener(new ActionListener() {

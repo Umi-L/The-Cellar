@@ -43,8 +43,8 @@ public class AI extends Business implements Cloneable, Serializable {
 
 	@Override
 	public void Update() {
-		MakeDecision(false);
 		super.Update();
+		MakeDecision(false);
 	}
 
 	public void Update(boolean simulated){
@@ -59,7 +59,7 @@ public class AI extends Business implements Cloneable, Serializable {
 		Food selected = food;
 
 		int expenses = getExpenses();
-		int money = getMoney();
+		long money = getMoney();
 		int profit = getProfit();
 
 		// calculate buffer, generally as the AI level increases, the buffer increases
@@ -91,7 +91,7 @@ public class AI extends Business implements Cloneable, Serializable {
 		PurchaseFood(selected);
 	}
 
-	private void UpdatePricing(boolean simulated){
+	public void UpdatePricing(boolean simulated){
 		// get optimal price for steak at price
 		int optimalPrice = getOptimalPrice();
 
@@ -110,7 +110,15 @@ public class AI extends Business implements Cloneable, Serializable {
 			buffer = (int)(((double)random)*inverseAI/2); // buffer is 1/2 of normal
 		}
 
-		setPrice(optimalPrice + buffer); // price is modulated +/- buffer
+		int finalPrice = optimalPrice + buffer; // price is modulated +/- buffer
+
+		if (finalPrice <= 0){
+			finalPrice = 1;
+		}
+
+		System.out.println("AI " + level + " buffer " + buffer + " optimal " + optimalPrice);
+
+		setPrice(finalPrice);
 	}
 
 	private void ChefDecision(boolean simulated){
@@ -329,7 +337,9 @@ public class AI extends Business implements Cloneable, Serializable {
 		}
 
 		// set AI money to ai level * some value
-		ai.setMoney(level * 1000);
+		ai.setMoney(level * 2000);
+
+//		ai.setPrice(Main.game.getGoingRate());
 
 		return ai;
 	}

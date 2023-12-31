@@ -3,17 +3,13 @@ package TheCellar.GUI;
 import TheCellar.Business;
 import TheCellar.Main;
 import TheCellar.TickListener;
-import TheCellar.Charts.Animation;
 import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
 import TheCellar.Charts.PieChart;
-import TheCellar.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
-import java.awt.Canvas;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,9 +17,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.border.CompoundBorder;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionEvent;
 
 
 // window builder class that creates the gui
@@ -99,16 +93,24 @@ public class GamePage {
 		frame.getContentPane().add(debtLabel);
 
 		PieChart pieChart = new PieChart();
-		pieChart.setBounds(100, 10, 300, 200);
+		pieChart.setBounds(100, 10, 218, 140);
 		frame.getContentPane().add(pieChart);
 
+		BarGraph steaksPerDayChart = new BarGraph("Steaks Per Day");
+		steaksPerDayChart.setBounds(375, 331, 193, 122);
+		frame.getContentPane().add(steaksPerDayChart);
+
 		LineGraph lineGraph = new LineGraph("time", "Going Rate");
-		lineGraph.setBounds(633, 331, 200, 122);
+		lineGraph.setBounds(565, 331, 200, 122);
 		frame.getContentPane().add(lineGraph);
 
 		BarGraph barGraph = new BarGraph("value");
 		barGraph.setBounds(175, 331, 200, 122);
 		frame.getContentPane().add(barGraph);
+
+		BarGraph demandGraph = new BarGraph("Demand");
+		demandGraph.setBounds(175, 207, 200, 116);
+		frame.getContentPane().add(demandGraph);
 
 		ArrayList<Double> goingRateValues = new ArrayList<>();
 		Main.game.addTickListener(new TickListener() {
@@ -116,6 +118,8 @@ public class GamePage {
 			public void onTick() {
 				ArrayList<String> labels = new ArrayList<>();
 				ArrayList<Double> netWorthValues = new ArrayList<>();
+				ArrayList<Double> steaksPerDay = new ArrayList<>();
+				ArrayList<Double> demandValues = new ArrayList<>();
 
 				// add ai businesses
 				for (int i = 0; i < Main.game.AIBusinesses.size(); i++) {
@@ -130,6 +134,8 @@ public class GamePage {
 					}
 
 					netWorthValues.add(netWorth);
+					steaksPerDay.add((double)b.GetSteaksPerDay());
+					demandValues.add(b.GetDemand());
 				}
 
 				// add player business
@@ -142,8 +148,10 @@ public class GamePage {
 				}
 
 				netWorthValues.add(netWorth);
+				steaksPerDay.add((double)Main.game.PlayerBusiness.GetSteaksPerDay());
 
 				goingRateValues.add((double)Main.game.getGoingRate());
+				demandValues.add(Main.game.PlayerBusiness.GetDemand());
 
 				// if more than 10 values, remove the first one
 				if (goingRateValues.size() > 10) {
@@ -151,9 +159,11 @@ public class GamePage {
 				}
 
 				pieChart.Update(labels, netWorthValues);
+				steaksPerDayChart.Update(labels, steaksPerDay);
 				barGraph.Update(labels, netWorthValues);
 				lineGraph.Update(goingRateValues);
-				
+				demandGraph.Update(labels, demandValues);
+
 				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
 		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.getDebt()));
 			}
@@ -220,6 +230,21 @@ public class GamePage {
 		JButton setSteakPriceButton = new JButton("Set Steak Price");
 		setSteakPriceButton.setBounds(14, 410, 150, 30); 
 		frame.getContentPane().add(setSteakPriceButton);
+		
+		JTextPane InventoryPane = new JTextPane();
+		InventoryPane.setFont(new Font("Tahoma", Font.PLAIN, 7));
+		InventoryPane.setText("Stuff\r\nhere\r\noh");
+		InventoryPane.setBounds(494, 19, 184, 311);
+		frame.getContentPane().add(InventoryPane);
+
+
+		// add tick listener to update the inventory pane
+		Main.game.addTickListener(new TickListener() {
+			@Override
+			public void onTick() {
+				InventoryPane.setText(Main.game.PlayerBusiness.GetInventory());
+			}
+		});
 
 		setSteakPriceButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {

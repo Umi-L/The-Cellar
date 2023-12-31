@@ -30,11 +30,22 @@ public class Game implements Serializable {
 
     public ArrayList<TickListener> tickListeners = new ArrayList<TickListener>();
 
-    private int goingRate = 5; // going rate for a steak with 100% quality
+    private int goingRate = 20; // going rate for a steak with 100% quality
+    public static final int baseGoingRate = 25;
+    public static final int fluctuation = 5;
 
     public Game() {
         PlayerBusiness.setName("You");
-        Update();
+
+        timer.schedule(
+            new java.util.TimerTask() {
+                @Override
+                public void run() {
+                    Update();
+                }
+            },
+            GameSpeed
+        );
     }
 
 
@@ -61,7 +72,7 @@ public class Game implements Serializable {
         double sinusoidValue = Math.sin(2 * Math.PI * TotalTime / period); // simulating seasonal changes
 
         // Alternate the variable value by the sinusoid
-        goingRate = (int) (5 + 3 * sinusoidValue);  // Adjust the scaling factor as needed
+        goingRate = (int) (baseGoingRate + fluctuation * sinusoidValue);  // Adjust the scaling factor as needed
 
         // after each period randomize period
         if (TotalTime % period == 0) {

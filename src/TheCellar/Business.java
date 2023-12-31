@@ -20,6 +20,7 @@ get&set for all fields
 
  */
 
+import TheCellar.Items.Chefs.TeenChef;
 import TheCellar.Items.Equipment.Hotplate;
 import TheCellar.Items.Foods.FoodScraps;
 import TheCellar.Items.Knives.PlasticKnives;
@@ -29,30 +30,36 @@ import java.util.ArrayList;
 
 public class Business implements Serializable {
     protected String name;
-    protected int money;
+    protected long money;
     protected int steaks;
     protected double quality; // range from 0-1 representing 0-100%
     protected double cleanliness; // range from 0-1 representing 0-100%
-    protected int debt;
+    protected long debt;
     protected Equipment cookingEquipment = new Hotplate();
     protected ArrayList<Chef> chefs = new ArrayList<Chef>();
     protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
     protected Knife knives = new PlasticKnives();
     protected Food food = new FoodScraps();
-    protected int daysOfFood;
+    protected int daysOfFood = 7;
     protected int daysInDebt;
     protected int price;
     
     public Business() {
         // Set the starting net worth to $10,000
         this.money = 10000;
+
+        this.chefs.add(new TeenChef());
+        this.cleaners.add(new Cleaner());
+
+        // start price as optimal price
+        this.price = Game.baseGoingRate; // default price
     }
 
-    public void setDebt(int NewDebt) {
+    public void setDebt(long NewDebt) {
     	debt = NewDebt;
     }
     
-    public int getDebt() {
+    public long getDebt() {
     	return debt;
     }
     
@@ -64,7 +71,7 @@ public class Business implements Serializable {
         this.name = name;
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 
@@ -93,7 +100,7 @@ public class Business implements Serializable {
     }
 
     // get net worth, factors in money, equipment, knives, and debt but not employees
-    public int GetNetWorth() {
+    public long GetNetWorth() {
         int equipmentValue = cookingEquipment.getPrice();
         int knifeValue = knives.getPrice();
 
@@ -199,7 +206,7 @@ public class Business implements Serializable {
     	return expense;
     }
 
-    public double getDemand() {
+    public double GetDemand() {
 
         // if clenliness is less than 0.1, demand is 0
         if (cleanliness < 0.1) {
@@ -219,14 +226,23 @@ public class Business implements Serializable {
         // get difference between mean price and our price
         double difference = meanPrice - getPrice();
 
-        // get exponential fall off or rise
-        double curve = 0.01*Math.pow(3, difference);
+        System.out.println("Difference: " + difference);
 
-    	return curve;
+        // Tweak the curve parameters for a more gradual falloff
+        double slope = 1.4;  // Adjust the slope for a more gradual falloff
+        double midpoint = 0.5;  // Adjust the midpoint for fine-tuning
+
+        // Apply logistic function to get the curve
+        double curve = 1 / (1 + Math.exp(-slope * (difference - midpoint)));
+
+        // Ensure the curve value is between 0 and 1
+        curve = Math.max(0, Math.min(1, curve));
+
+        return curve;
     }
 
-    private int calculateSteaksNumber() {
-        int steaks = 0;
+    public int GetSteaksPerDay() {
+        int steaks = 20; // base steaks per day
 
         // foreach chef, add steaks to steaks
         for (Chef chef : chefs) {
@@ -246,8 +262,8 @@ public class Business implements Serializable {
     }
 
     public int getProfit() {
-        steaks = calculateSteaksNumber();
-    	int profit = (int) (steaks * getDemand());
+        steaks = GetSteaksPerDay();
+    	int profit = (int) (steaks * GetDemand() * getPrice());
     	return profit;
     }
 
@@ -255,7 +271,7 @@ public class Business implements Serializable {
     	return price;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(long money) {
     	this.money = money;
     }
 
@@ -265,6 +281,24 @@ public class Business implements Serializable {
     }
 
     public void Update() {
+
+        // update cleanliness
+        cleanliness = 0;
+        for (Cleaner cleaner : cleaners) {
+            cleanliness += cleaner.getModifier();
+        }
+
+        // if cleanliness is greater than 1, set to 1
+        if (cleanliness > 1) {
+            cleanliness = 1;
+        }
+
+        // update quality
+        quality = 0;
+        for (Chef chef : chefs) {
+            quality += chef.getModifier();
+        }
+
         // calculate expenses
         int expenses = getExpenses();
 
@@ -292,5 +326,42 @@ public class Business implements Serializable {
             // game over
             System.out.println("Game over! for " + name + "!");
         }
+
+        // log inventory and name
+        System.out.println(name + " Inventory: " + GetInventory());
+    }
+
+    public String GetInventory(){
+
+        String allChefSteaksPerDay = "";
+        for (Chef chef : chefs) {
+            allChefSteaksPerDay += chef.getSteaksPerDayIncrease() + ", ";
+        }
+
+        return "Inventory: \n" +
+                "Steaks: " + steaks + "\n" +
+                "Quality: " + quality + "\n" +
+                "Cleanliness: " + cleanliness + "\n" +
+                "Days of Food: " + daysOfFood + "\n" +
+                "Days in Debt: " + daysInDebt + "\n" +
+                "Money: " + money + "\n" +
+                "Debt: " + debt + "\n" +
+                "Equipment: " + cookingEquipment.getName() + "\n" +
+                "Knife: " + knives.getName() + "\n" +
+                "Food: " + food.getName() + "\n" +
+                "Chefs: " + chefs.size() + "\n" +
+                "Cleaners: " + cleaners.size() + "\n" +
+                "Chefs Steaks Per Day: " + allChefSteaksPerDay + "\n" +
+                "Food Steaks Per Day: " + food.getSteaksPerDayIncrease() + "\n" +
+                "Equipment Steaks Per Day: " + cookingEquipment.getSteaksPerDayIncrease() + "\n" +
+                "Knife Steaks Per Day: " + knives.getSteaksPerDayIncrease() + "\n" +
+                "Demand: " + GetDemand() + "\n" +
+                "Profit: " + getProfit() + "\n" +
+                "Price: " + getPrice() + "\n" +
+                "Optimal Price: " + getOptimalPrice() + "\n" +
+                "Net Worth: " + GetNetWorth() + "\n" +
+                "Customer Satisfaction: " + GetCustomerSatisfaction() + "\n" +
+                "Expenses: " + getExpenses() + "\n";
+
     }
 }

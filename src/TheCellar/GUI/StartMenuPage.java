@@ -42,7 +42,7 @@ public class StartMenuPage {
 				frame.setVisible(false);
 				Main.game = new Game();
 				Main.game.GenerateAI();
-				Main.game.clearPurchasedUpgrades(); 
+//				Main.game.clearPurchasedUpgrades();
 				GamePage window2 = new GamePage();
 				GamePage.showWindow();
 			}
