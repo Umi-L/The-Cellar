@@ -49,7 +49,6 @@ public class ShopPage {
 	private JComboBox<Object> equipment = new JComboBox<>();
 	private JComboBox<Object> food = new JComboBox<>();
 	private JComboBox<Object> knife = new JComboBox<>();
-	private JComboBox<Object> cleaner = new JComboBox<>();
 	private static Set<Object> purchasedUpgrades = new HashSet<>();
 	private Business PlayerBusiness;
 
@@ -90,25 +89,25 @@ public class ShopPage {
 	}
 	
 	//handle combo box selection and set location of add to cart button
-	 private void handleComboBoxSelection() {
-		    if (selectedComboBox != null && addToCartButton != null) {
-		        Object selectedItem = selectedComboBox.getSelectedItem();
+	private void handleComboBoxSelection() {
+	    if (selectedComboBox != null && addToCartButton != null) {
+	        Object selectedItem = selectedComboBox.getSelectedItem();
 
-		        if (selectedItem != null) {
-		            // Convert item name to lowercase for case-insensitive comparison
-		            String itemName = selectedItem.toString().toLowerCase();
+	        if (selectedItem != null && !selectedItem.toString().isEmpty()) {
+	            // Convert item name to lowercase for case-insensitive comparison
+	            String itemName = selectedItem.toString().toLowerCase();
 
-		            if (purchasedUpgrades.contains(itemName)) {
-		                JOptionPane.showMessageDialog(frame, "You already own this item.");
-		            } else {
-		                setButtonLocation();
-		                addToCartButton.setVisible(true);
-		            }
-		        } else {
-		            addToCartButton.setVisible(false);
-		        }
-		    }
-		}
+	            if (purchasedUpgrades.contains(itemName)) {
+	                JOptionPane.showMessageDialog(frame, "You already own this item.");
+	            } else {
+	                setButtonLocation();
+	                addToCartButton.setVisible(true);
+	            }
+	        } else {
+	            addToCartButton.setVisible(false);
+	        }
+	    }
+	}
 	//Method to hide other combo boxes when another upgrade type is clicked
 	private void hideOtherComboBoxes(JComboBox<Object> selectedComboBox) {
 		if (equipment != null && equipment != selectedComboBox) {
@@ -121,10 +120,6 @@ public class ShopPage {
 
 		if (knife != null && knife != selectedComboBox) {
 			knife.setVisible(false);
-		}
-
-		if (cleaner != null && cleaner != selectedComboBox) {
-			cleaner.setVisible(false);
 		}
 
 		addToCartButton.setVisible(false);
@@ -147,8 +142,6 @@ public class ShopPage {
 			return ((Food) selectedItem).getPrice();
 		} else if (selectedItem instanceof Knife) {
 			return ((Knife) selectedItem).getPrice();
-		} else if (selectedItem instanceof Cleaner) {
-			return ((Cleaner) selectedItem).getPrice();
 		} else {
 
 			return 0;
@@ -201,14 +194,14 @@ public class ShopPage {
 	        equipment.setSelectedIndex(0);
 	        food.setSelectedIndex(0);
 	        knife.setSelectedIndex(0);
-	        cleaner.setSelectedIndex(0);
+	      
 
 	        addToCartButton.setVisible(false);
 
 	        equipment.setVisible(false);
 	        food.setVisible(false);
 	        knife.setVisible(false);
-	        cleaner.setVisible(false);
+	       
 	    } else {
 	        // User has insufficient funds
 	        JOptionPane.showMessageDialog(frame, "Insufficient funds.");
@@ -219,7 +212,7 @@ public class ShopPage {
 	        equipment.setVisible(false);
 	        food.setVisible(false);
 	        knife.setVisible(false);
-	        cleaner.setVisible(false);
+	       
 	        
 	        
 	    }
@@ -311,38 +304,37 @@ public class ShopPage {
 		addToCartButton.setVisible(false);
 
 		addToCartButton.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	            if (selectedComboBox != null) {
-	                Object selectedItem = getSelectedItem();
+		    public void actionPerformed(ActionEvent e) {
+		        if (selectedComboBox != null) {
+		            Object selectedItem = getSelectedItem();
 
-	                if (selectedItem != null) {
-	                    // Check if the item is already in the cart
-	                    if (textArea.getText().contains(selectedItem.toString())) {
-	                        JOptionPane.showMessageDialog(frame, "Item already in the cart.");
-	                    } else {
-	                        // Check if the item is already owned
-	                        if (purchasedUpgrades.contains(selectedItem)) {
-	                            JOptionPane.showMessageDialog(frame, "You already own this item.");
-	                        } else {
-	                            int itemCost = getPrice(selectedItem);
+		            if (selectedItem != null && !selectedItem.toString().isEmpty()) {
+		                // Check if the item is already in the cart
+		                if (textArea.getText().contains(selectedItem.toString())) {
+		                    JOptionPane.showMessageDialog(frame, "Item already in the cart.");
+		                } else {
+		                    // Check if the item is already owned
+		                    if (purchasedUpgrades.contains(selectedItem)) {
+		                        JOptionPane.showMessageDialog(frame, "You already own this item.");
+		                    } else {
+		                        int itemCost = getPrice(selectedItem);
 
-	                            if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
-	                                // Add the item to the cart
-	                                textArea.append(selectedItem + " - $" + itemCost + "\n");
-	                                setButtonLocation();
-	                                addToCartButton.setVisible(true);
-	                                selectedComboBox.setSelectedIndex(0);
-	                            } else {
-	                                // User has insufficient funds
-	                                JOptionPane.showMessageDialog(frame, "Insufficient funds.");
-	                            }
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    });
-		
+		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
+		                            // Add the item to the cart
+		                            textArea.append(selectedItem + " - $" + itemCost + "\n");
+		                            setButtonLocation();
+		                            addToCartButton.setVisible(true);
+		                            selectedComboBox.setSelectedIndex(0);
+		                        } else {
+		                            // User has insufficient funds
+		                            JOptionPane.showMessageDialog(frame, "Insufficient funds.");
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
+		});
 		equipment = new JComboBox<Object>();
 		equipment.setBounds(203, 34, 178, 30);
 		frame.getContentPane().add(equipment);
@@ -442,37 +434,6 @@ public class ShopPage {
 		btnKnife.setBounds(36, 118, 165, 30);
 		frame.getContentPane().add(btnKnife);
 
-
-
-		cleaner = new JComboBox<Object>();
-		cleaner.setBounds(203, 160, 178, 30);
-		frame.getContentPane().add(cleaner);
-		cleaner.addItem("");
-//		cleaner.add(new Cleaner())
-
-		cleaner.setVisible(false);
-		cleaner.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				selectedComboBox = cleaner;
-				handleComboBoxSelection();
-			}
-		});
-
-		JButton btnCleaner = new JButton("Cleaner Upgrades");
-		btnCleaner.setBackground(new Color(70, 70, 234));
-		btnCleaner.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnCleaner.setOpaque(true);
-		btnCleaner.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cleaner.setVisible(true);
-				hideOtherComboBoxes(cleaner);
-
-			}
-		});
-		btnCleaner.setBounds(36, 160, 165, 30);
-		frame.getContentPane().add(btnCleaner);
-
 		JLabel lblCart = new JLabel("Cart");
 		lblCart.setFont(new Font("SansSerif", Font.BOLD, 20));
 		lblCart.setBounds(621, 7, 61, 23);
@@ -507,13 +468,12 @@ public class ShopPage {
 						equipment.setSelectedIndex(0);
 						food.setSelectedIndex(0);
 						knife.setSelectedIndex(0);
-						cleaner.setSelectedIndex(0);
+						
 
 
 						equipment.setVisible(false);
 						food.setVisible(false);
 						knife.setVisible(false);
-						cleaner.setVisible(false);
 						addToCartButton.setVisible(false);
 					}
 				}
@@ -571,22 +531,6 @@ public class ShopPage {
 		});
 		knifeHelp.setBounds(6, 121, 23, 24);
 		frame.getContentPane().add(knifeHelp);
-
-		JButton cleanerHelp = new JButton("?");
-		cleanerHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
-		cleanerHelp.setOpaque(true);
-		cleanerHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "Industrial Grade Cleaning Supplies: Cleanliness Increase 10% " + "\n" + "Cleaning Robots: Cleanliness Increase: 50% " + "\n" + "Eco Friendly Cleaning Supplies: Cleanliness Increase 15%" + "\n" + "24/7 cleaning staff: Cleanliness Increase 100%");
-
-
-			}
-		});
-		cleanerHelp.setBounds(6, 163, 23, 24);
-		frame.getContentPane().add(cleanerHelp);
-
-
-
 
 		frame.setVisible(true);
 
