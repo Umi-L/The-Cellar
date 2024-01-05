@@ -111,7 +111,7 @@ public class HirePage  {
 		frame.getContentPane().add(currentChefs);
 		
 		//NETWOTH LABEL
-		JLabel networthLabel = new JLabel("Current Networth: " +  Main.game.PlayerBusiness.getMoney());
+		JLabel networthLabel = new JLabel("Current Networth: " +  Main.game.PlayerBusiness.money);
 		networthLabel.setBounds(10, 20, 276, 13);
 		frame.getContentPane().add(networthLabel);
 		
@@ -126,7 +126,7 @@ public class HirePage  {
 		frame.getContentPane().add(ramsayHireButton);
 		
 		//S/D LABEL
-		JLabel SDLabel = new JLabel("Current S/D: " + Main.game.PlayerBusiness.getSteaks());
+		JLabel SDLabel = new JLabel("Current S/D: " + Main.game.PlayerBusiness.steaks);
 		SDLabel.setBounds(10, 10, 285, 13);
 		frame.getContentPane().add(SDLabel);
 	

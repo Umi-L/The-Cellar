@@ -167,16 +167,16 @@ public class ShopPage {
 	    }
 
 	    // Check if the total cost is less than or equal to remainingBalance
-	    if (totalCost <= PlayerBusiness.getMoney()) {
+	    if (totalCost <= PlayerBusiness.money) {
 	        // Deduct the total cost from the remaining balance
-	        PlayerBusiness.setMoney(PlayerBusiness.getMoney() - totalCost);
+	        PlayerBusiness.money -= totalCost;
 
 	        // Update the UI with the new remaining balance
-	        moneyLabel.setText("$" + PlayerBusiness.getMoney());
+	        moneyLabel.setText("$" + PlayerBusiness.money);
 
 	        // Purchase details
 	        String purchaseDetails = "Items Purchased:\n\n" + textArea.getText() +
-	                "\n\nRemaining Balance: $" + PlayerBusiness.getMoney();
+	                "\n\nRemaining Balance: $" + PlayerBusiness.money;
 
 	        // Save purchased upgrades
 	        for (String item : cartItems) {
@@ -281,7 +281,7 @@ public class ShopPage {
 		scrollPane.setBounds(510, 34, 273, 269);
 		frame.getContentPane().add(scrollPane);
 
-		moneyLabel = new JLabel("$" + Main.game.PlayerBusiness.getMoney());
+		moneyLabel = new JLabel("$" + Main.game.PlayerBusiness.money);
 		moneyLabel.setBackground(new Color(192, 192, 192));
 		moneyLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
 		moneyLabel.setBounds(649, 375, 145, 38);
@@ -319,7 +319,7 @@ public class ShopPage {
 		                    } else {
 		                        int itemCost = getPrice(selectedItem);
 
-		                        if (itemCost > 0 && itemCost <= PlayerBusiness.getMoney()) {
+		                        if (itemCost > 0 && itemCost <= PlayerBusiness.money) {
 		                            // Add the item to the cart
 		                            textArea.append(selectedItem + " - $" + itemCost + "\n");
 		                            setButtonLocation();

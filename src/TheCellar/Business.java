@@ -29,12 +29,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Business implements Serializable {
-    protected String name;
-    protected long money;
-    protected int steaks;
+    public String name;
+    public long money;
+    public int steaks;
     protected double quality; // range from 0-1 representing 0-100%
     protected double cleanliness; // range from 0-1 representing 0-100%
-    protected long debt;
+    public long debt;
     protected Equipment cookingEquipment = new Hotplate();
     protected ArrayList<Chef> chefs = new ArrayList<Chef>();
     protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
@@ -55,50 +55,6 @@ public class Business implements Serializable {
         this.price = Game.baseGoingRate; // default price
     }
 
-    public void setDebt(long NewDebt) {
-    	debt = NewDebt;
-    }
-    
-    public long getDebt() {
-    	return debt;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getMoney() {
-        return money;
-    }
-
-    public int getSteaks() {
-        return steaks;
-    }
-
-    public void setSteaks(int steaks) {
-        this.steaks = steaks;
-    }
-
-    public double getQuality() {
-        return quality;
-    }
-
-    public void setQuality(double quality) {
-        this.quality = quality;
-    }
-
-    public double getCleanliness() {
-        return cleanliness;
-    }
-
-    public void setCleanliness(double cleanliness) {
-        this.cleanliness = cleanliness;
-    }
-
     // get net worth, factors in money, equipment, knives, and debt but not employees
     public long GetNetWorth() {
         int equipmentValue = cookingEquipment.getPrice();
@@ -114,23 +70,23 @@ public class Business implements Serializable {
 
     public void PurchaseFood(Food food) {
     	this.food = food;
-        setMoney(money -= food.getPrice());
+        money -= food.getPrice();
         this.daysOfFood = 7;
     }
 
     public void PurchaseEquipment(Equipment equipment) {
     	cookingEquipment = equipment;
-        setMoney(money -= GetEquipmentPrice(equipment));
+        money -= GetEquipmentPrice(equipment);
     }
 
     public void PurchaseKnife(Knife knife) {
     	knives = knife;
-        setMoney(money -= knife.getPrice());
+        money -= knife.getPrice();
     }
 
     public void TakeOutLoan(int amount) {
     	debt += amount;
-    	setMoney(money += amount);
+    	money += amount;
     }
 
     public int GetEquipmentPrice(Equipment equipment) {
@@ -167,22 +123,22 @@ public class Business implements Serializable {
 
     public void HireCleaner(Cleaner cleaner) {
     	cleaners.add(cleaner);
-        setMoney(money -= cleaner.getPrice());
+        money -= cleaner.getPrice();
     }
 
     public void HireChef(Chef chef) {
     	chefs.add(chef);
-        setMoney(money -= chef.getPrice());
+        money -= chef.getPrice();
     }
 
     public void UpgradeEquipment(Equipment equipment) {
     	cookingEquipment = equipment;
-        setMoney(money -= equipment.getPrice());
+        money -= equipment.getPrice();
     }
 
     public void UpgradeKnife(Knife knife) {
     	knives = knife;
-        setMoney(money -= knife.getPrice());
+        money -= knife.getPrice();
     }
 
     public int getExpenses() {
@@ -219,14 +175,14 @@ public class Business implements Serializable {
         // get mean price of competition multiplied by customer satisfaction
         double meanPrice = 0;
         for (Business b : competition) {
-            meanPrice += b.getPrice()*b.GetCustomerSatisfaction();
+            meanPrice += b.price*b.GetCustomerSatisfaction();
         }
         meanPrice /= competition.size();
 
         // get difference between mean price and our price
-        double difference = meanPrice - getPrice();
+        double difference = meanPrice - price;
 
-        System.out.println("Difference: " + difference);
+//        System.out.println("Difference: " + difference);
 
         // Tweak the curve parameters for a more gradual falloff
         double slope = 1.4;  // Adjust the slope for a more gradual falloff
@@ -263,16 +219,8 @@ public class Business implements Serializable {
 
     public int getProfit() {
         steaks = GetSteaksPerDay();
-    	int profit = (int) (steaks * GetDemand() * getPrice());
+    	int profit = (int) (steaks * GetDemand() * price);
     	return profit;
-    }
-
-    public int getPrice() {
-    	return price;
-    }
-
-    public void setMoney(long money) {
-    	this.money = money;
     }
 
     public int getOptimalPrice() {
@@ -299,20 +247,20 @@ public class Business implements Serializable {
             quality += chef.getModifier();
         }
 
-        // calculate expenses
-        int expenses = getExpenses();
-
-        setMoney(money - expenses);
-        // if money is less than 0, increment debt
-        if (money < 0) {
-            setDebt(debt + Math.abs(money));
-            setMoney(0);
-        }
-
         // calculate profit
         int profit = getProfit();
 
-        setMoney(money += profit);
+        money += profit;
+
+        // calculate expenses
+        int expenses = getExpenses();
+
+        money -= expenses;
+        // if money is less than 0, increment debt
+        if (money < 0) {
+            debt += Math.abs(money);
+            money = 0;
+        }
 
         // if debt is greater than 0, increment days in debt
         if (debt > 0) {
@@ -323,12 +271,15 @@ public class Business implements Serializable {
 
         // if debt is greater than 0 and days in debt is greater than 7, game over
         if (debt > 0 && daysInDebt > 7) {
-            // game over
-            System.out.println("Game over! for " + name + "!");
+            GameOver();
         }
 
         // log inventory and name
         System.out.println(name + " Inventory: " + GetInventory());
+    }
+
+    public void GameOver(){
+        System.out.println("Game over! for " + name + "!");
     }
 
     public String GetInventory(){
@@ -357,7 +308,7 @@ public class Business implements Serializable {
                 "Knife Steaks Per Day: " + knives.getSteaksPerDayIncrease() + "\n" +
                 "Demand: " + GetDemand() + "\n" +
                 "Profit: " + getProfit() + "\n" +
-                "Price: " + getPrice() + "\n" +
+                "Price: " + price + "\n" +
                 "Optimal Price: " + getOptimalPrice() + "\n" +
                 "Net Worth: " + GetNetWorth() + "\n" +
                 "Customer Satisfaction: " + GetCustomerSatisfaction() + "\n" +

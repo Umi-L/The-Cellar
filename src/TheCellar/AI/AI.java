@@ -34,11 +34,24 @@ public class AI extends Business implements Cloneable, Serializable {
 
 		EquipmentDecision(simulated);
 
+		// if days in debt is greater than 3 and we have money pay off loan
+		if (daysInDebt > 3 && money > debt) {
+			money -= debt;
+			debt = 0;
+		}
+
 
 		if (random <= level) { // this will make the AI more likely to change their pricing as the AI level increases
 			// update pricing
 			UpdatePricing(simulated);
 		}
+	}
+
+	@Override
+	public void GameOver(){
+		super.GameOver();
+
+		Main.game.RemoveAI(this);
 	}
 
 	@Override
@@ -59,7 +72,6 @@ public class AI extends Business implements Cloneable, Serializable {
 		Food selected = food;
 
 		int expenses = getExpenses();
-		long money = getMoney();
 		int profit = getProfit();
 
 		// calculate buffer, generally as the AI level increases, the buffer increases
@@ -136,7 +148,7 @@ public class AI extends Business implements Cloneable, Serializable {
 			Chef currChef = Chef.ChefTypes[offsetIndex]; // as AI level increases, the chef types the AI can possibly pick becomes less random.
 
 			// if we have enough money to buy the chef
-			if (getMoney() > currChef.getPrice()) {
+			if (money > currChef.getPrice()) {
 				// if we have no chefs
 				if (chefs.isEmpty()) {
 					// hire the chef
@@ -182,7 +194,7 @@ public class AI extends Business implements Cloneable, Serializable {
 			Equipment currEquipment = Equipment.EquipmentTypes[offsetIndex]; // as AI level increases, the equipment types the AI can possibly pick becomes less random.
 
 			// if we have enough money to buy the equipment and some random chance
-			if (getMoney() > currEquipment.getPrice() && random < level) {
+			if (money > currEquipment.getPrice() && random < level) {
 				// if we have no equipment
 				if (cookingEquipment == null) {
 					// buy the equipment
@@ -228,7 +240,7 @@ public class AI extends Business implements Cloneable, Serializable {
 			Knife currKnife = Knife.KnifeTypes[offsetIndex]; // as AI level increases, the knife types the AI can possibly pick becomes less random.
 
 			// if we have enough money to buy the knife and some random chance
-			if (getMoney() > currKnife.getPrice() && random < level) {
+			if (money > currKnife.getPrice() && random < level) {
 				// if we have no knife
 				if (currKnife == null) {
 					// buy the knife
@@ -264,7 +276,7 @@ public class AI extends Business implements Cloneable, Serializable {
 		int random = Main.game.random.nextInt(10)+1;
 
 		// if we have no loans and we have money
-		if (getMoney() < 100000 && level < 3) {
+		if (money < 100000 && level < 3) {
 			// determine loan amount
 			int loanAmount = 1000*(Main.game.random.nextInt(10)+1);
 
@@ -283,7 +295,7 @@ public class AI extends Business implements Cloneable, Serializable {
 		int random = Main.game.random.nextInt(10)+1;
 
 		// if we have no cleaners and we have money
-		if (getMoney() > 1000 && level < 3 && random < 3) {
+		if (money > 1000 && level < 3 && random < 3) {
 			// hire a cleaner
 			HireCleaner(new Cleaner()); // TODO: Maybe make cleaners have different tiers like chefs?
 		}
@@ -302,11 +314,11 @@ public class AI extends Business implements Cloneable, Serializable {
 
 	public static AI generateAI(int level) {
 		AI ai = new AI();
-		ai.setName("AI " + (level + 1));
+		ai.name = "AI " + level;
 		ai.level = level;
 
 		// as AI level is higher start the AI with more stuff
-		ai.setMoney(999999999); // give a ton of money to buy stuff initially
+		ai.money = 999999999; // give a ton of money to buy stuff initially
 
 		if (level > 9) {
 			ai.PurchaseEquipment(Equipment.EquipmentTypes[Equipment.EquipmentTypes.length - 2]);
@@ -337,7 +349,7 @@ public class AI extends Business implements Cloneable, Serializable {
 		}
 
 		// set AI money to ai level * some value
-		ai.setMoney(level * 2000);
+		ai.money = level * 10000L;
 
 //		ai.setPrice(Main.game.getGoingRate());
 

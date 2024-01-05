@@ -19,6 +19,7 @@ public class Game implements Serializable {
 
 	public Business PlayerBusiness = new Business();
 	public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
+    private ArrayList<AI> AIsToRemove = new ArrayList<AI>();
 
     public int GameSpeed = 4000;
     public final int GameSpeedMax = 5000;
@@ -31,11 +32,11 @@ public class Game implements Serializable {
     public ArrayList<TickListener> tickListeners = new ArrayList<TickListener>();
 
     private int goingRate = 20; // going rate for a steak with 100% quality
-    public static final int baseGoingRate = 25;
+    public static final int baseGoingRate = 40;
     public static final int fluctuation = 5;
 
     public Game() {
-        PlayerBusiness.setName("You");
+        PlayerBusiness.name = "You";
 
         timer.schedule(
             new java.util.TimerTask() {
@@ -100,6 +101,11 @@ public class Game implements Serializable {
         for (TickListener listener : tickListeners) {
             listener.onTick();
         }
+
+        // remove AIs that have lost
+        for (AI ai : AIsToRemove) {
+            AIBusinesses.remove(ai);
+        }
     }
 
     public ArrayList<Business> getCompetitors(Business b){
@@ -134,5 +140,9 @@ public class Game implements Serializable {
 
     public void removeTickListener(TickListener listener) {
         tickListeners.remove(listener);
+    }
+
+    public void RemoveAI(AI ai){
+        AIsToRemove.add(ai);
     }
 }

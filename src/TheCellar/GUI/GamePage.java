@@ -1,5 +1,6 @@
 package TheCellar.GUI;
 
+import TheCellar.AI.AI;
 import TheCellar.Business;
 import TheCellar.Main;
 import TheCellar.TickListener;
@@ -81,13 +82,13 @@ public class GamePage {
 		debt.setBounds(720, 25, 113, 38);
 		frame.getContentPane().add(debt);
 
-		JLabel moneyLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getMoney()));
+		JLabel moneyLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.money));
 		moneyLabel.setBackground(new Color(192, 192, 192));
 		moneyLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
 		moneyLabel.setBounds(820, 8, 124, 38);
 		frame.getContentPane().add(moneyLabel);
 
-		JLabel debtLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.getDebt()));
+		JLabel debtLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.debt));
 		debtLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
 		debtLabel.setBounds(770, 25, 159, 38);
 		frame.getContentPane().add(debtLabel);
@@ -124,7 +125,7 @@ public class GamePage {
 				// add ai businesses
 				for (int i = 0; i < Main.game.AIBusinesses.size(); i++) {
 					Business b = Main.game.AIBusinesses.get(i);
-					labels.add(b.getName());
+					labels.add(b.name);
 
 					double netWorth = (double)b.GetNetWorth();
 
@@ -139,7 +140,7 @@ public class GamePage {
 				}
 
 				// add player business
-				labels.add(Main.game.PlayerBusiness.getName());
+				labels.add(Main.game.PlayerBusiness.name);
 
 				double netWorth = (double)Main.game.PlayerBusiness.GetNetWorth();
 
@@ -164,8 +165,8 @@ public class GamePage {
 				lineGraph.Update(goingRateValues);
 				demandGraph.Update(labels, demandValues);
 
-				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
-		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.getDebt()));
+				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.money));
+		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.debt));
 			}
 		});
 
@@ -284,7 +285,7 @@ public class GamePage {
 
 		Main.game.addTickListener(new TickListener() {
 			public void onTick() {
-				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.getMoney()));
+				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.money));
 			}
 		});
 
