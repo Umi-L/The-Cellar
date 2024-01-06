@@ -37,7 +37,7 @@ public class GamePage {
 		frame = new JFrame();
 		frame.setTitle("The Cellar");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 950, 500);
+		frame.setBounds(100, 100, 1061, 500);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
@@ -74,35 +74,35 @@ public class GamePage {
 
 		JLabel money = new JLabel("Money: ");
 		money.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		money.setBounds(720, 8, 100, 38);
+		money.setBounds(815, 8, 100, 38);
 		frame.getContentPane().add(money);
 
 		JLabel debt = new JLabel("Debt: ");
 		debt.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		debt.setBounds(720, 25, 113, 38);
+		debt.setBounds(815, 25, 113, 38);
 		frame.getContentPane().add(debt);
 
 		JLabel moneyLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.money));
 		moneyLabel.setBackground(new Color(192, 192, 192));
 		moneyLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		moneyLabel.setBounds(820, 8, 124, 38);
+		moneyLabel.setBounds(915, 8, 124, 38);
 		frame.getContentPane().add(moneyLabel);
 
 		JLabel debtLabel = new JLabel(String.valueOf(Main.game.PlayerBusiness.debt));
 		debtLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-		debtLabel.setBounds(770, 25, 159, 38);
+		debtLabel.setBounds(865, 25, 159, 38);
 		frame.getContentPane().add(debtLabel);
 
 		PieChart pieChart = new PieChart();
-		pieChart.setBounds(100, 10, 218, 140);
+		pieChart.setBounds(175, 50, 218, 140);
 		frame.getContentPane().add(pieChart);
 
 		BarGraph steaksPerDayChart = new BarGraph("Steaks Per Day");
-		steaksPerDayChart.setBounds(375, 331, 193, 122);
+		steaksPerDayChart.setBounds(375, 331, 200, 122);
 		frame.getContentPane().add(steaksPerDayChart);
 
 		LineGraph lineGraph = new LineGraph("time", "Going Rate");
-		lineGraph.setBounds(565, 331, 200, 122);
+		lineGraph.setBounds(575, 331, 200, 122);
 		frame.getContentPane().add(lineGraph);
 
 		BarGraph barGraph = new BarGraph("value");
@@ -110,8 +110,18 @@ public class GamePage {
 		frame.getContentPane().add(barGraph);
 
 		BarGraph demandGraph = new BarGraph("Demand");
-		demandGraph.setBounds(175, 207, 200, 116);
+		demandGraph.setBounds(175, 207, 200, 122);
 		frame.getContentPane().add(demandGraph);
+
+		ArrayList<Double> customerSentimentValues = new ArrayList<>();
+		LineGraph CustomerSentimentGraph = new LineGraph("time", "Customer Sentiment");
+		CustomerSentimentGraph.setBounds(375, 207, 200, 122);
+		frame.getContentPane().add(CustomerSentimentGraph);
+
+		ArrayList<Double> netWorthOverTime = new ArrayList<>();
+		LineGraph MarketValueGraph = new LineGraph("time", "Net Worth");
+		MarketValueGraph.setBounds(575, 207, 200, 122);
+		frame.getContentPane().add(MarketValueGraph);
 
 		ArrayList<Double> goingRateValues = new ArrayList<>();
 		Main.game.addTickListener(new TickListener() {
@@ -151,19 +161,37 @@ public class GamePage {
 				netWorthValues.add(netWorth);
 				steaksPerDay.add((double)Main.game.PlayerBusiness.GetSteaksPerDay());
 
+				// add player value over times
 				goingRateValues.add((double)Main.game.getGoingRate());
 				demandValues.add(Main.game.PlayerBusiness.GetDemand());
+				netWorthOverTime.add((double)Main.game.PlayerBusiness.GetNetWorth());
+				customerSentimentValues.add(Main.game.PlayerBusiness.GetCustomerSatisfaction());
 
 				// if more than 10 values, remove the first one
 				if (goingRateValues.size() > 10) {
 					goingRateValues.remove(0);
 				}
+				if (netWorthOverTime.size() > 10) {
+					netWorthOverTime.remove(0);
+				}
+				if (customerSentimentValues.size() > 10) {
+					customerSentimentValues.remove(0);
+				}
 
+				// update graphs
+
+				// pie charts
 				pieChart.Update(labels, netWorthValues);
+
+				// bar graphs
 				steaksPerDayChart.Update(labels, steaksPerDay);
 				barGraph.Update(labels, netWorthValues);
-				lineGraph.Update(goingRateValues);
 				demandGraph.Update(labels, demandValues);
+
+				// line graphs
+				lineGraph.Update(goingRateValues);
+				MarketValueGraph.Update(netWorthOverTime);
+				CustomerSentimentGraph.Update(customerSentimentValues);
 
 				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.money));
 		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.debt));
@@ -233,9 +261,9 @@ public class GamePage {
 		frame.getContentPane().add(setSteakPriceButton);
 		
 		JTextPane InventoryPane = new JTextPane();
-		InventoryPane.setFont(new Font("Tahoma", Font.PLAIN, 7));
+		InventoryPane.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		InventoryPane.setText("Stuff\r\nhere\r\noh");
-		InventoryPane.setBounds(494, 19, 184, 311);
+		InventoryPane.setBounds(815, 123, 224, 332);
 		frame.getContentPane().add(InventoryPane);
 
 
@@ -283,9 +311,64 @@ public class GamePage {
 			}
 		});
 
+
+		JLabel DebtWarningLabel = new JLabel("You've been in debt for _ days you will lose in _ days");
+		DebtWarningLabel.setForeground(new Color(255, 0, 0));
+		DebtWarningLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		DebtWarningLabel.setBounds(176, 20, 407, 21);
+		frame.getContentPane().add(DebtWarningLabel);
+
+		JButton DebtPaymentButton = new JButton("Pay Debt!");
+		DebtPaymentButton.setForeground(new Color(255, 0, 0));
+		DebtPaymentButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		DebtPaymentButton.setBounds(624, 15, 124, 26);
+		frame.getContentPane().add(DebtPaymentButton);
+
+		// add action listener to the debt payment button
+		DebtPaymentButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// pay the debt
+				boolean paidOff = Main.game.PlayerBusiness.PayDebt();
+
+				// if not paid off show a message
+				if (!paidOff) {
+					JOptionPane.showMessageDialog(frame, "You don't have enough money to pay off your debt");
+				}
+			}
+		});
+
 		Main.game.addTickListener(new TickListener() {
 			public void onTick() {
 				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.money));
+
+				// if the player is in debt
+				if (Main.game.PlayerBusiness.debt > 0) {
+					// show the debt warning label
+					DebtWarningLabel.setVisible(true);
+					DebtWarningLabel.setText("You've been in debt for " + Main.game.PlayerBusiness.daysInDebt + " days you will lose in " + (7-Main.game.PlayerBusiness.daysInDebt) + " days");
+
+					// show the debt payment button
+					DebtPaymentButton.setVisible(true);
+
+				} else {
+					// hide the debt warning label
+					DebtWarningLabel.setVisible(false);
+
+					// hide the debt payment button
+					DebtPaymentButton.setVisible(false);
+				}
+
+				// if the player has lost
+				if (Main.game.PlayerBusiness.daysInDebt > 7) {
+
+					// set game over
+					Main.game.GameOver();
+
+					// show the game over page
+					frame.setVisible(false);
+					GameOverPage gameOver = new GameOverPage();
+
+				}
 			}
 		});
 

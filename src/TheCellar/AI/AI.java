@@ -36,8 +36,7 @@ public class AI extends Business implements Cloneable, Serializable {
 
 		// if days in debt is greater than 3 and we have money pay off loan
 		if (daysInDebt > 3 && money > debt) {
-			money -= debt;
-			debt = 0;
+			PayDebt();
 		}
 
 

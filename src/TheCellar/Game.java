@@ -29,6 +29,8 @@ public class Game implements Serializable {
     public Timer timer = new Timer();
     public Random random = new Random();
 
+    private boolean gameIsOver = false;
+
     public ArrayList<TickListener> tickListeners = new ArrayList<TickListener>();
 
     private int goingRate = 20; // going rate for a steak with 100% quality
@@ -65,7 +67,16 @@ public class Game implements Serializable {
         GameSpeed = speed;
     }
 
+    public void GameOver() {
+    	gameIsOver = true;
+    }
+
     public void Update(){
+
+        // if the game is over stop updating
+        if (gameIsOver) {
+            return;
+        }
 
         TotalTime++; // increment total time
 

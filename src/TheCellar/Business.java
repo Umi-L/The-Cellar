@@ -41,7 +41,7 @@ public class Business implements Serializable {
     protected Knife knives = new PlasticKnives();
     protected Food food = new FoodScraps();
     protected int daysOfFood = 7;
-    protected int daysInDebt;
+    public int daysInDebt;
     protected int price;
     
     public Business() {
@@ -226,6 +226,20 @@ public class Business implements Serializable {
     public int getOptimalPrice() {
         int optimalPrice = (int) (food.getQualityModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
         return optimalPrice;
+    }
+
+    // returns true if debt is paid off
+    public boolean PayDebt() {
+    	// pay off as much as possible
+        if (money > debt) {
+            money -= debt;
+            debt = 0;
+            return true;
+        } else {
+            debt -= money;
+            money = 0;
+            return false;
+        }
     }
 
     public void Update() {
