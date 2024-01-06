@@ -5,9 +5,7 @@ This is seperated because it needs to be serialized and deserialized.
 
 import java.io.Console;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
+import java.util.*;
 
 import TheCellar.AI.AI;
 import TheCellar.GUI.ShopPage;
@@ -20,6 +18,8 @@ public class Game implements Serializable {
 	public Business PlayerBusiness = new Business();
 	public ArrayList<AI> AIBusinesses = new ArrayList<AI>();
     private ArrayList<AI> AIsToRemove = new ArrayList<AI>();
+
+    public static Set<Object> purchasedUpgrades = new HashSet<>();
 
     public int GameSpeed = 4000;
     public final int GameSpeedMax = 5000;

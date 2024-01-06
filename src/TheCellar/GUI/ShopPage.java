@@ -39,6 +39,8 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import static TheCellar.Game.purchasedUpgrades;
+
 public class ShopPage {
 	private JFrame frame;
 	private JTextArea textArea;
@@ -49,7 +51,6 @@ public class ShopPage {
 	private JComboBox<Object> equipment = new JComboBox<>();
 	private JComboBox<Object> food = new JComboBox<>();
 	private JComboBox<Object> knife = new JComboBox<>();
-	private static Set<Object> purchasedUpgrades = new HashSet<>();
 	private Business PlayerBusiness;
 
 
@@ -71,18 +72,6 @@ public class ShopPage {
 	            purchasedUpgrades.add(line);
 	        }
 	        System.out.println("Loaded Purchased Upgrades: " + purchasedUpgrades);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
-
-	    // Method to save purchased upgrades 
-	private static void savePurchasedUpgrades() {
-	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("purchasedUpgrades.csv"))) {
-	        for (Object upgrade : purchasedUpgrades) {
-	            writer.write(upgrade.toString());
-	            writer.newLine();
-	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
@@ -183,7 +172,6 @@ public class ShopPage {
 	            String itemName = item.split(" - ")[0].toLowerCase();  // Convert to lowercase
 	            purchasedUpgrades.add(itemName);
 	        }
-	        savePurchasedUpgrades();
 
 	        JOptionPane.showMessageDialog(frame, "Purchase successful!\n\n" + purchaseDetails);
 
