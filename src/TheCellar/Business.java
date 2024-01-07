@@ -40,9 +40,9 @@ public class Business implements Serializable {
     protected ArrayList<Cleaner> cleaners = new ArrayList<Cleaner>();
     protected Knife knives = new PlasticKnives();
     protected Food food = new FoodScraps();
-    protected int daysOfFood = 7;
+    public int daysOfFood = 7;
     public int daysInDebt;
-    protected int price;
+    public int price;
     
     public Business() {
         // Set the starting net worth to $10,000
@@ -162,6 +162,17 @@ public class Business implements Serializable {
     	return expense;
     }
 
+    public double getProfitMargin() {
+    	return CalculateProfitMargin(price, food.getPrice() / (double)steaks);
+    }
+
+    private double CalculateProfitMargin(double sellingPrice, double costPrice)
+    {
+        double profit = sellingPrice - costPrice;
+        double profitMargin = profit / sellingPrice;
+        return profitMargin;
+    }
+
     public double GetDemand() {
 
         // if clenliness is less than 0.1, demand is 0
@@ -199,6 +210,10 @@ public class Business implements Serializable {
 
     public int GetSteaksPerDay() {
         int steaks = 20; // base steaks per day
+
+        if (daysOfFood == 0) {
+            return 0;
+        }
 
         // foreach chef, add steaks to steaks
         for (Chef chef : chefs) {
@@ -283,8 +298,13 @@ public class Business implements Serializable {
             daysInDebt = 0;
         }
 
+        // if days of food is greater than 0, decrement days of food
+        if (daysOfFood > 0) {
+            daysOfFood--;
+        }
+
         // if debt is greater than 0 and days in debt is greater than 7, game over
-        if (debt > 0 && daysInDebt > 7) {
+        if (debt > 0 && daysInDebt > Game.MaxDebtDays) {
             GameOver();
         }
 

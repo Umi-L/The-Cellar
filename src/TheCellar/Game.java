@@ -24,6 +24,7 @@ public class Game implements Serializable {
     public int GameSpeed = 4000;
     public final int GameSpeedMax = 5000;
     public final int GameSpeedMin = 100;
+    public static final int MaxDebtDays = 7*4;
     public int period = 50;
     public int TotalTime = 0;
     public Timer timer = new Timer();
@@ -57,6 +58,30 @@ public class Game implements Serializable {
             AI ai = AI.generateAI(i);
             AIBusinesses.add(ai);
         }
+    }
+
+    public void Tick(){
+        for (TickListener listener : tickListeners) {
+            listener.onTick();
+        }
+    }
+
+    public void Pause() {
+    	timer.cancel();
+    }
+
+    public void Resume() {
+        timer = new Timer();
+
+    	timer.schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Update();
+                    }
+                },
+                GameSpeed
+        );
     }
 
     public int getGoingRate() {

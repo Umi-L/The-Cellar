@@ -1,9 +1,7 @@
 package TheCellar.GUI;
 
+import TheCellar.*;
 import TheCellar.AI.AI;
-import TheCellar.Business;
-import TheCellar.Main;
-import TheCellar.TickListener;
 import TheCellar.Charts.BarGraph;
 import TheCellar.Charts.LineGraph;
 import TheCellar.Charts.PieChart;
@@ -37,7 +35,7 @@ public class GamePage {
 		frame = new JFrame();
 		frame.setTitle("The Cellar");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 1061, 500);
+		frame.setBounds(100, 100, 1061, 628);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
@@ -48,7 +46,7 @@ public class GamePage {
 		//		frame.getContentPane().add(Animation);
 
 		JSlider slider = new JSlider();
-		slider.setBounds(14, 384, 151, 26);
+		slider.setBounds(14, 515, 151, 26);
 		frame.getContentPane().add(slider);
 		slider.addChangeListener(e -> {
 			if (textListenerEnabled) {
@@ -68,7 +66,7 @@ public class GamePage {
 		slider.setValue(100-((Main.game.GameSpeed - Main.game.GameSpeedMin) * 100 / (Main.game.GameSpeedMax - Main.game.GameSpeedMin)));
 
 		JLabel timeLabel = new JLabel("Game Speed\r\n");
-		timeLabel.setBounds(54, 369, 81, 14);
+		timeLabel.setBounds(54, 500, 81, 14);
 		frame.getContentPane().add(timeLabel);
 
 
@@ -94,15 +92,15 @@ public class GamePage {
 		frame.getContentPane().add(debtLabel);
 
 		PieChart pieChart = new PieChart();
-		pieChart.setBounds(175, 50, 218, 140);
+		pieChart.setBounds(248, 53, 218, 140);
 		frame.getContentPane().add(pieChart);
 
 		BarGraph steaksPerDayChart = new BarGraph("Steaks Per Day");
-		steaksPerDayChart.setBounds(375, 331, 200, 122);
+		steaksPerDayChart.setBounds(383, 331, 200, 122);
 		frame.getContentPane().add(steaksPerDayChart);
 
 		LineGraph lineGraph = new LineGraph("time", "Going Rate");
-		lineGraph.setBounds(575, 331, 200, 122);
+		lineGraph.setBounds(593, 331, 200, 122);
 		frame.getContentPane().add(lineGraph);
 
 		BarGraph barGraph = new BarGraph("value");
@@ -110,18 +108,38 @@ public class GamePage {
 		frame.getContentPane().add(barGraph);
 
 		BarGraph demandGraph = new BarGraph("Demand");
-		demandGraph.setBounds(175, 207, 200, 122);
+		demandGraph.setBounds(175, 203, 200, 122);
 		frame.getContentPane().add(demandGraph);
+
+		ArrayList<Double> marginValues = new ArrayList<>();
+		LineGraph MarginsGraph = new LineGraph("time", "Profit Margins");
+		MarginsGraph.setBounds(593, 459, 200, 122);
+		frame.getContentPane().add(MarginsGraph);
+
+		ArrayList<Double> expensesValues = new ArrayList<>();
+		LineGraph ExpensesGraph = new LineGraph("time", "Expenses");
+		ExpensesGraph.setBounds(383, 459, 200, 122);
+		frame.getContentPane().add(ExpensesGraph);
+
+		ArrayList<Double> profitValues = new ArrayList<>();
+		LineGraph ProfitGraph = new LineGraph("time", "Profit");
+		ProfitGraph.setBounds(175, 459, 200, 122);
+		frame.getContentPane().add(ProfitGraph);
 
 		ArrayList<Double> customerSentimentValues = new ArrayList<>();
 		LineGraph CustomerSentimentGraph = new LineGraph("time", "Customer Sentiment");
-		CustomerSentimentGraph.setBounds(375, 207, 200, 122);
+		CustomerSentimentGraph.setBounds(383, 203, 200, 122);
 		frame.getContentPane().add(CustomerSentimentGraph);
 
 		ArrayList<Double> netWorthOverTime = new ArrayList<>();
 		LineGraph MarketValueGraph = new LineGraph("time", "Net Worth");
-		MarketValueGraph.setBounds(575, 207, 200, 122);
+		MarketValueGraph.setBounds(593, 203, 200, 122);
 		frame.getContentPane().add(MarketValueGraph);
+
+		ArrayList<Double> AvgSalePriceValues = new ArrayList<>();
+		LineGraph AvgSalePriceGraph = new LineGraph("time", "Average Sale Price");
+		AvgSalePriceGraph.setBounds(490, 50, 218, 140);
+		frame.getContentPane().add(AvgSalePriceGraph);
 
 		ArrayList<Double> goingRateValues = new ArrayList<>();
 		Main.game.addTickListener(new TickListener() {
@@ -166,6 +184,29 @@ public class GamePage {
 				demandValues.add(Main.game.PlayerBusiness.GetDemand());
 				netWorthOverTime.add((double)Main.game.PlayerBusiness.GetNetWorth());
 				customerSentimentValues.add(Main.game.PlayerBusiness.GetCustomerSatisfaction());
+				profitValues.add((double)Main.game.PlayerBusiness.getProfit());
+				expensesValues.add((double)Main.game.PlayerBusiness.getExpenses());
+
+				// get mean sale price
+				int buisnessCount = 1;
+				double totalSalePrice = Main.game.PlayerBusiness.price;
+				for (AI ai : Main.game.AIBusinesses) {
+					buisnessCount++;
+					totalSalePrice += ai.price;
+				}
+				double avgSalePrice = totalSalePrice / buisnessCount;
+
+				// round to 1 decimal
+				avgSalePrice = Math.round(avgSalePrice * 10.0) / 10.0;
+
+				// add to avg sale price values
+				AvgSalePriceValues.add(avgSalePrice);
+
+				double marginValue = Main.game.PlayerBusiness.getProfitMargin();
+				if (marginValue < 0) {
+					marginValue = 0;
+				}
+				marginValues.add(marginValue);
 
 				// if more than 10 values, remove the first one
 				if (goingRateValues.size() > 10) {
@@ -177,6 +218,19 @@ public class GamePage {
 				if (customerSentimentValues.size() > 10) {
 					customerSentimentValues.remove(0);
 				}
+				if (profitValues.size() > 10) {
+					profitValues.remove(0);
+				}
+				if (expensesValues.size() > 10) {
+					expensesValues.remove(0);
+				}
+				if (marginValues.size() > 10) {
+					marginValues.remove(0);
+				}
+				if (AvgSalePriceValues.size() > 10) {
+					AvgSalePriceValues.remove(0);
+				}
+
 
 				// update graphs
 
@@ -192,6 +246,10 @@ public class GamePage {
 				lineGraph.Update(goingRateValues);
 				MarketValueGraph.Update(netWorthOverTime);
 				CustomerSentimentGraph.Update(customerSentimentValues);
+				ProfitGraph.Update(profitValues);
+				ExpensesGraph.Update(expensesValues);
+				MarginsGraph.Update(marginValues);
+				AvgSalePriceGraph.Update(AvgSalePriceValues);
 
 				moneyLabel.setText(String.valueOf(Main.game.PlayerBusiness.money));
 		        debtLabel.setText(String.valueOf(Main.game.PlayerBusiness.debt));
@@ -257,13 +315,13 @@ public class GamePage {
 		});
 
 		JButton setSteakPriceButton = new JButton("Set Steak Price");
-		setSteakPriceButton.setBounds(14, 410, 150, 30); 
+		setSteakPriceButton.setBounds(15, 551, 150, 30); 
 		frame.getContentPane().add(setSteakPriceButton);
 		
 		JTextPane InventoryPane = new JTextPane();
 		InventoryPane.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		InventoryPane.setText("Stuff\r\nhere\r\noh");
-		InventoryPane.setBounds(815, 123, 224, 332);
+		InventoryPane.setBounds(815, 92, 224, 489);
 		frame.getContentPane().add(InventoryPane);
 
 
@@ -315,14 +373,28 @@ public class GamePage {
 		JLabel DebtWarningLabel = new JLabel("You've been in debt for _ days you will lose in _ days");
 		DebtWarningLabel.setForeground(new Color(255, 0, 0));
 		DebtWarningLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		DebtWarningLabel.setBounds(176, 20, 407, 21);
+		DebtWarningLabel.setBounds(176, 20, 469, 21);
 		frame.getContentPane().add(DebtWarningLabel);
 
 		JButton DebtPaymentButton = new JButton("Pay Debt!");
 		DebtPaymentButton.setForeground(new Color(255, 0, 0));
 		DebtPaymentButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		DebtPaymentButton.setBounds(624, 15, 124, 26);
+		DebtPaymentButton.setBounds(653, 15, 124, 26);
 		frame.getContentPane().add(DebtPaymentButton);
+		
+		JLabel DaysOfFoodLabel = new JLabel("Days Of Food:");
+		DaysOfFoodLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		DaysOfFoodLabel.setBounds(815, 46, 151, 38);
+		frame.getContentPane().add(DaysOfFoodLabel);
+		
+		JLabel daysOfFoodValue = new JLabel("0");
+		daysOfFoodValue.setFont(new Font("SansSerif", Font.ITALIC, 18));
+		daysOfFoodValue.setBackground(Color.LIGHT_GRAY);
+		daysOfFoodValue.setBounds(940, 46, 124, 38);
+		frame.getContentPane().add(daysOfFoodValue);
+		
+
+
 
 		// add action listener to the debt payment button
 		DebtPaymentButton.addActionListener(new ActionListener() {
@@ -345,7 +417,7 @@ public class GamePage {
 				if (Main.game.PlayerBusiness.debt > 0) {
 					// show the debt warning label
 					DebtWarningLabel.setVisible(true);
-					DebtWarningLabel.setText("You've been in debt for " + Main.game.PlayerBusiness.daysInDebt + " days you will lose in " + (7-Main.game.PlayerBusiness.daysInDebt) + " days");
+					DebtWarningLabel.setText("You've been in debt for " + Main.game.PlayerBusiness.daysInDebt + " days you will lose in " + (Game.MaxDebtDays-Main.game.PlayerBusiness.daysInDebt) + " days");
 
 					// show the debt payment button
 					DebtPaymentButton.setVisible(true);
@@ -359,7 +431,7 @@ public class GamePage {
 				}
 
 				// if the player has lost
-				if (Main.game.PlayerBusiness.daysInDebt > 7) {
+				if (Main.game.PlayerBusiness.daysInDebt > Game.MaxDebtDays) {
 
 					// set game over
 					Main.game.GameOver();
@@ -369,9 +441,43 @@ public class GamePage {
 					GameOverPage gameOver = new GameOverPage();
 
 				}
+
+				// update days of food value
+				daysOfFoodValue.setText(String.valueOf(Main.game.PlayerBusiness.daysOfFood));
+
+				// if 0 make it red else black
+				if (Main.game.PlayerBusiness.daysOfFood == 0) {
+					daysOfFoodValue.setForeground(Color.RED);
+					DaysOfFoodLabel.setForeground(Color.RED);
+				} else {
+					daysOfFoodValue.setForeground(Color.BLACK);
+					DaysOfFoodLabel.setForeground(Color.BLACK);
+				}
 			}
 		});
 
+		// on quit ask if they want to save
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	// show a confirm dialog
+		        if (JOptionPane.showConfirmDialog(frame,
+		            "Would you like to save before quitting?", "Quit",
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+		        	// if yes save the game
+		        	SaveLoadSystem.saveGame(Main.game);
+
+		        	// exit the program
+		        	System.exit(0);
+		        } else {
+		        	// exit the program
+		        	System.exit(0);
+		        }
+		    }
+		});
+
+		Main.game.Tick(); // populate graphs
 
 		frame.setVisible(true);
 	}

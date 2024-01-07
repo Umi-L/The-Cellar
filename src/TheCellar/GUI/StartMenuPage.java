@@ -4,9 +4,7 @@ import TheCellar.Game;
 import TheCellar.Main;
 import TheCellar.SaveLoadSystem;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -14,7 +12,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import java.awt.Color;
 
 public class StartMenuPage {
@@ -67,6 +64,32 @@ public class StartMenuPage {
 				frame.setVisible(false);
 				Main.game = new Game();
 				Main.game.GenerateAI();
+
+				Main.game.Pause();
+
+				// while input is not a number, keep asking for input
+				boolean isNumber = false;
+				while (!isNumber) {
+					try {
+						String out = JOptionPane.showInputDialog("Enter starting price of steak going rate is " + Main.game.getGoingRate() + ":");
+
+						// if null close
+						if (out == null) {
+							System.exit(0);
+						}
+
+						// show number input option pane
+						int startingSteakPrice = Integer.parseInt(out);
+						Main.game.PlayerBusiness.setPrice(startingSteakPrice);
+						isNumber = true;
+					} catch (NumberFormatException ex) {
+						// show error message
+						JOptionPane.showMessageDialog(null, "Please enter a number.");
+					}
+				}
+
+				Main.game.Resume();
+
 				GamePage window2 = new GamePage();
 				GamePage.showWindow();
 			}
@@ -157,11 +180,11 @@ public class StartMenuPage {
 		btnNewButton_1.setBounds(60, 303, 219, 70);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Load Save");
-		btnNewButton_2.setBackground(new Color(116, 116, 116));
-		btnNewButton_2.setFont(new Font("Arial", Font.PLAIN, 21));
-		btnNewButton_2.setForeground(new Color(0, 0, 0));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton loadButton = new JButton("Load Save");
+		loadButton.setBackground(new Color(116, 116, 116));
+		loadButton.setFont(new Font("Arial", Font.PLAIN, 21));
+		loadButton.setForeground(new Color(0, 0, 0));
+		loadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.game = SaveLoadSystem.loadGame();
 				Main.game.JustLoaded();
@@ -170,8 +193,14 @@ public class StartMenuPage {
 			}
 		});
 
-		btnNewButton_2.setBounds(60, 198, 219, 70);
-		frame.getContentPane().add(btnNewButton_2);
+		loadButton.setBounds(60, 198, 219, 70);
+		frame.getContentPane().add(loadButton);
+
+		// if save.sav doesn't exist, disable load button
+		File saveFile = new File("save.sav");
+		if (!saveFile.exists()) {
+			loadButton.setEnabled(false);
+		}
 		
 		frame.setVisible(true);
 		
