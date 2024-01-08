@@ -56,6 +56,7 @@ public class BankPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+				Main.game.Resume();
                 GamePage window2 = new GamePage();
                 window2.showWindow();
             }
@@ -68,6 +69,7 @@ public class BankPage {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Resume();
 				GamePage window2 = new GamePage();
 				window2.showWindow();
 		

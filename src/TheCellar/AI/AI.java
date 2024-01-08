@@ -83,13 +83,13 @@ public class AI extends Business implements Cloneable, Serializable {
 
 		// remove current food from expenses
 		if (daysOfFood == 0){
-			expenses -= food.getPrice();
+			expenses -= food.price;
 		}
 
 		// foreach food type in Food.FoodTypes
 		for (Food currFood : Food.FoodTypes) {
 			// if food price is some buffer away from money
-			if (currFood.getPrice() < money - expenses + buffer + profit) {
+			if (currFood.price < money - expenses + buffer + profit) {
 				selected = currFood;
 			} else{
 				if (level < 3){ // if low ai level we're stupid and ignore the buffer
@@ -147,7 +147,7 @@ public class AI extends Business implements Cloneable, Serializable {
 			Chef currChef = Chef.ChefTypes[offsetIndex]; // as AI level increases, the chef types the AI can possibly pick becomes less random.
 
 			// if we have enough money to buy the chef
-			if (money > currChef.getPrice()) {
+			if (money > currChef.price) {
 				// if we have no chefs
 				if (chefs.isEmpty()) {
 					// hire the chef
@@ -193,7 +193,7 @@ public class AI extends Business implements Cloneable, Serializable {
 			Equipment currEquipment = Equipment.EquipmentTypes[offsetIndex]; // as AI level increases, the equipment types the AI can possibly pick becomes less random.
 
 			// if we have enough money to buy the equipment and some random chance
-			if (money > currEquipment.getPrice() && random < level) {
+			if (money > currEquipment.price && random < level) {
 				// if we have no equipment
 				if (cookingEquipment == null) {
 					// buy the equipment
@@ -239,7 +239,7 @@ public class AI extends Business implements Cloneable, Serializable {
 			Knife currKnife = Knife.KnifeTypes[offsetIndex]; // as AI level increases, the knife types the AI can possibly pick becomes less random.
 
 			// if we have enough money to buy the knife and some random chance
-			if (money > currKnife.getPrice() && random < level) {
+			if (money > currKnife.price && random < level) {
 				// if we have no knife
 				if (currKnife == null) {
 					// buy the knife

@@ -7,31 +7,10 @@ get&set for all fields
 
 import java.io.Serializable;
 
-public class Cleaner  implements Serializable {
-	protected String name = "Cleaner";
-    protected int price = 1200;
-    protected double clenlinessModifier = .15;
-
-	public String getName() {
-		return name;
-	}
-
-    public int getPrice() {
-        return price;
-
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-
-    }
-
-    public double getModifier() {
-        return clenlinessModifier;
-
-    }
-	
-	public String toString() {
-	    return getName();  
+public class Cleaner extends Purchasable implements Serializable {
+    public Cleaner() {
+    	this.name = "Cleaner";
+    	this.price = 1200;
+    	this.cleanlinessModifier = .15;
     }
 }

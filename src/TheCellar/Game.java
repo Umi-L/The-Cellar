@@ -7,10 +7,13 @@ import java.io.Console;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.*;
+import java.util.Timer;
 
 import TheCellar.AI.AI;
+import TheCellar.GUI.GamePage;
 import TheCellar.GUI.ShopPage;
 
+import javax.swing.*;
 
 
 public class Game implements Serializable {
@@ -35,8 +38,8 @@ public class Game implements Serializable {
 
     public ArrayList<TickListener> tickListeners = new ArrayList<TickListener>();
 
-    private int goingRate = 20; // going rate for a steak with 100% quality
     public static final int baseGoingRate = 40;
+    private int goingRate = baseGoingRate; // going rate for a steak with 100% quality
     public static final int fluctuation = 5;
 
     public Game() {
@@ -192,5 +195,38 @@ public class Game implements Serializable {
 
     public void RemoveAI(AI ai){
         AIsToRemove.add(ai);
+    }
+
+    public static void CreateNewGame(){
+        Main.game = new Game();
+        Main.game.GenerateAI();
+
+        Main.game.Pause();
+
+        // while input is not a number, keep asking for input
+        boolean isNumber = false;
+        while (!isNumber) {
+            try {
+                String out = JOptionPane.showInputDialog("Enter starting price of steak going rate is " + Main.game.getGoingRate() + ":");
+
+                // if null close
+                if (out == null) {
+                    System.exit(0);
+                }
+
+                // show number input option pane
+                int startingSteakPrice = Integer.parseInt(out);
+                Main.game.PlayerBusiness.setPrice(startingSteakPrice);
+                isNumber = true;
+            } catch (NumberFormatException ex) {
+                // show error message
+                JOptionPane.showMessageDialog(null, "Please enter a number.");
+            }
+        }
+
+        Main.game.Resume();
+
+        GamePage window2 = new GamePage();
+        GamePage.showWindow();
     }
 }

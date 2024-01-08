@@ -1,5 +1,6 @@
 package TheCellar.GUI;
 
+import TheCellar.Game;
 import TheCellar.Main;
 import TheCellar.SaveLoadSystem;
 
@@ -44,7 +45,7 @@ public class GameOverPage {
 	Restart.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
-			new GamePage();
+			Game.CreateNewGame();
 		}
 	});
 	Restart.setBounds(116, 171, 219, 42);

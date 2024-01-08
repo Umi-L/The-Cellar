@@ -281,6 +281,7 @@ public class GamePage {
 		bankButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Pause();
 				TheCellar.GUI.BankPage bank = new BankPage();
 				bank.showWindow();
 			}
@@ -294,6 +295,7 @@ public class GamePage {
 		shopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Pause();
 				TheCellar.GUI.ShopPage shop = new ShopPage();
 				shop.showWindow();
 			}
@@ -311,6 +313,7 @@ public class GamePage {
 		hireButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Pause();
 				TheCellar.GUI.HirePage chefs = new HirePage();
 				chefs.showWindow();	
 			}
@@ -367,6 +370,7 @@ public class GamePage {
 
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Pause();
 				PauseMenuPage pause = new PauseMenuPage();
 				pause.showWindow();
 			}

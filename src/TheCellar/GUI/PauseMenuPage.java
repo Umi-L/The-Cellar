@@ -1,5 +1,6 @@
 package TheCellar.GUI;
 
+import TheCellar.Game;
 import TheCellar.Main;
 import TheCellar.SaveLoadSystem;
 
@@ -42,7 +43,8 @@ public class PauseMenuPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                GamePage window2 = new GamePage();
+				Main.game.Resume();
+				GamePage window2 = new GamePage();
                 window2.showWindow();
             }
         });
@@ -54,6 +56,7 @@ public class PauseMenuPage {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Resume();
 				GamePage window2 = new GamePage();
 				window2.showWindow();
 						
@@ -137,7 +140,7 @@ public class PauseMenuPage {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new GamePage();
+				Game.CreateNewGame();
 			}
 		});
 		btnNewButton_4.setBounds(339, 199, 52, 16);

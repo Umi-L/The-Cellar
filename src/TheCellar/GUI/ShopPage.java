@@ -1,12 +1,6 @@
 package TheCellar.GUI;
 
-import TheCellar.Business;
-import TheCellar.Cleaner;
-import TheCellar.Equipment;
-import TheCellar.Food;
-import TheCellar.Game;
-import TheCellar.Knife;
-import TheCellar.Main;
+import TheCellar.*;
 
 
 import java.awt.Color;
@@ -20,6 +14,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,11 +42,11 @@ public class ShopPage {
 	private JScrollPane scrollPane;
 	private JLabel moneyLabel; 
 	private JButton addToCartButton;
-	private JComboBox<?> selectedComboBox;
-	private JComboBox<Object> equipment = new JComboBox<>();
-	private JComboBox<Object> food = new JComboBox<>();
-	private JComboBox<Object> knife = new JComboBox<>();
-	private Business PlayerBusiness;
+	private JComboBox<Purchasable> selectedComboBox;
+	private JComboBox<Purchasable> equipment = new JComboBox<>();
+	private JComboBox<Purchasable> food = new JComboBox<>();
+	private JComboBox<Purchasable> knife = new JComboBox<>();
+	private ArrayList<Purchasable> cartItems = new ArrayList<>();
 
 
 	public static void showWindow() {
@@ -63,18 +58,6 @@ public class ShopPage {
 			Rectangle comboBoxBounds = selectedComboBox.getBounds();
 			addToCartButton.setBounds(comboBoxBounds.x + comboBoxBounds.width + 1, comboBoxBounds.y, 114, 30);
 		}
-	}
-	//method to load purchased upgrades
-	private static void loadPurchasedUpgrades() {
-	    try (BufferedReader reader = new BufferedReader(new FileReader("purchasedUpgrades.csv"))) {
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            purchasedUpgrades.add(line);
-	        }
-	        System.out.println("Loaded Purchased Upgrades: " + purchasedUpgrades);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
 	}
 	
 	//handle combo box selection and set location of add to cart button
@@ -98,7 +81,7 @@ public class ShopPage {
 	    }
 	}
 	//Method to hide other combo boxes when another upgrade type is clicked
-	private void hideOtherComboBoxes(JComboBox<Object> selectedComboBox) {
+	private void hideOtherComboBoxes(JComboBox<Purchasable> selectedComboBox) {
 		if (equipment != null && equipment != selectedComboBox) {
 			equipment.setVisible(false);
 		}
@@ -114,7 +97,7 @@ public class ShopPage {
 		addToCartButton.setVisible(false);
 	}
 
-	private Object getSelectedItem() {
+	private Purchasable getSelectedItem() {
 		if (selectedComboBox != null) {
 			int selectedIndex = selectedComboBox.getSelectedIndex();
 			if (selectedIndex >= 0) {
@@ -124,54 +107,48 @@ public class ShopPage {
 		return null;
 	}
 
-	private int getPrice(Object selectedItem) {
-		if (selectedItem instanceof Equipment) {
-			return ((Equipment) selectedItem).getPrice();
-		} else if (selectedItem instanceof Food) {
-			return ((Food) selectedItem).getPrice();
-		} else if (selectedItem instanceof Knife) {
-			return ((Knife) selectedItem).getPrice();
-		} else {
-
-			return 0;
-		}
+	private int getPrice(Purchasable selectedItem) {
+		return selectedItem.price;
 	}
 	
 	private void processPurchase() {
-	    // Calculate the total cost and process the purchase
-	    String[] cartItems = textArea.getText().split("\n");
 	    int totalCost = 0;
 
-	    for (String item : cartItems) {
-	        // Assume each line in the cart represents an item with a cost at the end
-	        String[] parts = item.split("\\$");
-	        if (parts.length > 1) {
-	            try {
-	                int itemCost = Integer.parseInt(parts[1].trim());
-	                totalCost += itemCost;
-	            } catch (NumberFormatException ex) {
-	                // Handle the exception if necessary
-	            }
-	        }
+	    for (Purchasable item : cartItems) {
+	        totalCost += Main.game.PlayerBusiness.GetPurchasablePrice(item);
 	    }
 
 	    // Check if the total cost is less than or equal to remainingBalance
-	    if (totalCost <= PlayerBusiness.money) {
+	    if (totalCost <= Main.game.PlayerBusiness.money) {
 	        // Deduct the total cost from the remaining balance
-	        PlayerBusiness.money -= totalCost;
+	        Main.game.PlayerBusiness.money -= totalCost;
 
 	        // Update the UI with the new remaining balance
-	        moneyLabel.setText("$" + PlayerBusiness.money);
+	        moneyLabel.setText("$" + Main.game.PlayerBusiness.money);
 
 	        // Purchase details
 	        String purchaseDetails = "Items Purchased:\n\n" + textArea.getText() +
-	                "\n\nRemaining Balance: $" + PlayerBusiness.money;
+	                "\n\nRemaining Balance: $" + Main.game.PlayerBusiness.money;
 
 	        // Save purchased upgrades
-	        for (String item : cartItems) {
-	            String itemName = item.split(" - ")[0].toLowerCase();  // Convert to lowercase
+	        for (Purchasable item : cartItems) {
+	            String itemName = item.toString().split(" - ")[0].toLowerCase();  // Convert to lowercase
 	            purchasedUpgrades.add(itemName);
 	        }
+			
+			// apply to business
+			for (Purchasable item : cartItems) {
+
+				System.out.println(item);
+
+				if (item instanceof Equipment) {
+					Main.game.PlayerBusiness.PurchaseEquipment((Equipment) item);
+				} else if (item instanceof Food) {
+					Main.game.PlayerBusiness.PurchaseFood((Food) item);
+				} else if (item instanceof Knife) {
+					Main.game.PlayerBusiness.PurchaseKnife((Knife) item);
+				}
+			}
 
 	        JOptionPane.showMessageDialog(frame, "Purchase successful!\n\n" + purchaseDetails);
 
@@ -182,9 +159,9 @@ public class ShopPage {
 	        equipment.setSelectedIndex(0);
 	        food.setSelectedIndex(0);
 	        knife.setSelectedIndex(0);
-	      
 
 	        addToCartButton.setVisible(false);
+			cartItems.clear();
 
 	        equipment.setVisible(false);
 	        food.setVisible(false);
@@ -200,21 +177,12 @@ public class ShopPage {
 	        equipment.setVisible(false);
 	        food.setVisible(false);
 	        knife.setVisible(false);
-	       
-	        
-	        
 	    }
 	}
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public ShopPage() {
-		
-		
-        loadPurchasedUpgrades();
-
-		this.PlayerBusiness = Main.game != null ? Main.game.PlayerBusiness : new Business();
-
 		frame = new JFrame("");
 		frame.getContentPane().setBackground(new Color(145, 145, 145));
 		frame.setTitle("The Cellar");
@@ -234,6 +202,7 @@ public class ShopPage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Resume();
 				GamePage window2 = new GamePage();
 				window2.showWindow();
 			}
@@ -294,7 +263,7 @@ public class ShopPage {
 		addToCartButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        if (selectedComboBox != null) {
-		            Object selectedItem = getSelectedItem();
+		            Purchasable selectedItem = getSelectedItem();
 
 		            if (selectedItem != null && !selectedItem.toString().isEmpty()) {
 		                // Check if the item is already in the cart
@@ -307,9 +276,10 @@ public class ShopPage {
 		                    } else {
 		                        int itemCost = getPrice(selectedItem);
 
-		                        if (itemCost > 0 && itemCost <= PlayerBusiness.money) {
+		                        if (itemCost > 0 && itemCost <= Main.game.PlayerBusiness.money) {
 		                            // Add the item to the cart
 		                            textArea.append(selectedItem + " - $" + itemCost + "\n");
+									cartItems.add(selectedItem);
 		                            setButtonLocation();
 		                            addToCartButton.setVisible(true);
 		                            selectedComboBox.setSelectedIndex(0);
@@ -323,10 +293,9 @@ public class ShopPage {
 		        }
 		    }
 		});
-		equipment = new JComboBox<Object>();
+		equipment = new JComboBox<Purchasable>();
 		equipment.setBounds(203, 34, 178, 30);
 		frame.getContentPane().add(equipment);
-		equipment.addItem("");
 
 		for (Equipment currentEquipment : Equipment.EquipmentTypes) {
 			equipment.addItem(currentEquipment); 
@@ -350,17 +319,14 @@ public class ShopPage {
 			public void actionPerformed(ActionEvent e) {
 				equipment.setVisible(true);
 				hideOtherComboBoxes(equipment);
-
-
 			}
 		});
 		btnEquipment.setBounds(36, 34, 165, 30);
 		frame.getContentPane().add(btnEquipment);
 
-		food = new JComboBox<Object>();
+		food = new JComboBox<Purchasable>();
 		food.setBounds(203, 76, 178, 30);
 		frame.getContentPane().add(food);
-		food.addItem("");
 
 		for (Food currentFood : Food.FoodTypes) {
 			food.addItem(currentFood); 
@@ -388,10 +354,10 @@ public class ShopPage {
 		btnFood.setBounds(36, 76, 165, 30);
 		frame.getContentPane().add(btnFood);
 
-		knife = new JComboBox<Object>();
+		knife = new JComboBox<Purchasable>();
 		knife.setBounds(203, 118, 178, 30);
 		frame.getContentPane().add(knife);
-		knife.addItem("");
+
 		for (Knife currentKnife : Knife.KnifeTypes) {
 			knife.addItem(currentKnife); 
 		}

@@ -57,8 +57,8 @@ public class Business implements Serializable {
 
     // get net worth, factors in money, equipment, knives, and debt but not employees
     public long GetNetWorth() {
-        int equipmentValue = cookingEquipment.getPrice();
-        int knifeValue = knives.getPrice();
+        int equipmentValue = cookingEquipment.price;
+        int knifeValue = knives.price;
 
         return (money + equipmentValue + knifeValue) - debt;
     }
@@ -70,7 +70,7 @@ public class Business implements Serializable {
 
     public void PurchaseFood(Food food) {
     	this.food = food;
-        money -= food.getPrice();
+        money -= food.price;
         this.daysOfFood = 7;
     }
 
@@ -81,7 +81,7 @@ public class Business implements Serializable {
 
     public void PurchaseKnife(Knife knife) {
     	knives = knife;
-        money -= knife.getPrice();
+        money -= knife.price;
     }
 
     public void TakeOutLoan(int amount) {
@@ -90,7 +90,7 @@ public class Business implements Serializable {
     }
 
     public int GetEquipmentPrice(Equipment equipment) {
-    	int price = equipment.getPrice();
+    	int price = equipment.price;
 
     	// determine if we have prior equipment
         if (cookingEquipment != null) {
@@ -99,17 +99,27 @@ public class Business implements Serializable {
 
             // if new equipment is i+1 of current equipment, price is 1.5x
             if (newIndex == currIndex + 1) {
-                price = equipment.getUpgradePrice();
+                price = equipment.upgradePrice;
             }
         }
 
         return price;
     }
 
+    public int GetPurchasablePrice(Purchasable item){
+        	int price = item.price;
+
+            if (item instanceof Equipment) {
+            	price = GetEquipmentPrice((Equipment)item);
+            }
+
+            return price;
+    }
+
     protected static int GetEquipmentIndex(Equipment equipment) {
         	int index = 0;
         	for (int i = 0; i < Equipment.EquipmentTypes.length; i++) {
-        		if (Equipment.EquipmentTypes[i].getName().equals(equipment.getName())) {
+        		if (Equipment.EquipmentTypes[i].name.equals(equipment.name)) {
         			index = i;
         			break;
         		}
@@ -123,22 +133,22 @@ public class Business implements Serializable {
 
     public void HireCleaner(Cleaner cleaner) {
     	cleaners.add(cleaner);
-        money -= cleaner.getPrice();
+        money -= cleaner.price;
     }
 
     public void HireChef(Chef chef) {
     	chefs.add(chef);
-        money -= chef.getPrice();
+        money -= chef.price;
     }
 
     public void UpgradeEquipment(Equipment equipment) {
     	cookingEquipment = equipment;
-        money -= equipment.getPrice();
+        money -= equipment.price;
     }
 
     public void UpgradeKnife(Knife knife) {
     	knives = knife;
-        money -= knife.getPrice();
+        money -= knife.price;
     }
 
     public int getExpenses() {
@@ -146,24 +156,24 @@ public class Business implements Serializable {
 
     	// foreach chef, add price to expense
     	for (Chef chef : chefs) {
-    		expense += chef.getPrice();
+    		expense += chef.price;
     	}
 
     	// foreach cleaner, add price to expense
     	for (Cleaner cleaner : cleaners) {
-    		expense += cleaner.getPrice();
+    		expense += cleaner.price;
     	}
 
     	// add food price to expenses if there is no food
         if (daysOfFood == 0) {
-            expense += food.getPrice();
+            expense += food.price;
         }
 
     	return expense;
     }
 
     public double getProfitMargin() {
-    	return CalculateProfitMargin(price, food.getPrice() / (double)steaks);
+    	return CalculateProfitMargin(price, food.price / (double)steaks);
     }
 
     private double CalculateProfitMargin(double sellingPrice, double costPrice)
@@ -217,17 +227,17 @@ public class Business implements Serializable {
 
         // foreach chef, add steaks to steaks
         for (Chef chef : chefs) {
-            steaks += chef.getSteaksPerDayIncrease();
+            steaks += chef.steaksPerDayIncrease;
         }
 
         // foreach food, add steaks to steaks
-        steaks += food.getSteaksPerDayIncrease();
+        steaks += food.steaksPerDayIncrease;
 
         // foreach Knife, add steaks to steaks
-        steaks += knives.getSteaksPerDayIncrease();
+        steaks += knives.steaksPerDayIncrease;
 
         // foreach Equipment, add steaks to steaks
-        steaks += cookingEquipment.getSteaksPerDayIncrease();
+        steaks += cookingEquipment.steaksPerDayIncrease;
 
         return steaks;
     }
@@ -239,7 +249,7 @@ public class Business implements Serializable {
     }
 
     public int getOptimalPrice() {
-        int optimalPrice = (int) (food.getQualityModifier() * Main.game.getGoingRate() * GetCustomerSatisfaction());
+        int optimalPrice = (int) (food.qualityModifier * Main.game.getGoingRate() * GetCustomerSatisfaction());
         return optimalPrice;
     }
 
@@ -262,7 +272,7 @@ public class Business implements Serializable {
         // update cleanliness
         cleanliness = 0;
         for (Cleaner cleaner : cleaners) {
-            cleanliness += cleaner.getModifier();
+            cleanliness += cleaner.cleanlinessModifier;
         }
 
         // if cleanliness is greater than 1, set to 1
@@ -273,7 +283,7 @@ public class Business implements Serializable {
         // update quality
         quality = 0;
         for (Chef chef : chefs) {
-            quality += chef.getModifier();
+            quality += chef.qualityModifier;
         }
 
         // calculate profit
@@ -309,7 +319,7 @@ public class Business implements Serializable {
         }
 
         // log inventory and name
-        System.out.println(name + " Inventory: " + GetInventory());
+//        System.out.println(name + " Inventory: " + GetInventory());
     }
 
     public void GameOver(){
@@ -320,7 +330,7 @@ public class Business implements Serializable {
 
         String allChefSteaksPerDay = "";
         for (Chef chef : chefs) {
-            allChefSteaksPerDay += chef.getSteaksPerDayIncrease() + ", ";
+            allChefSteaksPerDay += chef.steaksPerDayIncrease + ", ";
         }
 
         return "Inventory: \n" +
@@ -331,15 +341,15 @@ public class Business implements Serializable {
                 "Days in Debt: " + daysInDebt + "\n" +
                 "Money: " + money + "\n" +
                 "Debt: " + debt + "\n" +
-                "Equipment: " + cookingEquipment.getName() + "\n" +
-                "Knife: " + knives.getName() + "\n" +
-                "Food: " + food.getName() + "\n" +
+                "Equipment: " + cookingEquipment.name + "\n" +
+                "Knife: " + knives.name + "\n" +
+                "Food: " + food.name + "\n" +
                 "Chefs: " + chefs.size() + "\n" +
                 "Cleaners: " + cleaners.size() + "\n" +
                 "Chefs Steaks Per Day: " + allChefSteaksPerDay + "\n" +
-                "Food Steaks Per Day: " + food.getSteaksPerDayIncrease() + "\n" +
-                "Equipment Steaks Per Day: " + cookingEquipment.getSteaksPerDayIncrease() + "\n" +
-                "Knife Steaks Per Day: " + knives.getSteaksPerDayIncrease() + "\n" +
+                "Food Steaks Per Day: " + food.steaksPerDayIncrease + "\n" +
+                "Equipment Steaks Per Day: " + cookingEquipment.steaksPerDayIncrease + "\n" +
+                "Knife Steaks Per Day: " + knives.steaksPerDayIncrease + "\n" +
                 "Demand: " + GetDemand() + "\n" +
                 "Profit: " + getProfit() + "\n" +
                 "Price: " + price + "\n" +

@@ -60,38 +60,8 @@ public class StartMenuPage {
 		newGame.setBackground(new Color(116, 116, 116));
 		newGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clearShopUpgradesFile();
 				frame.setVisible(false);
-				Main.game = new Game();
-				Main.game.GenerateAI();
-
-				Main.game.Pause();
-
-				// while input is not a number, keep asking for input
-				boolean isNumber = false;
-				while (!isNumber) {
-					try {
-						String out = JOptionPane.showInputDialog("Enter starting price of steak going rate is " + Main.game.getGoingRate() + ":");
-
-						// if null close
-						if (out == null) {
-							System.exit(0);
-						}
-
-						// show number input option pane
-						int startingSteakPrice = Integer.parseInt(out);
-						Main.game.PlayerBusiness.setPrice(startingSteakPrice);
-						isNumber = true;
-					} catch (NumberFormatException ex) {
-						// show error message
-						JOptionPane.showMessageDialog(null, "Please enter a number.");
-					}
-				}
-
-				Main.game.Resume();
-
-				GamePage window2 = new GamePage();
-				GamePage.showWindow();
+				Game.CreateNewGame();
 			}
 		});
 		newGame.setBounds(60, 95, 219, 70);

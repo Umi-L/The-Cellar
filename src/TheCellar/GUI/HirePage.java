@@ -48,6 +48,7 @@ public class HirePage  {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	                frame.setVisible(false);
+					Main.game.Resume();
 	                GamePage window2 = new GamePage();
 	                window2.showWindow();
 	            }
@@ -65,6 +66,7 @@ public class HirePage  {
 		resumeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				Main.game.Resume();
 				GamePage window2 = new GamePage();
 				window2.showWindow();
 			}
@@ -225,6 +227,7 @@ public class HirePage  {
 		resumeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) { //execute when resume button clicked
 					frame.setVisible(false); //set frame to invisible
+					Main.game.Resume();
 					GamePage window2 = new GamePage(); 
 					window2.showWindow(); //show pop up
 				}
