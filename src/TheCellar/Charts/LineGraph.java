@@ -49,6 +49,11 @@ public class LineGraph  extends JPanel {
             }
         }
 
+        // if max is 0, set to 1
+        if (max == 0) {
+        	max = 1;
+        }
+
         // draw y axis as large as within bounds
         Rectangle bounds = this.getBounds();
 

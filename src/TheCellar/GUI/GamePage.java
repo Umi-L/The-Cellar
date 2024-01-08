@@ -321,6 +321,7 @@ public class GamePage {
 		frame.getContentPane().add(setSteakPriceButton);
 		
 		JTextPane InventoryPane = new JTextPane();
+		InventoryPane.setEditable(false);
 		InventoryPane.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		InventoryPane.setText("Stuff\r\nhere\r\noh");
 		InventoryPane.setBounds(815, 92, 224, 489);
@@ -404,7 +405,7 @@ public class GamePage {
 		SearchOpponentButton.setBounds(626, 163, 167, 30);
 		frame.getContentPane().add(SearchOpponentButton);
 
-SearchOpponentButton.addActionListener(new ActionListener() {
+		SearchOpponentButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// get the selected index
 				int index = list.getSelectedIndex();
@@ -416,8 +417,10 @@ SearchOpponentButton.addActionListener(new ActionListener() {
 					// get the ai
 					AI ai = Main.game.AIBusinesses.get(index);
 
+					Main.game.Pause();
 					// show the info
 					JOptionPane.showMessageDialog(frame, ai.GetInventory());
+					Main.game.Resume();
 				}
 			}
 		});

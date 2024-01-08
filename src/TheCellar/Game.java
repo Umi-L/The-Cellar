@@ -5,6 +5,7 @@ This is seperated because it needs to be serialized and deserialized.
 
 import java.io.Console;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.*;
 
 import TheCellar.AI.AI;
@@ -90,6 +91,17 @@ public class Game implements Serializable {
 
     public void SetGameSpeed(int speed) {
         GameSpeed = speed;
+        timer.cancel();
+        timer = new Timer();
+        timer.schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Update();
+                    }
+                },
+                GameSpeed
+        );
     }
 
     public void GameOver() {
