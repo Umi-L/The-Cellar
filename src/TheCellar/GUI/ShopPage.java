@@ -148,7 +148,8 @@ public class ShopPage {
 	        if (parts.length > 1) {
 	            try {
 	                int itemCost = Integer.parseInt(parts[1].trim());
-	                totalCost += itemCost;
+	                totalCost += itemCost;]
+	                
 	            } catch (NumberFormatException ex) {
 	                // Handle the exception if necessary
 	            }
