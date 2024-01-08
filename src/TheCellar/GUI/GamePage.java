@@ -15,8 +15,10 @@ import java.awt.Font;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Console;
 import java.util.ArrayList;
 import java.awt.event.KeyEvent;
+import java.awt.List;
 
 
 // window builder class that creates the gui
@@ -92,7 +94,7 @@ public class GamePage {
 		frame.getContentPane().add(debtLabel);
 
 		PieChart pieChart = new PieChart();
-		pieChart.setBounds(248, 53, 218, 140);
+		pieChart.setBounds(174, 53, 218, 140);
 		frame.getContentPane().add(pieChart);
 
 		BarGraph steaksPerDayChart = new BarGraph("Steaks Per Day");
@@ -138,7 +140,7 @@ public class GamePage {
 
 		ArrayList<Double> AvgSalePriceValues = new ArrayList<>();
 		LineGraph AvgSalePriceGraph = new LineGraph("time", "Average Sale Price");
-		AvgSalePriceGraph.setBounds(490, 50, 218, 140);
+		AvgSalePriceGraph.setBounds(402, 53, 218, 140);
 		frame.getContentPane().add(AvgSalePriceGraph);
 
 		ArrayList<Double> goingRateValues = new ArrayList<>();
@@ -393,7 +395,32 @@ public class GamePage {
 		daysOfFoodValue.setBounds(940, 46, 124, 38);
 		frame.getContentPane().add(daysOfFoodValue);
 		
+		List list = new List();
+		list.setBounds(626, 53, 167, 104);
+		frame.getContentPane().add(list);
+		
+		JButton SearchOpponentButton = new JButton("Display Info");
+		SearchOpponentButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		SearchOpponentButton.setBounds(626, 163, 167, 30);
+		frame.getContentPane().add(SearchOpponentButton);
 
+SearchOpponentButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// get the selected index
+				int index = list.getSelectedIndex();
+
+				// if no index is selected show a message
+				if (index == -1) {
+					JOptionPane.showMessageDialog(frame, "Please select an opponent");
+				} else {
+					// get the ai
+					AI ai = Main.game.AIBusinesses.get(index);
+
+					// show the info
+					JOptionPane.showMessageDialog(frame, ai.GetInventory());
+				}
+			}
+		});
 
 
 		// add action listener to the debt payment button
@@ -452,6 +479,27 @@ public class GamePage {
 				} else {
 					daysOfFoodValue.setForeground(Color.BLACK);
 					DaysOfFoodLabel.setForeground(Color.BLACK);
+				}
+
+				// get current selected opponent
+				String selectedOpponent = list.getSelectedItem();
+
+				// add opponent names to list
+				list.removeAll();
+				for (AI ai : Main.game.AIBusinesses) {
+					list.add(ai.name);
+				}
+
+				// get list items
+				String[] listItems = list.getItems();
+
+				// foreach list item
+				for (int i = 0; i < listItems.length; i++) {
+					// if the item is the same as the selected opponent
+					if (listItems[i].equals(selectedOpponent)) {
+						// select it
+						list.select(i);
+					}
 				}
 			}
 		});
